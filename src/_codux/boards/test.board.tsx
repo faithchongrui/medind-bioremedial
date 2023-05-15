@@ -5,5 +5,10 @@ export default createBoard({
     name: 'test',
     Board: () => <div>
         <button>Button</button>
-    </div>
+        <h1>Heading 1</h1>
+    </div>,
+    environmentProps: {
+        canvasHeight: 608,
+        canvasWidth: 962
+    }
 });

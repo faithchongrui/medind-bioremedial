@@ -2,17 +2,17 @@ import './App.css';
 import * as React from 'react';
 import {
   BrowserRouter as Router, 
-  Switch,
+  // Switch,
   Route, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
-
+import createBoard from '@wixc3/react-board';
 
 function App() {
   return (
     <div>
-      <title>Bioremedial</title>
+      <title href="title">Bioremedial</title>
 
       <header className="header">
         <h1>Welcome to Bioremedial!</h1>
@@ -29,13 +29,14 @@ function App() {
         <div className="main">e. coli</div>
       </div>
       {/* <Button variant="contained">Contained</Button> */}
-      <Router>
+      {/* <Router>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="test" element={<createBoard />} />
       </Router>
       <Link to={"./About"}>
         Dashboard
-      </Link>
+      </Link> */}
     </div>
   );
 }
