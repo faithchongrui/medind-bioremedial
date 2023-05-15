@@ -1,6 +1,9 @@
 import './App.css';
 import * as React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router, 
+  Switch,
+  Route, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -16,7 +19,9 @@ function App() {
       </header>
 
       {/* <nav className="navbar"> */}
-        <a href="/test" id="btn">slay some bacteria</a>
+        <a href="/test" id="btn">slay</a>
+        <a href="Home" id="btn">some</a>
+        <a href="About" id="btn">bacteria</a>
       {/* </nav> */}
 
       <div className="row">
@@ -24,10 +29,13 @@ function App() {
         <div className="main">e. coli</div>
       </div>
       {/* <Button variant="contained">Contained</Button> */}
-      <Routes>
+      <Router>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
-      </Routes>
+      </Router>
+      <Link to={"./About"}>
+        Dashboard
+      </Link>
     </div>
   );
 }
