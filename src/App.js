@@ -12,10 +12,16 @@ import createBoard from '@wixc3/react-board';
 function App() {
   return (
     <div>
-      <title href="title">Bioremedial</title>
+      <title>Bioremedial</title>
 
       <header className="header">
-        <h1>Welcome to Bioremedial!</h1>
+        <div class="container">
+          <img src="" alt="bioremedial logo" class="left" /> 
+          <div>
+            <h1 class="right">Welcome to Bioremedial!</h1>
+            <h2 class="right">Your one-stop destination for biotech revision.</h2>
+          </div>
+        </div>
       </header>
 
       {/* <nav className="navbar"> */}
