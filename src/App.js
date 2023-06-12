@@ -1,10 +1,9 @@
 import './App.css';
 import React from 'react';
 import Button from '@mui/material/Button';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router,   Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import createBoard from '@wixc3/react-board';
 
 function App() {
   return (
@@ -34,13 +33,11 @@ function App() {
 
       <Button variant="contained">Contained</Button>
 
-      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="test" element={<createBoard />} />
         </Routes>
-      </Router>
 
       <Link to="/About">Dashboard</Link>
     </div>
