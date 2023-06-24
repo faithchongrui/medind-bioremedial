@@ -8,9 +8,10 @@
 }
 
 :root {
-    --blue: rgb(123, 31, 162);
-    --violet: rgb(103, 58, 183);
-    --pink: rgb(244, 143, 177);
+  --dark-bg: #2C3333;
+  --medium-bg: #2E4F4F;
+  --dark-green: #0E8388;
+  --light: #CBE4DE;
 }
 
 .App {
@@ -43,15 +44,6 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 header {
   color: #2C3333;
   background-color: #CBE4DE;
@@ -77,5 +69,5 @@ header h2 {
       .left {
         padding-left: 40px;
         background-color: #2C3333;
-      }
+}
 

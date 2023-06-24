@@ -1,0 +1,17 @@
+box {
+    position: absolute;
+    width: 1280px;
+    height: 500px;
+    left: 0px;
+    top: 0px;
+
+    background: #2C3333;
+}
+
+title {
+    color: #2C3333;
+    background-color: #CBE4DE;
+    height: 200px;
+    text-align: center;
+    padding-top: 55px;
+}

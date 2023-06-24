@@ -1,11 +1,12 @@
 import React from "react";
+import Box from '../components/Start/Header/Box.jsx'
 
 const home = () => {
-    return (
-        <div>
-            <h1 className="header">hello</h1>
-        </div>
-    );
+  return (
+    <div>
+        <Box/>
+    </div>
+  );
 };
 
 export default home;
