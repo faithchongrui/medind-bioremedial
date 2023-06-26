@@ -8,9 +8,10 @@
 }
 
 :root {
-  --dark-bg: #2C3333;
-  --medium-bg: #2E4F4F;
-  --dark-green: #0E8388;
+  --dark-two: #1E1E1E;
+  --dark-one: #2C3333;
+  --medium-two: #2E4F4F;
+  --medium-one: #146E72;
   --light: #CBE4DE;
 }
 
@@ -30,14 +31,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--dark-two);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--light);
 }
 
 .App-link {
@@ -45,8 +46,8 @@
 }
 
 header {
-  color: #2C3333;
-  background-color: #CBE4DE;
+  color: var(--dark-one);
+  background-color: var(--dark-two);
   height: 200px;
   text-align: center;
   padding-top: 55px;
@@ -68,6 +69,6 @@ header h2 {
       }
       .left {
         padding-left: 40px;
-        background-color: #2C3333;
+        background-color: var(--dark-one);
 }
 
