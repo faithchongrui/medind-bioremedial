@@ -1,3 +1,11 @@
+:root {
+    --dark-two: #1E1E1E;
+    --dark-one: #2C3333;
+    --medium-two: #2E4F4F
+    --medium-one: #146E72;
+    --light: #CBE4DE;
+  }
+
 box {
     position: absolute;
     width: 1280px;
@@ -5,12 +13,12 @@ box {
     left: 0px;
     top: 0px;
 
-    background: #2C3333;
+    background: var(--dark-one);
 }
 
 title {
-    color: #2C3333;
-    background-color: #CBE4DE;
+    color: var(--light);
+    background-color: var(--dark-one);
     height: 200px;
     text-align: center;
     padding-top: 55px;
