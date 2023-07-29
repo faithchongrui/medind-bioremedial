@@ -1,8 +1,7 @@
 import React from "react";
 import Box from "../components/Start/Header/Box";
-import About from "../components/Start/About/About";
 
-const home = () => {
+const Start = () => {
   return (
     <div className='container'>
       <Box/>
@@ -10,4 +9,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Start;

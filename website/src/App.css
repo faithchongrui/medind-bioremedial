@@ -16,8 +16,14 @@
   --light: #CBE4DE;
 }
 
+.container {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 .App {
   text-align: center;
+  background-color: var(--dark-two);
 }
 
 .App-logo {
@@ -30,6 +36,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: var(--dark-two);
@@ -50,7 +57,7 @@ header {
   color: var(--light);
   height: 200px;
   text-align: center;
-  padding-top: 55px;
+  /* padding-top: 40px; */
 }
 
 header h1 {
@@ -66,6 +73,7 @@ header h2 {
 header h3 {
   font-weight: 600;
   font-size: 30px;
+  padding-top: 30px;
 }
 
 header p {
@@ -89,3 +97,98 @@ header p {
   background-color: var(--dark-two);
   margin-top: 50px;
 }
+
+div .homepage {
+  background-color: var(--dark-two);
+}
+
+/* side bar styling */
+#tabbar {
+  border: var(--dark-one);
+  background-color: rgb(44, 51, 51);
+  width: 200px;
+  opacity: 10000;
+
+  #tabbar:hover {
+    background-color: #146E72;
+  }
+  .menu-anchor:hover {
+    background-color: var(--medium-one);
+  }
+  
+  .menu, .home, .activities {
+    background-color: var(--dark-one);
+    color: var(--light);
+  }
+
+}
+
+/* recent activities styling  */
+
+.subactivities {
+  text-align: center;
+  background-color: var(--medium-one);
+}
+
+.activitycontainer {
+  background-color: var(--dark-one);
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+.recentactivities {
+  position: top;
+  z-index: 20;
+  color: var(--light);
+  padding: 2rem;
+}
+
+.activitycontainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.activitycontainer::-webkit-scrollbar-thumb {
+  background-color: rgb(4, 51, 51);
+  border-radius: 10px;
+}
+
+.activitycontainer::-webkit-scrollbar-track {
+  background-color: rgb(203, 228, 222);
+  border-radius: 10px;
+}
+
+.smallmoduleactivities {
+  background-color: rgb(46, 79, 79);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1rem 1rem;
+  text-align: left;
+  width: 342px;
+
+  .child {
+    /* for visulisation */
+    /* background-color: rgb(20, 110, 114); */
+    color: white;
+    font-weight: 300;
+    display: inline-block;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.5rem;
+    vertical-align: middle;
+    /* margin-right: 1%; */
+    /* margin-left: 1%; */
+  }
+
+  .activitydesc {
+    color: white;
+    font-weight: 300;
+    /* margin-top: 1rem; */
+    /* margin-bottom: 1rem; */
+    vertical-align: baseline;
+  }
+}
+
+
+
+
