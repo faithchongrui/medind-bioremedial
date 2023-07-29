@@ -6,7 +6,7 @@ const Progress = () => {
         <header>{} Progress </header>
         <body className='container'>
             <div className='sessionindex'>Session 3: Class Test</div>
-            <div className="activitycontainer">
+            <div className='activitycontainer'>
                     <div className="childuhh">
                         heywhats up baby
                         <img></img>
