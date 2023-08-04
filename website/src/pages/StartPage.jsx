@@ -3,7 +3,7 @@ import Box from "../components/Start/Header/Box";
 
 const Start = () => {
   return (
-    <div className='container'>
+    <div className="homecontainer">
       <Box/>
     </div>
   );

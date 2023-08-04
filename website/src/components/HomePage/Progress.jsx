@@ -1,21 +1,15 @@
 import React from 'react'
+import Sets from './Sets'
+import Session from './Session'
 
 const Progress = () => {
   return (
-    <div className="userprogess">
-        <header>{} Progress </header>
-        <body className='container'>
-            <div className='sessionindex'>Session 3: Class Test</div>
-            <div className='activitycontainer'>
-                    <div className="childuhh">
-                        heywhats up baby
-                        <img></img>
-                    </div>
-                    <div className="childunit">
-                        sdsd
-                        {/*pull from backend*/}
-                    </div>
-                </div>
+    <div className="progess">
+        <h1 className="progress"> Your progress </h1>
+        <body className="progresscontainer">
+            <Session></Session>
+            <Sets></Sets>
+            {/*pull from backend*/}
         </body>
     </div>
   )
