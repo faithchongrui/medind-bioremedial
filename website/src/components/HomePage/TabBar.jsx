@@ -1,15 +1,15 @@
 import React from 'react';
-import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuIcon from "@mui/icons-material/Menu";
-import CasinoRoundedIcon from '@mui/icons-material/CasinoRounded';
+import CasinoIcon from '@mui/icons-material/Casino';
 import { style } from '@mui/system';
 
 import RecentActivities from './RecentActivities';
 
 const TabBar = () => {
-  const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
-  useProSidebar();
+  // const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
+  // useProSidebar();
 
   return (
     <div>
@@ -19,13 +19,13 @@ const TabBar = () => {
             className='menu'
             icon={<MenuIcon />}
             onClick={() => {
-              collapseSidebar();
+              // collapseSidebar();
             }}
             style={{ textAlign: "center" }}
           >
           </MenuItem>
           <MenuItem className="home" icon={<HomeRoundedIcon />}>Home</MenuItem>
-          <SubMenu className="activities" icon={<CasinoRoundedIcon />} label='Activities'
+          <SubMenu className="activities" icon={<CasinoIcon />} label='Activities'
           onClick={() => {
             
           }}
