@@ -9,9 +9,9 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      {/* <ProSidebarProvider> */}
+      <ProSidebarProvider>
         <App />
-      {/* </ProSidebarProvider> */}
+      </ProSidebarProvider>
     </Router>
   </React.StrictMode>
 );
