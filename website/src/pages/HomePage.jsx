@@ -3,6 +3,7 @@ import TabBar from '../components/HomePage/TabBar';
 import RecentActivities from '../components/HomePage/RecentActivities';
 import Progress from '../components/HomePage/Progress';
 import NavBar from '../components/HomePage/NavBar';
+
 const HomePage = () => {
   return (
     <div className="homepage">
