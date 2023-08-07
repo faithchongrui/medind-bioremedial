@@ -7,7 +7,7 @@ import Start from './pages/StartPage';
 import About from './pages/Login';
 import HomePage from './pages/HomePage';
 import Auth from './components/Auth/auth';
-import auth from 'config/firebase';
+import auth from './config/firebase';
 import signOut from 'firebase/auth'
 
 function App() {
