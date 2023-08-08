@@ -11,14 +11,14 @@ import auth from './config/firebase';
 import signOut from 'firebase/auth'
 
 function App() {
-  
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
     <div>
         <Routes>
           <Route path="/" element={<Start />} />
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/login" element={<Auth/>}/>
+          <Route path="/login" element={<Auth setIsAuth={{setIsAuth}}/>}/>
         </Routes>
     </div>
   );
