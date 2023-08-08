@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 const Auth = () => {
 
   // Auth Functions
-
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
