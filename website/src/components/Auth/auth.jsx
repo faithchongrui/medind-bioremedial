@@ -2,18 +2,17 @@ import { React, useState } from "react";
 import { auth } from "../../config/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const Auth = () => {
+const Auth = ({ setIsAuth }) => {
 
   // Auth Functions
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const signIn = (e) => {
-    e.preventDefault();
-    auth.signInWithEmailAndPassword(auth, email, password)
+    e.preventDefault()
+    auth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
@@ -26,7 +25,7 @@ const Auth = () => {
       });
   };
 
-  const logOut = async () => {
+  const logOut = async (e) => {
     try {
       auth.signOut(auth).then(() => {
         localStorage.clear();
@@ -42,9 +41,6 @@ const Auth = () => {
 
   return (
     <div className="login-page">
-      <div className="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-      </div>
       <form onSubmit={signIn}>
         <input
           type="email"
@@ -58,7 +54,7 @@ const Auth = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button type="Sign In" onClick={{ signIn }}>Login</button>
+        <button type="Sign In">Login</button>
       </form>
     </div>
   );
