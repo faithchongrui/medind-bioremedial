@@ -13,7 +13,7 @@ const TabBar = () => {
 
   return (
     <div>
-      <Sidebar className="tabbar" style={{ height: "100%", position: "absolute", backgroundColor:"44, 51, 51"}}>
+      <Sidebar id="tabbar" style={{ height: "100%", position: "absolute", backgroundColor:"rgb(44, 51, 51)"}}>
         <Menu>
           <MenuItem 
             className='menu'

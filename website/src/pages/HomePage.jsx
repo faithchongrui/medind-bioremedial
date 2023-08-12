@@ -7,7 +7,7 @@ import NavBar from '../components/HomePage/NavBar';
 const HomePage = () => {
   return (
     <div className="homepage">
-      <NavBar/> 
+      <NavBar/>
       <RecentActivities style={{ zIndex: 0}}>
         {/* <div style={{margin: "100px"}}></div> */}
       </RecentActivities>

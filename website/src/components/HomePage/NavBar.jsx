@@ -3,20 +3,24 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Button,
-  Menu,
+  createTheme,
+  ThemeProvider,
   IconButton,
+  Divider,
+  Collapse,
+  List,
 } from "@mui/material";
 import {
-  CheckBoxOutlineBlankOutlined,
+  Casino,
   DraftsOutlined,
   HomeOutlined,
   InboxOutlined,
   MailOutline,
   ReceiptOutlined,
+  ExpandMore,
+  ExpandLess,
 } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 
 const data = [
@@ -24,29 +28,77 @@ const data = [
     name: "Home",
     icon: <HomeOutlined />,
   },
-  { name: "Inbox", icon: <InboxOutlined /> },
-  { name: "Outbox", icon: <CheckBoxOutlineBlankOutlined /> },
-  { name: "Sent mail", icon: <MailOutline /> },
-  { name: "Draft", icon: <DraftsOutlined /> },
-  { name: "Trash", icon: <ReceiptOutlined /> },
+  {
+    name: "Activities",
+    icon: <Casino />,
+    submenu: [
+      {
+        name: "U1.1",
+      },
+      {
+        name: "U1.2",
+      },
+      {
+        name: "U1.3",
+      },
+    ],
+  },
 ];
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Inter",
+  },
+});
 
 function NavBar1() {
   const [open, setOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(false);
+
+  const handleMenuClick = () => {
+    setOpenSubMenu(!openSubMenu);
+  };
+
+  const handleItemClick = () => {};
 
   const getList = () => (
     <div style={{ width: 250 }}>
       {data.map((item, index) => (
-        <ListItemButton key={index} >
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.name} />
-        </ListItemButton>
+        <ThemeProvider theme={theme}>
+          <div>
+            <ListItemButton
+              key={index}
+              onClick={item.submenu ? handleMenuClick : handleItemClick}
+            >
+              <ListItemIcon sx={{ color: "#CBE4DE" }}>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} sx={{ color: "#CBE4DE" }} />
+              {item.submenu && // if item has submenu property, then render submenu
+                (openSubMenu ? ( // if openSubMenu true then ExpandLess, else ExpandMore
+                  <ExpandLess sx={{ color: "#CBE4DE" }} />
+                ) : (
+                  <ExpandMore sx={{ color: "#CBE4DE" }} />
+                ))}
+            </ListItemButton>
+            <Divider sx={{ backgroundColor: "#CBE4DE" }} />
+          </div>
+        </ThemeProvider>
       ))}
+      <Collapse in={openSubMenu} timeout="auto" unmountOnExit>
+        {data.map((item) =>
+          item.submenu?.map((subItem, index2) => (
+            <List component="div" disablePadding>
+              <ListItemButton key={index2}>
+              <ListItemText primary={subItem.name} sx={{ color: "#CBE4DE" }} />
+              </ListItemButton>
+            </List>
+          ))
+        )}
+      </Collapse>
     </div>
   );
+
   return (
     <div>
-      <scopedCssBaseline enableColorScheme/>
       <IconButton
         edge="start"
         color="inherit"
@@ -56,11 +108,16 @@ function NavBar1() {
       >
         <MenuIcon sx={{ color: "white", fontSize: 40 }} />
       </IconButton>
-      <Drawer 
-        open={open} 
-        anchor={"left"} 
+      <Drawer
+        open={open}
+        anchor={"left"}
         onClose={() => setOpen(false)}
-        >
+        PaperProps={{
+          sx: {
+            backgroundColor: "#2C3333",
+          },
+        }}
+      >
         {getList()}
       </Drawer>
     </div>
