@@ -6,7 +6,7 @@ import logo from "../../images/1.png";
 // https://stackoverflow.com/questions/75635346/how-to-do-a-reactjs-horizontal-scroll-webpage
 
 const RecentActivities = () => {
-    
+
     const handleScroll = (event) => {
         const container = event.target;
         const scrollAmount = event.deltaY;
