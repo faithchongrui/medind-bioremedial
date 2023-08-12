@@ -1,5 +1,15 @@
 @import url("https://rsms.me/inter/inter.css");
 
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+}
+
 * {
   margin: 0;
   padding: 0;
