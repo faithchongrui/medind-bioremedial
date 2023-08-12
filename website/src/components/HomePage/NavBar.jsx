@@ -79,18 +79,20 @@ function NavBar1() {
                   <ExpandMore sx={{ color: "#CBE4DE" }} />
                 ))}
             </ListItemButton>
-            <Divider sx={{ backgroundColor: "#CBE4DE" }} />
+            <Divider sx={{ backgroundColor: "#2C3333", borderBottomWidth: 3}} />
           </div>
         </ThemeProvider>
       ))}
       <Collapse in={openSubMenu} timeout="auto" unmountOnExit>
         {data.map((item) =>
           item.submenu?.map((subItem, index2) => (
-            <List component="div" disablePadding>
-              <ListItemButton key={index2}>
-              <ListItemText primary={subItem.name} sx={{ color: "#CBE4DE" }} />
-              </ListItemButton>
-            </List>
+            <ThemeProvider theme={theme}>
+              <List component="div" disablePadding>
+                <ListItemButton key={index2}>
+                  <ListItemText primary={subItem.name} sx={{ color: "#CBE4DE" }} />
+                </ListItemButton>
+              </List>
+            </ThemeProvider>
           ))
         )}
       </Collapse>

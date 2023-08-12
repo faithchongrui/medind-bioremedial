@@ -56,30 +56,30 @@ const RecentActivities = () => {
 
         // const [items] = React.useState(getItems);
         return (
-            <ScrollMenu style={{ display: "flex"}}>
-                <div className="recentactivities">
-                    <h1 className='recentactivities'>(name) Activities completed</h1>
-                    <body className='activitycontainer' onWheel={handleScroll}>
+          <ScrollMenu style={{ display: "flex" }}>
+            <div className="recentactivities">
+              <h1 className="recentactivities">(name) Activities completed</h1>
+              <body className="activitycontainer" onWheel={handleScroll}>
                 {/* change this into an array with backend */}
                 {/* {items.map(({ id }) => (
                     <smallModuleActivities>
                         
                     </smallModuleActivities>
                 ))} */}
-                        <SmallModuleActivities description="lorem"/>
-                        <SmallModuleActivities description="hi"/>
-                        <SmallModuleActivities description="test"/>
-                        {/* <SmallModuleActivities description="test"/> */}
-                        {/*            <SmallModuleActivities     description="test"/>
-                        <SmallModuleActivities  description="test"/>
-                        <SmallModuleActivities description="test"/>
-                        <SmallModuleActivities description="test"/>
-                        <SmallModuleActivities description="test"/>
-                        <SmallModuleActivities description="test"/> */}
-                    </body>
-                </div>
-            </ScrollMenu>
-            )
+                <SmallModuleActivities description="lorem" />
+                <SmallModuleActivities description="hi" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+                <SmallModuleActivities description="test" />
+              </body>
+            </div>
+          </ScrollMenu>
+        );
         }
         
 export default RecentActivities;
