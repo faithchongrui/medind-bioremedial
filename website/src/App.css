@@ -208,7 +208,7 @@ div .homepage {
   background-color: var(--dark-one);
   display:flex;
   flex-wrap: nowrap;
-  padding: 3rem;
+  padding: 1rem;
   margin-left: 2rem;
   margin-right: 2rem;
   /* overflow: hidden; */
@@ -218,8 +218,10 @@ div .homepage {
 }
 
 .sessioncontainer {
-  background-color: rgb(208, 217, 36);
+  background-color: chartreuse;
   width: 100%;
+  
+
 
   .sessionindex {
     background-color: rgb(46, 79, 79);
@@ -227,10 +229,54 @@ div .homepage {
     border-radius: 40px;
     vertical-align: center;
     width: fit-content;
+    
+  }
+  .everythingcontainer {
+    background-color: azure;
+    display: flex;
+  flex-wrap: nowrap;
   }
 
-  .hasas {
+  .diagramcontainer {
     background-color: #61dafb;
+    padding-top: 1rem;
+    padding-left: 0rem;
+    width: 30rem;
+    height: fit-content;
   
+    color: var(--light);
+    
+    
+    .completed {
+      background-color: #2E4F4F;
+      /* width: 100%; */
+      font-weight: 300;
+      opacity: 40%;
+      text-indent: 9%;
+    }
+  
+    .yettocomplete {
+      background-color: #2E4F4F;
+      font-weight: 300;
+      text-indent: 9%;
+    }
+  
+    .diagramtitle {
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
+  .flashcardcontainer {
+    background-color: yellow;
+    color: var(--light);
+
+    .flashcards {
+      background-color: purple;
+    }
+    .flashcardtitle {
+      font-weight: 600;
+      text-align: center;
+    }
   }
 }

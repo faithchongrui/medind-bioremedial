@@ -12,21 +12,17 @@ import {
 } from "@mui/material";
 import {
   Casino,
-  DraftsOutlined,
-  HomeOutlined,
-  InboxOutlined,
-  MailOutline,
-  ReceiptOutlined,
   ExpandMore,
   ExpandLess,
 } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useState } from "react";
 
 const data = [
   {
     name: "Home",
-    icon: <HomeOutlined />,
+    icon: <HomeRoundedIcon />,
   },
   {
     name: "Activities",
@@ -108,7 +104,7 @@ function NavBar1() {
         sx={{ padding: 3 }} // Add padding of 8 pixels to all sides
         onClick={() => setOpen(true)}
       >
-        <MenuIcon sx={{ color: "white", fontSize: 40 }} />
+        <MenuRoundedIcon sx={{ color: "white", fontSize: 40, marginLeft: '20px'}} />
       </IconButton>
       <Drawer
         open={open}
