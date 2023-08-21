@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-const Auth = ({ setIsAuth }) => {
+const SignUp = ({ setIsAuth }) => {
   // Auth Functions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +39,7 @@ const Auth = ({ setIsAuth }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     auth
-      .signInWithEmailAndPassword(data.get("email"), data.get("password"))
+      .createUserWithEmailAndPassword(data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
@@ -136,4 +136,4 @@ const Auth = ({ setIsAuth }) => {
   );
 };
 
-export default Auth;
+export default SignUp;

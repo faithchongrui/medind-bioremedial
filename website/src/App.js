@@ -19,6 +19,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Auth setIsAuth={{setIsAuth}}/>}/>
+          
         </Routes>
     </div>
   );
