@@ -1,62 +1,48 @@
-import { React, useState } from "react";
-import { auth } from "../../config/firebase";
-import { Navigate, useNavigate } from "react-router-dom";
-import { TextField, Avatar, Button, CssBaseline, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const Auth = ({ setIsAuth }) => {
-  // Auth Functions
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
-
-  const logOut = async (e) => {
-    try {
-      auth.signOut(auth).then(() => {
-        localStorage.clear();
-        setIsAuth(false);
-        window.location.pathname = "/login";
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    auth
-      .signInWithEmailAndPassword(data.get("email"), data.get("password"))
-      .then((userCredential) => {
-        localStorage.setItem("isAuth", true);
-        const user = userCredential.user;
-        navigate("/home");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.err("Error", errorCode + ", " + errorMessage);
-      });
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
-
-  // Front-end
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
+      <CssBaseline />
       <Grid
         item
         xs={false}
         sm={4}
         md={7}
         sx={{
+          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
           backgroundRepeat: "no-repeat",
-          backgroundColor: "#2C3333",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} >
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
             my: 8,
@@ -110,11 +96,22 @@ const Auth = ({ setIsAuth }) => {
             >
               Sign In
             </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
       </Grid>
     </Grid>
   );
-};
-
-export default Auth;
+}
