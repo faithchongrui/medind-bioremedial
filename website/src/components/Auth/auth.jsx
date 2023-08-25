@@ -156,7 +156,7 @@ const Auth = ({ setIsAuth }) => {
               control={
                 <Checkbox
                   value="remember"
-                  sx={{ color: "#CBE4DE", accentColor: "#CBE4DE" }}
+                  sx={{ color: "#CBE4DE", accentColor: "#CBE4DE", "&.Mui-checked": { color: "#CBE4DE"} }}
                 />
               }
               label="Remember me"
@@ -185,11 +185,9 @@ const Auth = ({ setIsAuth }) => {
                   variant="body2"
                   sx={{
                     color: "#CBE4DE",
-                    textDecoration: "none",
+                    textDecorationColor: "#2E4F4Fgit",
                     ":hover": {
-                      backgroundColor: "rgb(20, 110, 114)",
-                      borderRadius: 5,
-                      boxShadow: "0px 0px 3px 6px rgb(20, 110, 114)",
+                      textDecorationColor: "#CBE4DE",
                     },
                   }}
                 >
