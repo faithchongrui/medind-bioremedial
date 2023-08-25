@@ -46,13 +46,22 @@ const SignUp = ({ setIsAuth }) => {
   
     const recentActivitiesCollectionRef = collection(
       doc(usersCollectionRef, uid),
-      'Recent Activities'
+      'RecentActivities'
     );
   
     await setDoc(doc(recentActivitiesCollectionRef, 'initial'), {
       id: 'prokaryotic',
+      description: 'lorem ipsum',
       progress: 0.0,
-      progressedKeywords: [],
+    });
+
+    const progressedKeyWordsCollectionRef = collection(
+      recentActivitiesCollectionRef, 'initial', 'ProgressedKeywords'
+    )
+
+    await setDoc(doc(progressedKeyWordsCollectionRef, 'initial'), {
+      id: "prokaryotic",
+      keyword: 'cell'
     });
   };
 

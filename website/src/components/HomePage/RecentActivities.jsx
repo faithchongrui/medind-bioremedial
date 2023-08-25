@@ -5,7 +5,7 @@ import logo from "../../images/1.png";
 
 // https://stackoverflow.com/questions/75635346/how-to-do-a-reactjs-horizontal-scroll-webpage
 
-const RecentActivities = (items, username) => {
+const RecentActivities = ({ items, username }) => {
   const handleScroll = (event) => {
     const container = event.target;
     const scrollAmount = event.deltaY;
@@ -16,7 +16,7 @@ const RecentActivities = (items, username) => {
     });
   };
 
-  const SmallModuleActivities = (id, description) => {
+  const SmallModuleActivities = ({id, description}) => {
     // https://dev.to/dawnind/3-ways-to-display-two-divs-side-by-side-3d8b
     const picStyle = {
       width: "150px", // Adjust the size as needed
@@ -54,15 +54,15 @@ const RecentActivities = (items, username) => {
       <div className="recentactivities">
         <h1 className="recentactivities">{username} Activities completed</h1>
         <body className="activitycontainer" onWheel={handleScroll}>
-          {/* change this into an array with backend */}
-          {/* {items.map(({ id }) => (
-                    <smallModuleActivities>
-                        
-                    </smallModuleActivities>
-                ))} */}
-        {items?.map((item, index) => (
-            <SmallModuleActivities key={index} id={item.id} description={item.description}/>
-        ))}
+          {items.map((item, index) => {
+            return(
+              <SmallModuleActivities
+              key={index}
+              id={item.id}
+              description={item.description}
+            />
+            );
+          })}
         </body>
       </div>
     </ScrollMenu>
