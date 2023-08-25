@@ -48,7 +48,7 @@ const Auth = ({ setIsAuth }) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.err("Error", errorCode + ", " + errorMessage);
+        console.error("Error", errorCode + ", " + errorMessage);
       });
   };
 
@@ -78,7 +78,7 @@ const Auth = ({ setIsAuth }) => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#2C3333" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

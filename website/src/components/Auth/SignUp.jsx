@@ -15,11 +15,9 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
 
 const SignUp = ({ setIsAuth }) => {
-  // Auth Functions
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,24 +33,27 @@ const SignUp = ({ setIsAuth }) => {
     }
   };
 
-const createUser = async (email, password, username, uid) => {
+  const createUser = async (email, password, username, uid) => {
   
-  const usersCollectionRef = db.collection("users")
-
-  await usersCollectionRef.doc(uid).set({
-    email: email,
-    password: password,
-    username: username,
-  })
-
-  const recentActivitiesCollectionRef = usersCollectionRef.doc(uid).collection('Recent Activities')
-
-  await recentActivitiesCollectionRef.doc("initial").set({
-    id: 'prokaryotic',
-    progress: 0.0,
-    progressedKeywords: []
-  })
-}
+    const usersCollectionRef = collection(db, 'users');
+  
+    await setDoc(doc(usersCollectionRef, uid), {
+      email: email,
+      password: password,
+      username: username,
+    });
+  
+    const recentActivitiesCollectionRef = collection(
+      doc(usersCollectionRef, uid),
+      'Recent Activities'
+    );
+  
+    await setDoc(doc(recentActivitiesCollectionRef, 'initial'), {
+      id: 'prokaryotic',
+      progress: 0.0,
+      progressedKeywords: [],
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
