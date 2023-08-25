@@ -6,9 +6,6 @@ import {
   Avatar,
   Button,
   CssBaseline,
-  FormControlLabel,
-  Checkbox,
-  Link,
   Paper,
   Box,
   Grid,
@@ -185,18 +182,10 @@ const SignUp = ({ setIsAuth }) => {
                 >
                   Sign Up
                 </Button>
-                {/* <Grid container>
-                  <Grid item>
-                    <Link href="/sign-up" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid> */}
               </Box>
             </Box>
           </Grid>
         </Grid>
-      
     </Grid>
   );
 };

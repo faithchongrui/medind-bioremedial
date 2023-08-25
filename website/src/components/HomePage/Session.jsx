@@ -1,30 +1,76 @@
 import React from 'react'
-import { PieChart, Pie } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 const Session = () => {
   
     const keywords = [
-      {
-        word: "Cell membrane"
-      },
-      {
-        word: "Rough endoplasmic reticulum"
-      }
+      "polymers",
+      "monosaccharides",
+      "disaccharides",
+      "polysaccharides",
+      "triglycerides",
+      "cholesterol",
     ]
 
     const progress = [
-     { name: "complete", value: 80 },
-     { name: "incomplete", value: 20 }
+     { name: "complete", number: 40, color: "#1E1E1E" },
+     { name: "incomplete", number: 60, color: "#2E4F4F" }
     ]
-    const Diagrams = props => {
+
+    const simuls = [
+      "dehydration & hydrolysis reaction",
+      "fluid mosaic model",
+    ]
+    const Diagrams = () => {
       return (
         <div>
             <div className='completed'>
-            - {props.terms}
+              {keywords.map((term) => (
+                <div className="terms">- {term}</div>
+              ))}
             </div>
             <div className='yettocomplete'>
-            - {props.notdone}
+             {keywords.map((term) => (
+                <div className="terms">- {term}</div>
+              ))}
             </div>
+        </div>
+      )
+    }
+
+    const Flashcards = () => {
+      return (
+        <PieChart
+          className="flashcards"
+          width={300}
+          height={300}
+          >
+            <text x={150} y={150} dy={8} textAnchor="middle" fill="#CBE4DE" fontSize={20}>
+              {progress[0].number}% learned
+            </text>
+            <Pie 
+            data={progress}
+            dataKey="number"
+            outerRadius={150}
+            innerRadius={110}
+            startAngle={90}
+            endAngle={540}
+            fill="rgb(46,79,79)"
+            stroke='none'>
+              {progress.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+            </Pie>
+        </PieChart>
+      )
+    }
+
+    const Simulations = () => {
+      return (
+        <div>
+              {simuls.map((sim) => (
+                <div className="sims">{sim}</div>
+              ))}
         </div>
       )
     }
@@ -34,25 +80,16 @@ const Session = () => {
         <div className='sessionindex' style={{padding: "10px", align:"left"}}>Session 3: Class Test</div>
         <body className='everythingcontainer'>
         <body className='diagramcontainer'>
-            <Diagrams terms="asse" notdone="sdsd"/>
+            <Diagrams />
             <div className='diagramtitle'>Diagram</div>
         </body>
         <body className='flashcardcontainer'>
-          <PieChart
-          className="flashcards"
-          width={300}
-          height={300}
-          >
-            <Pie 
-            data={progress}
-            dataKey="number"
-            outerRadius={150}
-            innerRadius={110}
-            fill="rgb(46,79,79)"
-            stroke='rgb(46,79,79)'
-             />
-        </PieChart>
+          <Flashcards />
           <div className='flashcardtitle'>Flashcards</div>
+        </body>
+        <body className='simulationcontainer'>
+          <Simulations />
+          <div className='simulationtitle'>Simulations</div>
         </body>
         </body>
     </div>

@@ -58,7 +58,7 @@ const RecentActivities = () => {
         return (
           <ScrollMenu style={{ display: "flex" }}>
             <div className="recentactivities">
-              <h1 className="recentactivities">(name) Activities completed</h1>
+              <h1 className="recentactivities">Your Completed Activities</h1>
               <body className="activitycontainer" onWheel={handleScroll}>
                 {/* change this into an array with backend */}
                 {/* {items.map(({ id }) => (
