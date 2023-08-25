@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { auth, db } from "../../config/firebase";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth"
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -23,7 +24,7 @@ const SignUp = ({ setIsAuth }) => {
 
   const logOut = async (e) => {
     try {
-      auth.signOut(auth).then(() => {
+        signOut(auth).then(() => {
         localStorage.clear();
         setIsAuth(false);
         window.location.pathname = "/login";
@@ -59,8 +60,7 @@ const SignUp = ({ setIsAuth }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    auth
-      .createUserWithEmailAndPassword(data.get("email"), data.get("password"))
+    createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;

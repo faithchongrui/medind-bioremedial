@@ -1,11 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import TabBar from '../components/HomePage/TabBar';
 import RecentActivities from '../components/HomePage/RecentActivities';
 import Progress from '../components/HomePage/Progress';
 import NavBar from '../components/HomePage/NavBar';
 import { auth, db } from '../config/firebase'
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection } from 'firebase/firestore';
 
 
 // const getDetails = async () => {
@@ -25,11 +24,9 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 const HomePage = () => {
   const [recentActivities, setRecentActivities] = useState([]);
-  const usersCollectionRef = db.collection("users");
   const user = auth.currentUser;
 
   const fetchRecentActivities = async (user) => {
-    const db = getFirestore();
     const userDocRef = doc(db, 'users', user.uid);
   
     try {
@@ -38,6 +35,7 @@ const HomePage = () => {
       if (userDocSnapshot.exists()) {
         const userActivities = userDocSnapshot.data().recentActivities;
         setRecentActivities([...userActivities]);
+        console.log(typeof recentActivities)
       } else {
         console.error('No such document!');
       }
@@ -45,6 +43,10 @@ const HomePage = () => {
       console.error('Error fetching recent activities:', error);
     }
   };
+
+  useEffect(() => {
+    fetchRecentActivities(user)
+  })
 
   return (
     <div className="homepage">
