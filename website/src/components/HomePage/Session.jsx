@@ -13,12 +13,8 @@ const Session = () => {
     ]
 
     const progress = [
-     {
-      name: "hs", number: 80
-     },
-     {
-      name: "j", number: 20
-     }
+     { name: "complete", value: 80 },
+     { name: "incomplete", value: 20 }
     ]
     const Diagrams = props => {
       return (
@@ -52,7 +48,8 @@ const Session = () => {
             dataKey="number"
             outerRadius={150}
             innerRadius={110}
-            fill="green"
+            fill="rgb(46,79,79)"
+            stroke='rgb(46,79,79)'
              />
         </PieChart>
           <div className='flashcardtitle'>Flashcards</div>

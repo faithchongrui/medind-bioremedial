@@ -14,7 +14,28 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { styled } from "@mui/material/styles";
+import Person2Icon from "@mui/icons-material/Person2";
+
+const StyledTextField = styled(TextField)({
+  "& label": {
+    color: "#CBE4DE",
+  },
+  "& label.Mui-focused": {
+    color: "#CBE4DE",
+  },
+  "& .MuiOutlinedInput-root": {
+    color: "white",
+    "& fieldset": {
+      borderColor: "rgb(30, 30, 30)",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "rgb(30, 30, 30)",
+    },
+  },
+  backgroundColor: "rgb(30, 30, 30)",
+  borderRadius: 3
+});
 
 const Auth = ({ setIsAuth }) => {
   // Auth Functions
@@ -60,7 +81,7 @@ const Auth = ({ setIsAuth }) => {
         item
         xs={false}
         sm={4}
-        md={7}
+        md={6}
         sx={{
           backgroundRepeat: "no-repeat",
           backgroundColor: "#2C3333",
@@ -68,29 +89,50 @@ const Auth = ({ setIsAuth }) => {
           backgroundPosition: "center",
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={6}
+        component={Paper}
+        sx={{
+          backgroundColor: "rgb(30, 30, 30)",
+        }}
+      >
         <Box
           sx={{
-            my: 8,
-            mx: 4,
+            my: 16,
+            mx: 13,
+            padding: "2.5rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundColor: "#2E4F4F",
+            borderRadius: 15,
+            color: "#CBE4DE",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: "rgb(20, 110, 114)" }}>
+            <Person2Icon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              my: 1,
+              fontSize: 30,
+              fontWeight: "bold",
+            }}
+          >
+            Login to Bioremedial
           </Typography>
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, color: "#CBE4DE" }}
           >
-            <TextField
+            <StyledTextField
               margin="normal"
               required
               fullWidth
@@ -100,7 +142,7 @@ const Auth = ({ setIsAuth }) => {
               autoComplete="email"
               autoFocus
             />
-            <TextField
+            <StyledTextField
               margin="normal"
               required
               fullWidth
@@ -111,21 +153,47 @@ const Auth = ({ setIsAuth }) => {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  sx={{ color: "#CBE4DE", accentColor: "#CBE4DE" }}
+                />
+              }
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                my: 2,
+                backgroundColor: "rgb(20, 110, 114)",
+                boxShadow: "none",
+                // inlineSize: "70%",
+                ":hover": {
+                  backgroundColor: "#188C92",
+                  boxShadow: "0px 0px 3px 3px #188C92",
+                },
+              }}
             >
-              Sign In
+              Login
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link
+                  href="/sign-up"
+                  variant="body2"
+                  sx={{
+                    color: "#CBE4DE",
+                    textDecoration: "none",
+                    ":hover": {
+                      backgroundColor: "rgb(20, 110, 114)",
+                      borderRadius: 5,
+                      boxShadow: "0px 0px 3px 6px rgb(20, 110, 114)",
+                    },
+                  }}
+                >
+                  {"Don't have an account yet? Signup!"}
                 </Link>
               </Grid>
             </Grid>
