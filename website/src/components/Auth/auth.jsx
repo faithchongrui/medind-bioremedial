@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { auth } from "../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -60,8 +61,7 @@ const Auth = ({ setIsAuth }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    auth
-      .signInWithEmailAndPassword(data.get("email"), data.get("password"))
+    signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
@@ -70,7 +70,7 @@ const Auth = ({ setIsAuth }) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.err("Error", errorCode + ", " + errorMessage);
+        console.error("Error", errorCode + ", " + errorMessage);
       });
   };
 

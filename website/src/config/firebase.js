@@ -1,5 +1,7 @@
-import firebase from "firebase/app";
-require('firebase/auth')
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 // import { initializeApp } from "firebase/app";
 // import { getAuth } from 'firebase/auth'
 
@@ -13,8 +15,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-export const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const images = getStorage(app);
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // export const auth = getAuth(app)

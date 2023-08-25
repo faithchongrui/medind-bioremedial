@@ -1,5 +1,6 @@
 import { React, useState } from "react";
-import { auth } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth"
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -14,6 +15,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import logo from "../../images/1.png";
+import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -35,16 +37,14 @@ const StyledTextField = styled(TextField)({
   borderRadius: 3
 });
 
+
 const SignUp = ({ setIsAuth }) => {
-  // Auth Functions
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const logOut = async (e) => {
     try {
-      auth.signOut(auth).then(() => {
+        signOut(auth).then(() => {
         localStorage.clear();
         setIsAuth(false);
         window.location.pathname = "/login";
@@ -54,20 +54,56 @@ const SignUp = ({ setIsAuth }) => {
     }
   };
 
+  const createUser = async (email, password, username, uid) => {
+  
+    const usersCollectionRef = collection(db, 'users');
+  
+    await setDoc(doc(usersCollectionRef, uid), {
+      email: email,
+      password: password,
+      username: username,
+    });
+  
+    const recentActivitiesCollectionRef = collection(
+      doc(usersCollectionRef, uid),
+      'RecentActivities'
+    );
+  
+    await setDoc(doc(recentActivitiesCollectionRef, 'initial'), {
+      id: 'prokaryotic',
+      description: 'lorem ipsum',
+      progress: 0.0,
+    });
+
+    const progressedKeyWordsCollectionRef = collection(
+      recentActivitiesCollectionRef, 'initial', 'ProgressedKeywords'
+    )
+
+    await setDoc(doc(progressedKeyWordsCollectionRef, 'initial'), {
+      id: "prokaryotic",
+      keyword: 'cell'
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    auth
-      .createUserWithEmailAndPassword(data.get("email"), data.get("password"))
+
+    createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
-        navigate("/home");
+        try {
+          createUser(data.get("email"), data.get("password"), data.get("username"), user.uid)
+        } catch (e) {
+          console.error(e)
+        }
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.err("Error", errorCode + ", " + errorMessage);
+        console.error("Error", errorCode + ", " + errorMessage);
       });
   };
 
@@ -133,6 +169,15 @@ const SignUp = ({ setIsAuth }) => {
                 onSubmit={handleSubmit}
                 sx={{ mt: 1, color: "#CBE4DE" }}
               >
+                <StyledTextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoFocus
+                />
                 <StyledTextField
                   margin="normal"
                   required
