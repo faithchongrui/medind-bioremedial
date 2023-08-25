@@ -108,6 +108,24 @@ div .homepage {
   -webkit-overflow-scrolling: touch;
 }
 
+/* trying to get rid of the white bg in the autocomplete https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete */
+/* .test:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #802d2d;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+} */
+
+/* input.test:-webkit-autofill,
+input.test:-webkit-autofill:hover, 
+input.test:-webkit-autofill:focus, 
+input.test:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #802d2d;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+} */
+
 /* side bar styling */
 #tabbar {
   border: var(--dark-one);
@@ -147,7 +165,9 @@ div .homepage {
   position: top;
   z-index: 20;
   color: var(--light);
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
 }
 
 .activitycontainer::-webkit-scrollbar {
@@ -155,12 +175,12 @@ div .homepage {
 }
 
 .activitycontainer::-webkit-scrollbar-thumb {
-  background-color: rgb(4, 51, 51);
+  background-color: rgb(44, 51, 51);
   border-radius: 10px;
 }
 
 .activitycontainer::-webkit-scrollbar-track {
-  background-color: rgb(203, 228, 222);
+  background-color: rgb(20, 110, 114);
   border-radius: 10px;
 }
 
@@ -218,7 +238,7 @@ div .homepage {
 }
 
 .sessioncontainer {
-  background-color: chartreuse;
+  background-color: #2C3333;
   width: 100%;
   
 
@@ -232,51 +252,82 @@ div .homepage {
     
   }
   .everythingcontainer {
-    background-color: azure;
+    background-color: #ced7d7;
     display: flex;
-  flex-wrap: nowrap;
+    flex-wrap: nowrap;
+
   }
 
   .diagramcontainer {
-    background-color: #61dafb;
+    background-color: #2C3333;
     padding-top: 1rem;
     padding-left: 0rem;
+    /* padding-right: 1rem; */
+    margin-right: 2rem;
     width: 30rem;
-    height: fit-content;
+    /* height: fit-content; */
   
     color: var(--light);
     
     
     .completed {
+      padding: 0.5rem;
       background-color: #2E4F4F;
       /* width: 100%; */
       font-weight: 300;
       opacity: 40%;
-      text-indent: 9%;
+      text-indent: 7%;
     }
   
     .yettocomplete {
+      padding: 0.5rem;
       background-color: #2E4F4F;
       font-weight: 300;
-      text-indent: 9%;
+      text-indent: 7%;
     }
   
     .diagramtitle {
+      padding-top: 1rem;
+      font-size: larger;
       font-weight: 600;
       text-align: center;
     }
   }
+}
 
-  .flashcardcontainer {
-    background-color: yellow;
-    color: var(--light);
+.flashcardcontainer {
+  padding-top: 1rem;
+  background-color: #2C3333;
+  color: var(--light);
+  margin-right: 2rem;
 
-    .flashcards {
-      background-color: purple;
-    }
-    .flashcardtitle {
-      font-weight: 600;
-      text-align: center;
-    }
+  .flashcards {
+    background-color: #2C3333;
+  }
+  .flashcardtitle {
+    padding-top: 1rem;
+    font-size: larger;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.simulationcontainer {
+  padding-top: 1rem;
+  background-color: #2C3333;
+  color: var(--light);
+
+  .sims {
+    background-color: #2E4F4F;
+    padding: 10%;
+    margin: 1rem;
+    text-align: center;
+    font-weight: 300;
+  }
+  .simulationtitle {
+    padding-top: 1rem;
+    font-size: larger;
+    font-weight: 600;
+    text-align: center;
   }
 }

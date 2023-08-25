@@ -7,16 +7,36 @@ import {
   Avatar,
   Button,
   CssBaseline,
-  FormControlLabel,
-  Checkbox,
-  Link,
   Paper,
   Box,
   Grid,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { styled } from "@mui/material/styles";
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import logo from "../../images/1.png";
 import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
+
+const StyledTextField = styled(TextField)({
+  "& label": {
+    color: "#CBE4DE",
+  },
+  "& label.Mui-focused": {
+    color: "#CBE4DE",
+  },
+  "& .MuiOutlinedInput-root": {
+    color: "white",
+    "& fieldset": {
+      borderColor: "rgb(30, 30, 30)",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "rgb(30, 30, 30)",
+    },
+  },
+  backgroundColor: "rgb(30, 30, 30)",
+  borderRadius: 3
+});
+
 
 const SignUp = ({ setIsAuth }) => {
 
@@ -90,30 +110,66 @@ const SignUp = ({ setIsAuth }) => {
   // Front-end
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign Up
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
-            <TextField
+    <Grid container component="main" justifyContent="center" sx={{ height: "100vh", backgroundColor: "#1E1E1E" }}>
+      <Grid
+        container
+        item
+        xs={false}
+        // sm={4}
+        md={9}
+        justifyContent="center"
+        sx={{
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "#2C3333",
+          // backgroundSize: "cover",
+          backgroundPosition: "center",
+          alignItems: "center",
+        }}>
+          <img src={logo} alt="Logo" style={{width: "30%", margin: 50}} />
+          <Grid 
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            elevation={0}
+            component={Paper}
+            sx={{
+              backgroundColor: "#2C3333",
+            }}>
+           
+            <Box
+              sx={{
+                my: 6,
+                mx: 4,
+                padding: "2.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                borderRadius: 15,
+                color: "#CBE4DE",
+                backgroundColor: "#2E4F4F",
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: "rgb(20, 110, 114)" }}>
+                <Person2OutlinedIcon />
+              </Avatar>
+              <Typography 
+                component="h1"
+                variant="h5"
+                sx={{
+                  my: 1,
+                  fontSize: 30,
+                  fontWeight: "bold",
+                }}>
+                Create a new account
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 1, color: "#CBE4DE" }}
+              >
+                <StyledTextField
               margin="normal"
               required
               fullWidth
@@ -121,44 +177,60 @@ const SignUp = ({ setIsAuth }) => {
               label="Username"
               name="username"
               autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container>
-            </Grid>
-          </Box>
-        </Box>
-      </Grid>
+                />
+                <StyledTextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  // class="test"
+                />
+                <StyledTextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                {/* confirm password */}
+                <StyledTextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Confirm Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    my: 2,
+                    backgroundColor: "rgb(20, 110, 114)",
+                    boxShadow: "none",
+                    // inlineSize: "70%",
+                    ":hover": {
+                      backgroundColor: "#188C92",
+                      boxShadow: "0px 0px 3px 3px #188C92",
+                    },
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
     </Grid>
   );
 };
