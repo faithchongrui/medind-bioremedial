@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { auth } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -35,20 +35,45 @@ const SignUp = ({ setIsAuth }) => {
     }
   };
 
+const createUser = async (email, password, username, uid) => {
+  
+  const usersCollectionRef = db.collection("users")
+
+  await usersCollectionRef.doc(uid).set({
+    email: email,
+    password: password,
+    username: username,
+  })
+
+  const recentActivitiesCollectionRef = usersCollectionRef.doc(uid).collection('Recent Activities')
+
+  await recentActivitiesCollectionRef.doc("initial").set({
+    id: 'prokaryotic',
+    progress: 0.0,
+    progressedKeywords: []
+  })
+}
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     auth
       .createUserWithEmailAndPassword(data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
-        navigate("/home");
+        try {
+          createUser(data.get("email"), data.get("password"), data.get("username"), user.uid)
+        } catch (e) {
+          console.error(e)
+        }
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.err("Error", errorCode + ", " + errorMessage);
+        console.error("Error", errorCode + ", " + errorMessage);
       });
   };
 
@@ -56,18 +81,6 @@ const SignUp = ({ setIsAuth }) => {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "#2C3333",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
         <Box
           sx={{
@@ -82,7 +95,7 @@ const SignUp = ({ setIsAuth }) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <Box
             component="form"
@@ -90,6 +103,15 @@ const SignUp = ({ setIsAuth }) => {
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoFocus
+            />
             <TextField
               margin="normal"
               required
@@ -120,14 +142,9 @@ const SignUp = ({ setIsAuth }) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
-              <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
           </Box>
         </Box>
