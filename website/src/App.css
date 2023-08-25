@@ -108,6 +108,24 @@ div .homepage {
   -webkit-overflow-scrolling: touch;
 }
 
+/* trying to get rid of the white bg in the autocomplete https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete */
+/* .test:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #802d2d;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+} */
+
+/* input.test:-webkit-autofill,
+input.test:-webkit-autofill:hover, 
+input.test:-webkit-autofill:focus, 
+input.test:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #802d2d;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+} */
+
 /* side bar styling */
 #tabbar {
   border: var(--dark-one);

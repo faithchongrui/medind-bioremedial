@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Person2Icon from "@mui/icons-material/Person2";
+import logo from "../../images/1.png";
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -78,17 +79,21 @@ const Auth = ({ setIsAuth }) => {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
+        container
         item
         xs={false}
         sm={4}
         md={6}
+        justifyContent="center"
         sx={{
           backgroundRepeat: "no-repeat",
           backgroundColor: "#2C3333",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}
-      />
+          alignItems: "center"
+        }}>
+        <img src={logo} alt="Logo" style={{width: "50%", margin: 20}} />
+      </Grid>
       <Grid
         item
         xs={12}
@@ -185,7 +190,7 @@ const Auth = ({ setIsAuth }) => {
                   variant="body2"
                   sx={{
                     color: "#CBE4DE",
-                    textDecorationColor: "#2E4F4Fgit",
+                    textDecorationColor: "#2E4F4F",
                     ":hover": {
                       textDecorationColor: "#CBE4DE",
                     },
