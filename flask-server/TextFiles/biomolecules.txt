@@ -1,0 +1,35 @@
+biomolecules
+structure
+properties
+proteins
+lipids
+nucleic acid
+DNA
+RNA
+carbohydrates
+carbon
+hydrogen
+ubiquitious
+polymer
+monomer
+synthesis
+dehydration reaction
+enzymes
+energy
+water molecule
+hydrolysis
+disassemble
+process
+fats
+cell membrane
+monosaccharides
+disaccharides
+polymers
+polysaccharides
+triglycerides
+cholesterol
+fatty acids
+amino acids
+peptide bond
+polypeptide chain
+carboxyl group

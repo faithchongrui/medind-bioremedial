@@ -18,7 +18,7 @@ def export_pdf(real_file_id):
     TODO(developer) - See https://developers.google.com/identity
     for guides on implementing OAuth2 for the application.
     """
-    credentials = Credentials.from_authorized_user_file('token.json')
+    credentials = Credentials.from_authorized_user_file('credentials/token.json')
 
     try:
         # create drive api client

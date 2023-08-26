@@ -15,7 +15,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import logo from "../../images/1.png";
-import { getFirestore, doc, setDoc, collection } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, deleteDoc } from 'firebase/firestore';
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -83,6 +83,8 @@ const SignUp = ({ setIsAuth }) => {
       id: "prokaryotic",
       keyword: 'cell'
     });
+
+    await deleteDoc(doc(recentActivitiesCollectionRef, 'initial'))
   };
 
   const handleSubmit = (event) => {
