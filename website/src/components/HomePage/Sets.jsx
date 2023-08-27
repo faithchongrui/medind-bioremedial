@@ -4,6 +4,7 @@ import {
   Button,
   Box,
   Typography,
+  IconButton,
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
@@ -30,33 +31,35 @@ const Sets = () => {
       sx={{
         display: "flex",
             flexDirection: "row",
+            width: "fit-content",
       }}>
         <Typography
           component="h1"
           variant="h6"
           sx={{
             color: "#CBE4DE",
-            m: 2,
+            my: 2,
+            ml: 2,
+            mr: 1,
             fontWeight: 300,
+            padding: 1
           }}
         >
           Created Sets
         </Typography>
-        <Button
+        <IconButton
         sx={{
           color: "#CBE4DE",
           backgroundColor: "#2E4F4F",
-          borderRadius: 20,
-          inlineSize: "fit-content",
-          my: 2,
-          padding: 0,
+          my: 2.5,
+          // padding: 1,
           ":hover": {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
         }}>
-          <EditRoundedIcon></EditRoundedIcon>
-        </Button>
+          <EditRoundedIcon />
+        </IconButton>
       </Box>
       
       {arr.map((number) => (

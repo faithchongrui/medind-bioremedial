@@ -29,7 +29,7 @@ const data = [
     icon: <Casino />,
     submenu: [
       {
-        name: "U1.1",
+        name: "Simulations",
       },
       {
         name: "U1.2",

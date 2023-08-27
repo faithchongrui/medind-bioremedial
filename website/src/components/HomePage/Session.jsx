@@ -5,6 +5,7 @@ import {
   Button,
   Box,
   Typography,
+  IconButton,
 } from "@mui/material";
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
@@ -90,36 +91,31 @@ const Session = () => {
         <div className='sessionindex' style={{padding: "10px", align:"left"}}>
           Session 3: Class Test
         </div>
-        <Button
+        <IconButton
         sx={{
           color: "#CBE4DE",
           backgroundColor: "#2E4F4F",
-          borderRadius: 20,
-          inlineSize: "fit-content",
           mx: 2,
-          padding: 0,
+          padding: 1,
           ":hover": {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
         }}>
           <PlayArrowRoundedIcon />
-        </Button>
-        <Button
+        </IconButton>
+        <IconButton
         sx={{
           color: "#CBE4DE",
           backgroundColor: "#2E4F4F",
-          borderRadius: 20,
-          inlineSize: "fit-content",
-          // mx: 2,
-          padding: 0,
+          padding: 1,
           ":hover": {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
         }}>
           <HistoryRoundedIcon />
-        </Button>
+        </IconButton>
         </div>
         <body className='everythingcontainer'>
           <body className='diagramcontainer'>

@@ -9,6 +9,7 @@ import Auth from './components/Auth/auth';
 import auth from './config/firebase';
 import signOut from 'firebase/auth'
 import SignUp from './components/Auth/SignUp';
+import SimulationPage from './pages/SimulationPage';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Auth setIsAuth={{setIsAuth}}/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/simulations" element={<SimulationPage/>}/>
         </Routes>
     </div>
   );

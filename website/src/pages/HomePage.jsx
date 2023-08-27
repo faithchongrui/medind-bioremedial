@@ -72,9 +72,8 @@ const HomePage = () => {
     <div className="homepage">
       <NavBar/>
       <RecentActivities style={{ zIndex: 0}} items={recentActivities} username={username}>
-        {/* <div style={{margin: "100px"}}></div> */}
       </RecentActivities>
-      <Progress></Progress>
+      <Progress />
     </div>
   )
 }
