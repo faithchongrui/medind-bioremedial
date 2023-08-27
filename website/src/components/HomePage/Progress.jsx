@@ -9,8 +9,8 @@ const Progress = () => {
         <body className="progresscontainer">
             <Session></Session>
             <Sets></Sets>
-            {/*pull from backend*/}
         </body>
+        
     </div>
   )
 }

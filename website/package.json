@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
+    "craco": "^0.0.3",
     "craco-webpack-resolve": "^1.2.1",
     "dgram": "^1.0.1",
     "dns": "^0.2.2",

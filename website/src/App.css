@@ -220,12 +220,14 @@ input.test:-webkit-autofill:active{
   position: top;
   z-index: 20;
   color: var(--light);
-  padding: 2rem; 
+  padding-left: 2rem; 
+
+  padding-bottom: 1rem;
   margin-left: 2rem;
 }
 
 .progresscontainer {
-  background-color: var(--dark-one);
+  background-color: #1E1E1E;
   display:flex;
   flex-wrap: nowrap;
   padding: 1rem;
@@ -240,22 +242,28 @@ input.test:-webkit-autofill:active{
 .sessioncontainer {
   background-color: #2C3333;
   width: 100%;
-  
+  padding: 1rem;
+  padding-bottom: 3rem;
+  margin-right: 1rem;
 
-
+  .sindex {
+    vertical-align: center;
+    width: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+  }
   .sessionindex {
     background-color: rgb(46, 79, 79);
     color: var(--light);
     border-radius: 40px;
     vertical-align: center;
     width: fit-content;
-    
   }
   .everythingcontainer {
-    background-color: #ced7d7;
+    background-color: #2C3333;
     display: flex;
     flex-wrap: nowrap;
-
+    /* margin-right: 2rem */
   }
 
   .diagramcontainer {
@@ -264,19 +272,22 @@ input.test:-webkit-autofill:active{
     padding-left: 0rem;
     /* padding-right: 1rem; */
     margin-right: 2rem;
-    width: 30rem;
+    width: 20rem;
     /* height: fit-content; */
+    /* padding-right: 30%; */
+    
   
     color: var(--light);
     
     
     .completed {
       padding: 0.5rem;
+      /* padding-right: 30%; */
       background-color: #2E4F4F;
-      /* width: 100%; */
       font-weight: 300;
       opacity: 40%;
       text-indent: 7%;
+      /* margin-right: 2rem; */
     }
   
     .yettocomplete {
@@ -284,6 +295,7 @@ input.test:-webkit-autofill:active{
       background-color: #2E4F4F;
       font-weight: 300;
       text-indent: 7%;
+      /* margin-right: 2rem; */
     }
   
     .diagramtitle {
@@ -320,7 +332,7 @@ input.test:-webkit-autofill:active{
   .sims {
     background-color: #2E4F4F;
     padding: 10%;
-    margin: 1rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-weight: 300;
   }
