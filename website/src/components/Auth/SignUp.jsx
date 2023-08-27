@@ -17,6 +17,8 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import logo from "../../images/1.png";
 import { getFirestore, doc, setDoc, collection, deleteDoc } from 'firebase/firestore';
 
+import { useAuth } from '../../context/AuthContext'
+
 const StyledTextField = styled(TextField)({
   "& label": {
     color: "#CBE4DE",
@@ -42,17 +44,7 @@ const SignUp = ({ setIsAuth }) => {
 
   const navigate = useNavigate();
 
-  const logOut = async (e) => {
-    try {
-        signOut(auth).then(() => {
-        localStorage.clear();
-        setIsAuth(false);
-        window.location.pathname = "/login";
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { signUp } = useAuth()
 
   const createUser = async (email, password, username, uid) => {
   
@@ -91,7 +83,7 @@ const SignUp = ({ setIsAuth }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
+    signUp(data.get("email"), data.get("password"))
       .then((userCredential) => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
