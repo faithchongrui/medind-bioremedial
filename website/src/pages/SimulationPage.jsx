@@ -174,20 +174,22 @@ const SimulationPage = () => {
           </div>
         ))} */}
         {sims.map((sim) => (
-        //   <Grid container
-        //   item
-        //   xs={12}
-        // sm={8}
-        // md={6}
-        //   sx={{
-        //     display: "flex",
-        //     flexDirection: "row",
-        //     alignItems: "left",
-        //     flexWrap: "nowrap",
-        //     width: "fit-content",
-        //   }}>
-          <SimulationCard title={sim.title} description={sim.description} />
-          // </Grid>
+          <Grid container
+          spacing={0}
+        
+          sx={{
+            // display: "flex",
+            // flexDirection: "row",
+            // alignItems: "left",
+            // flexWrap: "nowrap",
+            // width: "fit-content",
+            
+          }}
+          >
+            <Grid item xs={12} sm={6} >
+              <SimulationCard title={sim.title} description={sim.description} />
+            </Grid>
+         </Grid>
           ))}
       </div>
       </Box>
