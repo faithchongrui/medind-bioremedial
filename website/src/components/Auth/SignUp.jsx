@@ -40,7 +40,7 @@ const StyledTextField = styled(TextField)({
 });
 
 
-const SignUp = ({ setIsAuth }) => {
+const SignUp = () => {
 
   const navigate = useNavigate();
 

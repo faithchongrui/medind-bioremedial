@@ -1,13 +1,10 @@
-
 import './App.css';
-import { React, useState } from 'react';
+import React from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 import Start from './pages/StartPage';
 import HomePage from './pages/HomePage';
 import Auth from './components/Auth/auth';
-import auth from './config/firebase';
-import signOut from 'firebase/auth'
 import SignUp from './components/Auth/SignUp';
 import SimulationPage from './pages/SimulationPage';
 import { AuthProvider } from './context/AuthContext';

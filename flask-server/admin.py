@@ -42,6 +42,5 @@ def push_to_firebase(files_word_dict):
 
 if __name__ == '__main__':
     files_word_dict = read_words_from_folder(textFiles)
-    # push_to_firebase(files_word_dict)
-    print(files_word_dict)
+    push_to_firebase(files_word_dict)
 

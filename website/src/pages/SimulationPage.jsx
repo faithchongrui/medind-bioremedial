@@ -14,38 +14,10 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import NavBar from '../components/HomePage/NavBar';
 import SimulationCard from "../components/SimulationPage/SimulationCard";
+import { debounce } from "lodash";
 
 const SimulationPage = () => {
-  // const SearchBar = ({setSearchQuery}) => (
-  //   <Grid
-  //   sx={{
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //   }}>
-  //     <TextField
-  //       margin="normal"
-  //       id="search-bar"
-  //       onInput={(e) => {
-  //         setSearchQuery(e.target.value);
-  //       }}
-  //       label="Enter a city name"
-  //       placeholder="Search..."
-  //       size="small"
-  //       sx={{
-  //         backgroundColor: "#FFFFFF",
-  //         width: "80%",
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //       }}
-  //       >
-  //         <SearchIcon sx={{ color: "blue" }} />
-  //       </TextField>
-  //       <IconButton type="submit" aria-label="search">
-       
-  //     </IconButton>
-  //   </Grid>
-  // );
+
   const Search = styled('div')({
     position: 'relative',
     borderRadius: 10,
@@ -77,26 +49,8 @@ const SimulationPage = () => {
     width: '100%',
   });
 
-  const filterData = (query, data) => {
-    if (!query) {
-      return data;
-    } else {
-      return data.filter((d) => d.toLowerCase().includes(query));
-    }
-  };
+  
 
-  // const data = [
-  //   "Paris",
-  //   "London",
-  //   "New York",
-  //   "Tokyo",
-  //   "Berlin",
-  //   "Buenos Aires",
-  //   "Cairo",
-  //   "Canberra",
-  //   "Rio de Janeiro",
-  //   "Dublin"
-  // ];
   const sims = [
     { 
         title: "Fluid Mosaic Model", 
@@ -115,8 +69,24 @@ const SimulationPage = () => {
   },
 ]
 
-  // const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   // const dataFiltered = filterData(searchQuery, data);
+
+  const filterData = (query, data) => {
+    if (!query) {
+      return data;
+    } else {
+      return data.filter(
+        (sim) =>
+          sim.title.toLowerCase().includes(query.toLowerCase()) ||
+          sim.description.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }; 
+
+  const debouncedHandleInput = debounce((value) => {
+    setSearchQuery(value);
+  }, 300);
 
   return (
     <Grid 
@@ -156,23 +126,19 @@ const SimulationPage = () => {
       }}>
         {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}> */}
         <Search sx={{ my: "1rem",}}>
-        <SearchIconWrapper>
+          <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              type="search"
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => debouncedHandleInput(e.target.value)}
+              value={searchQuery}
             />
           </Search>
         
       <div>
-        {/* {dataFiltered.map((d) => (
-          <div
-            key={d.id}
-          >
-            
-          </div>
-        ))} */}
         {sims.map((sim) => (
           <Grid container
           spacing={0}

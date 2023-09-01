@@ -14,23 +14,28 @@ import {
   Casino,
   ExpandMore,
   ExpandLess,
+  ViewInAr
 } from "@mui/icons-material";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
     name: "Home",
     icon: <HomeRoundedIcon />,
+    link: "/home"
+  },
+  {
+    name: "Simulations",
+    icon: <ViewInAr/>,
+    link: "/simulations"
   },
   {
     name: "Activities",
     icon: <Casino />,
     submenu: [
-      {
-        name: "Simulations",
-      },
       {
         name: "U1.2",
       },
@@ -48,6 +53,9 @@ const theme = createTheme({
 });
 
 function NavBar1() {
+
+const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState(false);
 
@@ -55,7 +63,9 @@ function NavBar1() {
     setOpenSubMenu(!openSubMenu);
   };
 
-  const handleItemClick = () => {};
+  const handleItemClick = (item) => {
+    navigate(item.link)
+  };
 
   const getList = () => (
     <div style={{ width: 250 }}>
@@ -64,7 +74,7 @@ function NavBar1() {
           <div>
             <ListItemButton
               key={index}
-              onClick={item.submenu ? handleMenuClick : handleItemClick}
+              onClick={item.submenu ? () => handleMenuClick(item) : () => handleItemClick(item)}
             >
               <ListItemIcon sx={{ color: "#CBE4DE" }}>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} sx={{ color: "#CBE4DE" }} />
@@ -117,6 +127,7 @@ function NavBar1() {
         }}
       >
         {getList()}
+
       </Drawer>
     </div>
   );
