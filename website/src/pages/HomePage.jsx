@@ -1,25 +1,9 @@
-import { useEffect, useState, React } from 'react';
+import React, { useEffect, useState } from 'react';
 import RecentActivities from '../components/HomePage/RecentActivities';
 import Progress from '../components/HomePage/Progress';
 import NavBar from '../components/HomePage/NavBar';
 import { auth, db } from '../config/firebase'
 import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
-
-
-// const getDetails = async () => {
-//   try {
-
-//     if (doc.exists) {
-//       return Array.from(doc.data()['recentActivities']);
-//     } else {
-//       console.error("No such document!");
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error getting user details:", error);
-//     return null;
-//   }
-// };
 
 const HomePage = () => {
   const [recentActivities, setRecentActivities] = useState([]);

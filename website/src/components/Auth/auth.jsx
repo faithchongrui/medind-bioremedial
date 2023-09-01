@@ -1,6 +1,5 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { auth } from "../../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -18,6 +17,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Person2Icon from "@mui/icons-material/Person2";
 import logo from "../../images/1.png";
+import { useAuth } from '../../context/AuthContext'
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -39,18 +39,18 @@ const StyledTextField = styled(TextField)({
   borderRadius: 3
 });
 
-const Auth = ({ setIsAuth }) => {
+const Auth = () => {
   // Auth Functions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { login } = useAuth()
 
   const navigate = useNavigate();
 
   const logOut = async (e) => {
     try {
       auth.signOut(auth).then(() => {
-        localStorage.clear();
-        setIsAuth(false);
         window.location.pathname = "/login";
       });
     } catch (err) {
@@ -61,9 +61,8 @@ const Auth = ({ setIsAuth }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    signInWithEmailAndPassword(auth, data.get("email"), data.get("password"))
+    login(data.get("email"), data.get("password"))
       .then((userCredential) => {
-        localStorage.setItem("isAuth", true);
         const user = userCredential.user;
         navigate("/home");
       })
