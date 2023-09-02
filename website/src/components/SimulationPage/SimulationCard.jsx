@@ -10,39 +10,52 @@ import {
 const SimulationCard = ({ title, description, imageurl }) => {
     
   return (
-    <Card
-        sx={{
-            // width: "100%",
-            backgroundColor: "#2E4F4F",
-            my: 1,
-            borderRadius: 3,
-            cursor: "pointer",
-        }}>
-      <CardContent>
-        <Typography
-            component="h1"
-            variant="h5"
-            sx={{
-              fontSize: 20,
-              color: "#CBE4DE"
-            }}>
-            {title}
-        </Typography>
-        <Typography
-        component="body"
-        variant="body1"
-        sx={{
-          paddingX: 1,
-          fontSize: 15,
-          mt: 1,
-          color: "#CBE4DE",
-          backgroundColor: "#146E72",
-          borderRadius: 2,
-        }}>
-            {description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Grid container item xs={6} sm={4} md={6}>
+      <Card
+       component="div"
+          sx={{
+              // width: "70%",
+              backgroundColor: "#2E4F4F",
+              borderRadius: 3,
+              cursor: "pointer",
+              m: 1,
+              my: 0,
+              textOverflow: 'clip',
+              whiteSpace: 'normal',
+              height: "90%"
+          }}>
+        <Grid item xs={6} sm={4} md={8}>
+        <CardContent>
+          <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                fontSize: 20,
+                color: "#CBE4DE",
+                textDecorationLine: "underline",
+              }}>
+              {title}
+          </Typography>
+          <Typography
+          component="body"
+          variant="body1"
+          sx={{
+            paddingX: 1,
+            fontSize: 15,
+            mt: 1,
+            color: "#CBE4DE",
+            backgroundColor: "inherit",
+            overflow: 'hidden'
+          }}>
+              {description}
+          </Typography>
+        </CardContent>
+        <CardMedia image={"website/src/images/2.png"} sx={{
+          // width: "70%",
+        }}/>
+        </Grid>
+      </Card>
+    </Grid>
   )
 }
 
