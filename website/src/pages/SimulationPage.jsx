@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from 'react'
 import {
   Grid,
@@ -10,12 +10,32 @@ import {
   styled,
   InputBase,
   alpha,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import NavBar from '../components/HomePage/NavBar';
 import SimulationCard from "../components/SimulationPage/SimulationCard";
+import fs from "fs";
+import path from 'path';
+import { BorderColor } from "@mui/icons-material";
+// import 
 
 const SimulationPage = () => {
+  const [filePaths, setFilePaths] = useState([]);
+  
+  const FileList = () => {
+    
+    useEffect(() => {
+      const folderPath = '../images'
+      const files = fs.readdirSync(folderPath)
+  
+      const filePathsArray = files.map(file => path.join(folderPath, file))
+      setFilePaths(filePathsArray);
+    }, [])
+  }
   // const SearchBar = ({setSearchQuery}) => (
   //   <Grid
   //   sx={{
@@ -101,20 +121,24 @@ const SimulationPage = () => {
     { 
         title: "Fluid Mosaic Model", 
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.", 
-        imageurl: "nil" 
+        imageurl: "website/src/images/2.png" 
     },
     { 
         title: "Diffusion", 
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.", 
-        imageurl: "nil"
+        imageurl: "website/src/images/2.png"
     },
     { 
       title: "Osmosis", 
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.", 
-      imageurl: "nil"
+      imageurl: "website/src/images/2.png"
   },
 ]
+    const [unit, setUnit] = React.useState('');
 
+    const handleChange = (event) => {
+      setUnit(event.target.value);
+    };
   // const [searchQuery, setSearchQuery] = useState("");
   // const dataFiltered = filterData(searchQuery, data);
 
@@ -155,16 +179,67 @@ const SimulationPage = () => {
         
       }}>
         {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}> */}
-        <Search sx={{ my: "1rem",}}>
-        <SearchIconWrapper>
+          <Search sx={{ my: "1rem",}}>
+            <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
           </Search>
-        
+          <FormControl variant="standard" sx={{
+              width: "20%",
+              backgroundColor: "#2E4F4F",
+            }}>
+            <InputLabel id="unit-label">Unit</InputLabel>
+            <Select
+              labelId="unit-label"
+              id="unit"
+              value={unit}
+              label="Unit"
+              onChange={handleChange}
+              sx={{
+                padding: 1,
+                m: 1
+              }}
+            >
+              <MenuItem value={10}>
+              <Typography
+                sx={{
+                  width: "fit-content",
+                  backgroundColor: "#2C3333",
+                  borderRadius: 10,
+                  color: "#CBE4DE",
+                  paddingX: 1,
+                }}>
+                U1.1 Biomolecules
+                </Typography>
+              </MenuItem>
+              <MenuItem value={20}><Typography
+                sx={{
+                  width: "fit-content",
+                  backgroundColor: "#2C3333",
+                  borderRadius: 10,
+                  color: "#CBE4DE",
+                  paddingX: 1,
+                }}>
+                U1.2 Eukaryotic Cells
+                </Typography>
+                </MenuItem>
+              <MenuItem value={30}><Typography
+                sx={{
+                  width: "fit-content",
+                  backgroundColor: "#2C3333",
+                  borderRadius: 10,
+                  color: "#CBE4DE",
+                  paddingX: 1,
+                }}>
+                U1.3 Prokaryotic Cells
+                </Typography>
+                </MenuItem>
+            </Select>
+          </FormControl>
       <div>
         {/* {dataFiltered.map((d) => (
           <div
@@ -173,25 +248,21 @@ const SimulationPage = () => {
             
           </div>
         ))} */}
-        {sims.map((sim) => (
-          <Grid container
-          spacing={0}
-        
+        <Grid container
           sx={{
-            // display: "flex",
-            // flexDirection: "row",
-            // alignItems: "left",
-            // flexWrap: "nowrap",
-            // width: "fit-content",
             
-          }}
-          >
-            <Grid item xs={12} sm={6} >
-              <SimulationCard title={sim.title} description={sim.description} />
-            </Grid>
-         </Grid>
+          }}>
+        {sims.map((sim) => (
+              <SimulationCard title={sim.title} description={sim.description} imageurl={sim.imageurl} />
           ))}
+          </Grid>
+          <ul>
+        {filePaths.map(filePath => (
+          <li key={filePath}>{filePath}</li>
+        ))}
+      </ul>
       </div>
+      
       </Box>
       
     </Grid>
