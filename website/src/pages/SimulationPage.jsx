@@ -14,7 +14,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import NavBar from '../components/HomePage/NavBar';
 import SimulationCard from "../components/SimulationPage/SimulationCard";
-import { debounce } from "lodash";
+import { debounce, uniqueId } from "lodash";
 
 const SimulationPage = () => {
 
@@ -84,9 +84,11 @@ const SimulationPage = () => {
     }
   }; 
 
-  const debouncedHandleInput = debounce((value) => {
-    setSearchQuery(value);
-  }, 300);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setSearchQuery(e.target.value)
+    }
+  }
 
   return (
     <Grid 
@@ -130,11 +132,12 @@ const SimulationPage = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              type="search"
+              type="text"
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => debouncedHandleInput(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               value={searchQuery}
+              autoFocus={true}
             />
           </Search>
         
