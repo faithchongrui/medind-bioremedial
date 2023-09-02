@@ -54,15 +54,19 @@ const RecentActivities = ({ items, username }) => {
       <div className="recentactivities">
         <h1 className="recentactivities">{username} Activities completed</h1>
         <body className="activitycontainer" onWheel={handleScroll}>
-          {items.map((item, index) => {
-            return(
-              <SmallModuleActivities
-              key={index}
-              id={item.id}
-              description={item.description}
-            />
-            );
-          })}
+          {items.length > 0 ? (
+            items.map((item, index) => {
+              return(
+                <SmallModuleActivities
+                key={index}
+                id={item.id}
+                description={item.description}
+              />
+              );
+            })
+          ) : (
+            <p>No activities yet!</p>
+          )}
         </body>
       </div>
     </ScrollMenu>
