@@ -2,14 +2,10 @@ import { useState, useEffect } from "react";
 import React from "react";
 import {
   Grid,
-  Button,
   Box,
   Typography,
-  TextField,
-  IconButton,
   styled,
   InputBase,
-  alpha,
   FormControl,
   InputLabel,
   Select,
@@ -21,8 +17,6 @@ import SimulationCard from "../components/SimulationPage/SimulationCard";
 import fs from "fs";
 import path from "path";
 import { BorderColor } from "@mui/icons-material";
-// import
-import { debounce, uniqueId } from "lodash";
 
 const SimulationPage = () => {
   const [filePaths, setFilePaths] = useState([]);
@@ -122,8 +116,7 @@ const SimulationPage = () => {
     setUnit(event.target.value);
   };
   const [searchQuery, setSearchQuery] = useState("");
-  // const dataFiltered = filterData(searchQuery, data);
-
+  
   const filterData = (query, data) => {
     if (!query) {
       return data;
@@ -136,11 +129,7 @@ const SimulationPage = () => {
     }
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      setSearchQuery(e.target.value);
-    }
-  };
+  const dataFiltered = filterData(searchQuery, sims);
 
   return (
     <Grid
@@ -256,7 +245,7 @@ const SimulationPage = () => {
         </FormControl>
         <div>
           <Grid container sx={{}}>
-            {sims.map((sim) => (
+            {dataFiltered.map((sim) => (
               <SimulationCard
                 title={sim.title}
                 description={sim.description}
