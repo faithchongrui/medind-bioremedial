@@ -19,10 +19,10 @@ const SimulationCard = ({ title, description, imageurl }) => {
               borderRadius: 3,
               cursor: "pointer",
               m: 1,
-              my: 0,
-              textOverflow: 'clip',
-              whiteSpace: 'normal',
-              height: "90%"
+              // my: 1,
+              textOverflow: 'ellipsis',
+              // whiteSpace: 'nowrap',
+              height: "25vh"
           }}>
         <Grid item xs={6} sm={4} md={8}>
         <CardContent>

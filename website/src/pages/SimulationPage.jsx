@@ -10,6 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  OutlinedInput,
+  Chip,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import NavBar from "../components/HomePage/NavBar";
@@ -30,45 +32,18 @@ const SimulationPage = () => {
       setFilePaths(filePathsArray);
     }, []);
   };
-  // const SearchBar = ({setSearchQuery}) => (
-  //   <Grid
-  //   sx={{
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //   }}>
-  //     <TextField
-  //       margin="normal"
-  //       id="search-bar"
-  //       onInput={(e) => {
-  //         setSearchQuery(e.target.value);
-  //       }}
-  //       label="Enter a city name"
-  //       placeholder="Search..."
-  //       size="small"
-  //       sx={{
-  //         backgroundColor: "#FFFFFF",
-  //         width: "80%",
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //       }}
-  //       >
-  //         <SearchIcon sx={{ color: "blue" }} />
-  //       </TextField>
-  //       <IconButton type="submit" aria-label="search">
 
-  //     </IconButton>
-  //   </Grid>
-  // );
   const Search = styled("div")({
     position: "relative",
     borderRadius: 10,
     backgroundColor: "#2C3333",
     "&:hover": {
-      backgroundColor: "#2E4F4F",
+      borderBottomColor: "rgb(20, 110, 114)",
     },
     mx: "2rem",
     width: "100%",
+    borderBottom: "10px solid #2E4F4F",
+
   });
 
   const SearchIconWrapper = styled("div")({
@@ -90,11 +65,37 @@ const SimulationPage = () => {
     width: "100%",
   });
 
+  const StyledSelectInput = styled(InputBase)({
+    "& .MuiInputBase-input": {
+      padding: "1rem",
+      borderRadius: 10,
+      background: '#2E4F4F',
+      border: '1px solid #2C33',
+      position: 'relative',
+              "&:hover":{
+                // borderStyle:'none',
+                borderRadius: 10,
+                color: "white",
+              },
+      "&:focus":{
+        borderRadius: 10,
+        color: "white",
+      },
+    },
+    "&.MuiInputLabel-root": {
+      color: "white",
+      background: '#2E4F4F',
+    },
+    "&.MuiSelect-icon": {
+      color: "white",
+    }
+  });
+
   const sims = [
     {
       title: "Fluid Mosaic Model",
       description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
       imageurl: "website/src/images/2.png",
     },
     {
@@ -110,11 +111,24 @@ const SimulationPage = () => {
       imageurl: "website/src/images/2.png",
     },
   ];
-  const [unit, setUnit] = React.useState("");
+
+  const units = [
+    "U1.1 Biomolecules",
+    "U1.2 Eukaryotic Cells",
+    "U1.3 Prokaryotic Cells",
+  ]
+  const [unit, setUnit] = React.useState([]);
 
   const handleChange = (event) => {
-    setUnit(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setUnit(
+      event.target.value,
+      typeof value === 'string' ? value.split(',') : value
+      );
   };
+
   const [searchQuery, setSearchQuery] = useState("");
   
   const filterData = (query, data) => {
@@ -123,8 +137,8 @@ const SimulationPage = () => {
     } else {
       return data.filter(
         (sim) =>
-          sim.title.toLowerCase().includes(query.toLowerCase()) ||
-          sim.description.toLowerCase().includes(query.toLowerCase())
+          sim.title.toLowerCase().includes(query.toLowerCase())
+          // sim.description.toLowerCase().includes(query.toLowerCase())
       );
     }
   };
@@ -145,7 +159,7 @@ const SimulationPage = () => {
       <Box
         sx={{
           width: "100%",
-          paddingX: "2rem",
+          paddingX: "5rem",
         }}
       >
         <Typography
@@ -156,20 +170,20 @@ const SimulationPage = () => {
             // backgroundColor: "#2C3333",
             color: "#CBE4DE",
             fontWeight: 600,
-            paddingX: "2rem",
-            // paddingBottom: "2rem",
+            // paddingX: 1,
+            paddingBottom: 2,
           }}
         >
           Browse Simulations
         </Typography>
-      </Box>
-      <Box
+        <Box
         sx={{
-          mx: 10,
-          width: "100%",
-        }}
-      >
-        {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}> */}
+          background: "rgba(20, 110, 114, 0.1)",
+          // opacity: 0.1,
+          borderRadius: 5,
+          padding: 2,
+          mb: 1,
+        }}>
         <Search sx={{ my: "1rem" }}>
           <SearchIconWrapper>
             <SearchIcon />
@@ -184,10 +198,9 @@ const SimulationPage = () => {
           />
         </Search>
         <FormControl
-          variant="standard"
           sx={{
-            width: "20%",
-            backgroundColor: "#2E4F4F",
+            width: "50%",
+            // backgroundColor: "#2E4F4F",
           }}
         >
           <InputLabel id="unit-label">Unit</InputLabel>
@@ -197,52 +210,40 @@ const SimulationPage = () => {
             value={unit}
             label="Unit"
             onChange={handleChange}
-            sx={{
-              padding: 1,
-              m: 1,
-            }}
+            multiple
+            input={<StyledSelectInput />}  
+            renderValue={(selected) => (
+              <Box sx={{ display: "flex", flexWrap: 'wrap', gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} 
+                  sx={{
+                    width: "fit-content",
+                    backgroundColor: "rgb(20, 110, 114)",
+                    borderRadius: 10,
+                    color: "#CBE4DE",
+                    paddingX: 1,
+                  }}/>
+                ))}
+              </Box>
+            )}
           >
-            <MenuItem value={10}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.1 Biomolecules
-              </Typography>
+            {units.map((unit) => (
+            <MenuItem
+              key={unit}
+              value={unit}
+            >
+              {unit}
             </MenuItem>
-            <MenuItem value={20}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.2 Eukaryotic Cells
-              </Typography>
-            </MenuItem>
-            <MenuItem value={30}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.3 Prokaryotic Cells
-              </Typography>
-            </MenuItem>
+          ))}
           </Select>
         </FormControl>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          mx: 10,
+          width: "100%",
+        }}> 
         <div>
           <Grid container sx={{}}>
             {dataFiltered.map((sim) => (

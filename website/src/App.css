@@ -165,9 +165,20 @@ input.test:-webkit-autofill:active{
   position: top;
   z-index: 20;
   color: var(--light);
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   padding-bottom: 2rem;
+
+  .recentactivitiesheading {
+    padding-left: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .emptyactivities {
+    padding: 2rem;
+    
+  }
 }
 
 .activitycontainer::-webkit-scrollbar {
@@ -190,7 +201,7 @@ input.test:-webkit-autofill:active{
   margin-right: 1rem;
   padding: 1rem 1rem;
   text-align: left;
-  width: 342px;
+  width: 40vh;
 
   .child {
     /* for visulisation */
