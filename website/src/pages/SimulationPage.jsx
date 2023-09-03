@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import {
   Grid,
@@ -13,25 +13,14 @@ import {
   OutlinedInput,
   Chip,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import NavBar from "../components/HomePage/NavBar";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
-import fs from "fs";
-import path from "path";
-import { BorderColor } from "@mui/icons-material";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const SimulationPage = () => {
-  const [filePaths, setFilePaths] = useState([]);
-
-  const FileList = () => {
-    useEffect(() => {
-      const folderPath = "../images";
-      const files = fs.readdirSync(folderPath);
-
-      const filePathsArray = files.map((file) => path.join(folderPath, file));
-      setFilePaths(filePathsArray);
-    }, []);
-  };
+  const images = require.context("../images", false);
+  const imageList = images.keys().map((image) => images(image));
+  const [unit, setUnit] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const Search = styled("div")({
     position: "relative",
@@ -117,7 +106,6 @@ const SimulationPage = () => {
     "U1.2 Eukaryotic Cells",
     "U1.3 Prokaryotic Cells",
   ]
-  const [unit, setUnit] = React.useState([]);
 
   const handleChange = (event) => {
     const {
@@ -128,8 +116,6 @@ const SimulationPage = () => {
       typeof value === 'string' ? value.split(',') : value
       );
   };
-
-  const [searchQuery, setSearchQuery] = useState("");
   
   const filterData = (query, data) => {
     if (!query) {
@@ -151,11 +137,9 @@ const SimulationPage = () => {
       item
       xs={12}
       sx={{
-        // backgroundColor: "rgb(30, 30, 30)",
         color: "#CBE4DE",
       }}
     >
-      <NavBar />
       <Box
         sx={{
           width: "100%",
@@ -183,20 +167,9 @@ const SimulationPage = () => {
           borderRadius: 5,
           padding: 2,
           mb: 1,
-        }}>
-        <Search sx={{ my: "1rem" }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            type="text"
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-            autoFocus={true}
-          />
-        </Search>
+        }}
+      >
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <FormControl
           sx={{
             width: "50%",
@@ -254,11 +227,9 @@ const SimulationPage = () => {
               />
             ))}
           </Grid>
-          <ul>
-            {filePaths.map((filePath) => (
-              <li key={filePath}>{filePath}</li>
-            ))}
-          </ul>
+          {imageList.map((image, index) => (
+            <img key={index} src={image} alt={`image-${index}`} />
+          ))}
         </div>
       </Box>
     </Grid>

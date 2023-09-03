@@ -1,5 +1,5 @@
-import './App.css';
-import React from 'react';
+import "./App.css";
+import React from "react";
 
 import { Routes, Route } from 'react-router-dom';
 import Start from './pages/StartPage';
@@ -10,20 +10,25 @@ import SimulationPage from './pages/SimulationPage';
 import TemplateSimulation from './components/SimulationPage/TemplateSimulation';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Activities from "./pages/Activities";
+import NavBar from "./components/HomePage/NavBar";
 
 function App() {
+  const location = useLocation();
   return (
     <div>
       <AuthProvider>
+        {location.pathname !== "/" && <NavBar/>}
         <Routes>
           <Route path="/" element={<Start />} />
-          <Route exact path="/home" element={<PrivateRoute/>}>
-            <Route exact path="/home" element={<HomePage/>}/>
+          <Route exact path="/home" element={<PrivateRoute />}>
+            <Route exact path="/home" element={<HomePage />} />
           </Route>
           <Route path="/login" element={<Auth />}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/simulations" element={<SimulationPage/>}/>
           <Route path="/simtem" element={<TemplateSimulation/>}/>
+          <Route path="/activities" element={<Activities />} />
         </Routes>
       </AuthProvider>
     </div>

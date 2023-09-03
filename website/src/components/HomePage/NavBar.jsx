@@ -35,14 +35,7 @@ const data = [
   {
     name: "Activities",
     icon: <Casino />,
-    submenu: [
-      {
-        name: "U1.2",
-      },
-      {
-        name: "U1.3",
-      },
-    ],
+    link: "/activities"
   },
 ];
 
