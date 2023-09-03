@@ -54,7 +54,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <NavBar/>
       <RecentActivities style={{ zIndex: 0}} items={recentActivities} username={username}>
       </RecentActivities>
       <Progress />

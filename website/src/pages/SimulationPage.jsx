@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import {
   Grid,
@@ -14,13 +14,31 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import NavBar from "../components/HomePage/NavBar";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
-import fs from "fs";
-import path from "path";
-import { BorderColor } from "@mui/icons-material";
 
 const SimulationPage = () => {
   const images = require.context("../images", false);
   const imageList = images.keys().map((image) => images(image));
+
+  const sims = [
+    {
+      title: "Fluid Mosaic Model",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
+      imageurl: "website/src/images/2.png",
+    },
+    {
+      title: "Diffusion",
+      description:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
+      imageurl: "website/src/images/2.png",
+    },
+    {
+      title: "Osmosis",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
+      imageurl: "website/src/images/2.png",
+    },
+  ];
 
   const Search = styled("div")({
     position: "relative",
@@ -52,27 +70,8 @@ const SimulationPage = () => {
     width: "100%",
   });
 
-  const sims = [
-    {
-      title: "Fluid Mosaic Model",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Diffusion",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Osmosis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "website/src/images/2.png",
-    },
-  ];
-  const [unit, setUnit] = React.useState("");
+  
+  const [unit, setUnit] = useState("");
 
   const handleChange = (event) => {
     setUnit(event.target.value);
@@ -99,11 +98,9 @@ const SimulationPage = () => {
       item
       xs={12}
       sx={{
-        // backgroundColor: "rgb(30, 30, 30)",
         color: "#CBE4DE",
       }}
     >
-      <NavBar />
       <Box
         sx={{
           width: "100%",
@@ -131,7 +128,6 @@ const SimulationPage = () => {
           width: "100%",
         }}
       >
-        {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}> */}
         <Search sx={{ my: "1rem" }}>
           <SearchIconWrapper>
             <SearchIcon />
