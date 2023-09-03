@@ -65,7 +65,7 @@ const RecentActivities = ({ items, username }) => {
               );
             })
           ) : (
-            <p>No activities yet!</p>
+            <h2>No activities yet!</h2>
           )}
         </body>
       </div>

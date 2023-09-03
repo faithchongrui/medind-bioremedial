@@ -5,7 +5,10 @@ import {
     CardContent,
     Typography,
     Grid,
- } from '@mui/material';
+ } from '@mui/material'
+
+ import image from '../../images/1.png'
+
 // https://codesandbox.io/s/beer-finder-mz7nx9v02j?file=/src/Beer.jsx
 const SimulationCard = ({ title, description, imageurl }) => {
     
@@ -50,9 +53,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
               {description}
           </Typography>
         </CardContent>
-        <CardMedia image={"website/src/images/2.png"} sx={{
-          // width: "70%",
-        }}/>
+        <CardMedia component="img" src={image} height="80"/>
         </Grid>
       </Card>
     </Grid>
