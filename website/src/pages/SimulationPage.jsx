@@ -19,47 +19,9 @@ import path from "path";
 import { BorderColor } from "@mui/icons-material";
 
 const SimulationPage = () => {
-  const [filePaths, setFilePaths] = useState([]);
+  const images = require.context("../images", false);
+  const imageList = images.keys().map((image) => images(image));
 
-  const FileList = () => {
-    useEffect(() => {
-      const folderPath = "../images";
-      const files = fs.readdirSync(folderPath);
-
-      const filePathsArray = files.map((file) => path.join(folderPath, file));
-      setFilePaths(filePathsArray);
-    }, []);
-  };
-  // const SearchBar = ({setSearchQuery}) => (
-  //   <Grid
-  //   sx={{
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //   }}>
-  //     <TextField
-  //       margin="normal"
-  //       id="search-bar"
-  //       onInput={(e) => {
-  //         setSearchQuery(e.target.value);
-  //       }}
-  //       label="Enter a city name"
-  //       placeholder="Search..."
-  //       size="small"
-  //       sx={{
-  //         backgroundColor: "#FFFFFF",
-  //         width: "80%",
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //       }}
-  //       >
-  //         <SearchIcon sx={{ color: "blue" }} />
-  //       </TextField>
-  //       <IconButton type="submit" aria-label="search">
-
-  //     </IconButton>
-  //   </Grid>
-  // );
   const Search = styled("div")({
     position: "relative",
     borderRadius: 10,
@@ -116,7 +78,7 @@ const SimulationPage = () => {
     setUnit(event.target.value);
   };
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const filterData = (query, data) => {
     if (!query) {
       return data;
@@ -253,11 +215,9 @@ const SimulationPage = () => {
               />
             ))}
           </Grid>
-          <ul>
-            {filePaths.map((filePath) => (
-              <li key={filePath}>{filePath}</li>
-            ))}
-          </ul>
+          {imageList.map((image, index) => (
+            <img key={index} src={image} alt={`image-${index}`} />
+          ))}
         </div>
       </Box>
     </Grid>
