@@ -11,13 +11,14 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import NavBar from "../components/HomePage/NavBar";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const SimulationPage = () => {
   const images = require.context("../images", false);
   const imageList = images.keys().map((image) => images(image));
+  const [unit, setUnit] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const sims = [
     {
@@ -40,44 +41,10 @@ const SimulationPage = () => {
     },
   ];
 
-  const Search = styled("div")({
-    position: "relative",
-    borderRadius: 10,
-    backgroundColor: "#2C3333",
-    "&:hover": {
-      backgroundColor: "#2E4F4F",
-    },
-    mx: "2rem",
-    width: "100%",
-  });
-
-  const SearchIconWrapper = styled("div")({
-    padding: "1rem",
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  });
-
-  const StyledInputBase = styled(InputBase)({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: "1rem",
-      paddingLeft: "3rem",
-    },
-    width: "100%",
-  });
-
-  
-  const [unit, setUnit] = useState("");
-
   const handleChange = (event) => {
     setUnit(event.target.value);
   };
-  const [searchQuery, setSearchQuery] = useState("");
-
+  
   const filterData = (query, data) => {
     if (!query) {
       return data;
@@ -128,19 +95,7 @@ const SimulationPage = () => {
           width: "100%",
         }}
       >
-        <Search sx={{ my: "1rem" }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            type="text"
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-            autoFocus={true}
-          />
-        </Search>
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <FormControl
           variant="standard"
           sx={{
