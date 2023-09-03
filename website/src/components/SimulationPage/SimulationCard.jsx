@@ -7,8 +7,6 @@ import {
     Grid,
  } from '@mui/material'
 
- import image from '../../images/1.png'
-
 // https://codesandbox.io/s/beer-finder-mz7nx9v02j?file=/src/Beer.jsx
 const SimulationCard = ({ title, description, imageurl }) => {
     
@@ -25,7 +23,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
               // my: 1,
               textOverflow: 'ellipsis',
               // whiteSpace: 'nowrap',
-              height: "25vh"
+              // height: "25vh"
           }}>
         <Grid item xs={6} sm={4} md={8}>
         <CardContent>
@@ -53,7 +51,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
               {description}
           </Typography>
         </CardContent>
-        <CardMedia component="img" src={image} height="80"/>
+        <CardMedia component="img" src={require('../../images/' + imageurl)} height="80"/>
         </Grid>
       </Card>
     </Grid>

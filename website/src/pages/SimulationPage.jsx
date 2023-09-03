@@ -17,8 +17,6 @@ import SimulationCard from "../components/SimulationPage/SimulationCard";
 import SearchBar from "../components/SearchBar/SearchBar";
 
 const SimulationPage = () => {
-  const images = require.context("../images", false);
-  const imageList = images.keys().map((image) => images(image));
   const [unit, setUnit] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -85,19 +83,19 @@ const SimulationPage = () => {
       title: "Fluid Mosaic Model",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "website/src/images/2.png",
+      imageurl: "2.png",
     },
     {
       title: "Diffusion",
       description:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "website/src/images/2.png",
+      imageurl: "2.png",
     },
     {
       title: "Osmosis",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "website/src/images/2.png",
+      imageurl: "2.png",
     },
   ];
 
@@ -227,9 +225,6 @@ const SimulationPage = () => {
               />
             ))}
           </Grid>
-          {imageList.map((image, index) => (
-            <img key={index} src={image} alt={`image-${index}`} />
-          ))}
         </div>
       </Box>
     </Grid>
