@@ -26,7 +26,12 @@ function App() {
           </Route>
           <Route path="/login" element={<Auth />}/>
           <Route path="/sign-up" element={<SignUp/>}/>
-          <Route path="/simulations" element={<SimulationPage/>}/>
+          <Route exact path="/simulations" element={<PrivateRoute />}>
+            <Route path="/simulations" element={<SimulationPage/>}/>
+          </Route>
+          <Route exact path="/activities" element={<PrivateRoute />}>
+            <Route path="/activities" element={<SimulationPage/>}/>
+          </Route>
           <Route path="/simtem" element={<TemplateSimulation/>}/>
           <Route path="/activities" element={<ActivitiesPage />} />
         </Routes>
