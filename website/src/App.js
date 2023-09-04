@@ -1,16 +1,16 @@
 import "./App.css";
 import React from "react";
 
-import { Routes, Route, useLocation } from "react-router-dom";
-import Start from "./pages/StartPage";
-import HomePage from "./pages/HomePage";
-import Auth from "./components/Auth/auth";
-import SignUp from "./components/Auth/SignUp";
-import SimulationPage from "./pages/SimulationPage";
-import TemplateSimulation from "./components/SimulationPage/TemplateSimulation";
-import { AuthProvider } from "./context/AuthContext";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Activities from "./pages/Activities";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Start from './pages/StartPage';
+import HomePage from './pages/HomePage';
+import Auth from './components/Auth/auth';
+import SignUp from './components/Auth/SignUp';
+import SimulationPage from './pages/SimulationPage';
+import TemplateSimulation from './components/SimulationPage/TemplateSimulation';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ActivitiesPage from "./pages/ActivitiesPage";
 import NavBar from "./components/HomePage/NavBar";
 
 function App() {
