@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Start from './pages/StartPage';
 import HomePage from './pages/HomePage';
 import Auth from './components/Auth/auth';
@@ -10,7 +10,7 @@ import SimulationPage from './pages/SimulationPage';
 import TemplateSimulation from './components/SimulationPage/TemplateSimulation';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Activities from "./pages/Activities";
+import ActivitiesPage from "./pages/ActivitiesPage";
 import NavBar from "./components/HomePage/NavBar";
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/simulations" element={<SimulationPage/>}/>
           <Route path="/simtem" element={<TemplateSimulation/>}/>
-          <Route path="/activities" element={<Activities />} />
+          <Route path="/activities" element={<ActivitiesPage />} />
         </Routes>
       </AuthProvider>
     </div>

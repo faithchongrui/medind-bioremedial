@@ -159,7 +159,7 @@ input.test:-webkit-autofill:active{
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
-  height: 200px
+  height: fit-content
 }
 
 .recentactivities {
@@ -178,7 +178,7 @@ input.test:-webkit-autofill:active{
   
   .emptyactivities {
     padding: 2rem;
-    
+
   }
 }
 

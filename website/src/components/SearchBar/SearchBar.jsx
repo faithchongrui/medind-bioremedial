@@ -3,7 +3,6 @@ import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
-
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
 
   const Search = styled("div")({
@@ -11,10 +10,12 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     borderRadius: 10,
     backgroundColor: "#2C3333",
     "&:hover": {
-      backgroundColor: "#2E4F4F",
+      borderBottomColor: "rgb(20, 110, 114)",
     },
     mx: "2rem",
     width: "100%",
+    borderBottom: "10px solid #2E4F4F",
+    marginBottom: "1rem",
   });
 
   const SearchIconWrapper = styled("div")({

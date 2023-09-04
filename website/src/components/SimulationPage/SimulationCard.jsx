@@ -14,8 +14,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
     
   return (
     <Grid container item xs={6} sm={4} md={6}>
-      <Card
-       component="div"
+      <Card component="div"
           sx={{
               // width: "70%",
               backgroundColor: "#2E4F4F",
@@ -53,7 +52,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
               {description}
           </Typography>
         </CardContent>
-        <CardMedia component="img" src={image} height="80"/>
+        <CardMedia component="img" src={image}/>
         </Grid>
       </Card>
     </Grid>
