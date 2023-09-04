@@ -32,7 +32,7 @@ function App() {
             <Route path="/simulations" element={<SimulationPage />} />
           </Route>
           <Route exact path="/activities" element={<PrivateRoute />}>
-            <Route path="/activities" element={<SimulationPage />} />
+            <Route path="/activities" element={<ActivitiesPage />} />
           </Route>
           <Route path="/simtem" element={<TemplateSimulation />} />
         </Routes>

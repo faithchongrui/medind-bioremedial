@@ -22,10 +22,11 @@ const SimulationCard = ({ title, description, imageurl }) => {
               // my: 1,
               textOverflow: 'ellipsis',
               // whiteSpace: 'nowrap',
-              // height: "25vh"
+              // height: "50vh"
           }}>
-        <Grid item xs={6} sm={4} md={8}>
-        <CardContent>
+        <Grid container item xs={6} columns={2}>
+          <Grid item xs={1}>
+          <CardContent>
           <Typography
               component="h1"
               variant="h5"
@@ -50,7 +51,22 @@ const SimulationCard = ({ title, description, imageurl }) => {
               {description}
           </Typography>
         </CardContent>
-        <CardMedia component="img" src={require('../../images/' + imageurl)}/>
+          </Grid>
+        <Grid item xs={1} 
+        sx={{
+          padding: 1,
+          backgroundColor: "#CBE4DE",
+          alignItems: "center",
+          justifyItems: "center",
+        }}>
+        <CardMedia component="img" src={require('../../images/' + imageurl)} 
+        sx={{
+          padding: 1,
+          backgroundColor: "#CBE4DE",
+          maxHeight: "fit-content"
+        }}/>
+        </Grid>
+        
         </Grid>
       </Card>
     </Grid>
