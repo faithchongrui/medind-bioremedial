@@ -7,7 +7,6 @@ import TypeCard from "./ActivityCardComponents/TypeCard";
 import QuizCard from "./ActivityCardComponents/QuizCard";
 
 const ActivityCard = ({unit, terms, set}) => {
-  console.log(unit)
   return (
     <Box
       sx={{

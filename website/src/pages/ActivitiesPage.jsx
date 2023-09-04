@@ -49,18 +49,28 @@ const ActivitiesPage = () => {
     },
   ];
 
-  const filterData = (query, data) => {
+  const filterData = (query, data, unit) => {
     if (!query) {
       return data;
     } else {
-      return data.filter(
-        (sim) => sim.title.toLowerCase().includes(query.toLowerCase())
-        // sim.description.toLowerCase().includes(query.toLowerCase())
+      const results = data.filter(
+        // (sim) => (sim.unit.toLowerCase().includes(query.toLowerCase())) 
+        (sim) => {
+          if (unit.length === 0) {
+            return sim.unit.toLowerCase().includes(query.toLowerCase());
+          } else {
+            return (
+              sim.unit.toLowerCase().includes(query.toLowerCase()) &&
+              unit.includes(sim.unit)
+            );
+          }
+        }
       );
+      return results
     }
   };
 
-  const dataFiltered = filterData(searchQuery, sims);
+  const dataFiltered = filterData(searchQuery, unitContent, unit);
 
   return (
     <Grid
@@ -120,7 +130,7 @@ const ActivitiesPage = () => {
         >
           <div>
             <Grid container sx={{}}>
-              {unitContent.map((unitcontent) => (
+              {dataFiltered.map((unitcontent) => (
                 <ActivityCard
                   unit={unitcontent.unit}
                   terms={unitcontent.terms}
