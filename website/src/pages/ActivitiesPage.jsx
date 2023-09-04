@@ -54,11 +54,14 @@ const ActivitiesPage = () => {
       return data;
     } else {
       const results = data.filter(
-        // (sim) => (sim.unit.toLowerCase().includes(query.toLowerCase())) 
         (sim) => {
           if (unit.length === 0) {
             return sim.unit.toLowerCase().includes(query.toLowerCase());
-          } else {
+          } 
+
+          // insert check to filter out typefilter too
+
+          else {
             return (
               sim.unit.toLowerCase().includes(query.toLowerCase()) &&
               unit.includes(sim.unit)

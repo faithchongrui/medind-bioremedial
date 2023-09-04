@@ -20,9 +20,9 @@ import ZoomOutMapRoundedIcon from "@mui/icons-material/ZoomOutMapRounded";
 import ZoomInRoundedIcon from "@mui/icons-material/ZoomInRounded";
 import ZoomOutRoundedIcon from "@mui/icons-material/ZoomOutRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import { BorderAllOutlined, BorderTopRounded, ExpandMore } from "@mui/icons-material";
+import { useParams } from "react-router-dom";
 
-const TemplateSimulation = () => {
+const TemplateSimulation = ({sims}) => {
   const StyledToolButtons = styled(IconButton)({
     color: "#CBE4DE",
     backgroundColor: "#2E4F4F",
@@ -33,8 +33,17 @@ const TemplateSimulation = () => {
   });
 
   const [expand, setExpand] = useState(false)
+
   const toggleAccordion = () => {
     setExpand((prev) => !prev)
+  }
+
+  const { id } = useParams()
+
+  const simulation = sims.find(sim => sim.title === id)
+
+  if (!simulation) {
+    return <div> Simulation not found </div>;
   }
 
   return (
@@ -111,7 +120,7 @@ const TemplateSimulation = () => {
                 fontWeight: 500,
               }}
             >
-              TemplateSimulation
+              {simulation.title}
             </Typography>
             <Typography
               component="body"
@@ -124,10 +133,7 @@ const TemplateSimulation = () => {
                 backgroundColor: "inherit",
               }}
             >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptate magni, inventore iste odio illo autem, natus non eaque
-              neque quia, reiciendis at commodi recusandae id. Magnam, quod
-              explicabo. Ut, iusto!
+              {simulation.description}
             </Typography>
           </AccordionDetails>
         </Accordion>
