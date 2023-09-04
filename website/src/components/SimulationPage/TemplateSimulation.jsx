@@ -20,9 +20,12 @@ import ZoomOutMapRoundedIcon from "@mui/icons-material/ZoomOutMapRounded";
 import ZoomInRoundedIcon from "@mui/icons-material/ZoomInRounded";
 import ZoomOutRoundedIcon from "@mui/icons-material/ZoomOutRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const TemplateSimulation = ({sims}) => {
+
+  const navigate = useNavigate();
+
   const StyledToolButtons = styled(IconButton)({
     color: "#CBE4DE",
     backgroundColor: "#2E4F4F",
@@ -70,6 +73,7 @@ const TemplateSimulation = ({sims}) => {
               backgroundColor: "rgb(20, 110, 114)",
             },
           }}
+          onClick={() => navigate(-1)}
         >
           <ArrowBackIosRoundedIcon />
         </IconButton>

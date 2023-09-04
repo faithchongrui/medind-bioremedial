@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const SimulationCard = ({ title, description, imageurl }) => {
   return (
     <Grid container item xs={6} sm={4} md={6}>
-      <Link to={`/simulation/${title}`} style={{ textDecoration: "none" }}>
+      <Link to={`/simulations/${title}`} style={{ textDecoration: "none" }}>
         <Card
           component="div"
           sx={{

@@ -56,7 +56,7 @@ function App() {
           <Route exact path="/activities" element={<PrivateRoute />}>
             <Route path="/activities" element={<ActivitiesPage />} />
           </Route>
-          <Route path="/simulation/:id" element={<TemplateSimulation sims={sims}/>} />
+          <Route path="/simulations/:id" element={<TemplateSimulation sims={sims}/>} />
         </Routes>
       </AuthProvider>
     </div>
