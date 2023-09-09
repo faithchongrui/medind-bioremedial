@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../config/firebase";
-import { collection, getDoc, setDoc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc } from "firebase/firestore";
 
 const SessionContext = createContext();
 

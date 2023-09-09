@@ -264,13 +264,7 @@ input.test:-webkit-autofill:active{
     display: flex;
     flex-wrap: nowrap;
   }
-  .sessionindex {
-    background-color: rgb(46, 79, 79);
-    color: var(--light);
-    border-radius: 40px;
-    vertical-align: center;
-    width: fit-content;
-  }
+
   .everythingcontainer {
     background-color: #2C3333;
     display: flex;

@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-// https://codesandbox.io/s/beer-finder-mz7nx9v02j?file=/src/Beer.jsx
 const SimulationCard = ({ title, description, imageurl }) => {
   return (
     <Grid container item xs={6} sm={4} md={6}>

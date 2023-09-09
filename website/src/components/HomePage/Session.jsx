@@ -6,12 +6,34 @@ import {
   Box,
   Typography,
   IconButton,
+  Select,
+  FormControl,
+  MenuItem,
+  InputBase,
+  styled,
 } from "@mui/material";
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
 const Session = () => {
-  
+  const [session, setSession] = React.useState('');
+
+  const handleChange = (event) => {
+    setSession(event.target.value);
+  };
+
+  const StyledSelectSesh = styled(InputBase)({
+    "& .MuiInputBase-input": {
+      padding: "10px",
+      borderRadius: 20,
+      background: "#2E4F4F",
+      position: "relative",
+      color:"#CBE4DE",
+      "&:focus": {
+        borderRadius: 20,
+      },
+    },
+  });
+
     const keywords = [
       "polymers",
       "monosaccharides",
@@ -88,35 +110,39 @@ const Session = () => {
   return (
     <div className='sessioncontainer'>
       <div className='sindex'>
-        <div className='sessionindex' style={{padding: "10px", align:"left"}}>
-          Session 3: Class Test
-        </div>
-        <IconButton
+        <FormControl sx={{ minWidth: 120 }} size="small">
+        <Select
+          id="demo-simple-select-autowidth"
+          value={session}
+          onChange={handleChange}
+          autoWidth
+          label="Age"
+          input={<StyledSelectSesh/>}
+        >
+          <MenuItem value="">
+            <em>No session selected!</em>
+          </MenuItem>
+          <MenuItem value={10}>Session 3: Class Test</MenuItem>
+          <MenuItem value={21}>Session 4: EOYS</MenuItem>
+        </Select>
+      </FormControl>
+        <Button
         sx={{
           color: "#CBE4DE",
-          backgroundColor: "#2E4F4F",
+          backgroundColor: "rgb(20, 110, 114)",
           mx: 2,
           padding: 1,
+          borderRadius: 7,
+          textTransform: 'none',
           ":hover": {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
         }}>
-          <PlayArrowRoundedIcon />
-        </IconButton>
-        <IconButton
-        sx={{
-          color: "#CBE4DE",
-          backgroundColor: "#2E4F4F",
-          padding: 1,
-          ":hover": {
-            backgroundColor: "#1E1E1E",
-            boxShadow: "none",
-          },
-        }}>
-          <HistoryRoundedIcon />
-        </IconButton>
-        </div>
+          <EditRoundedIcon sx={{ paddingRight: 1 }}/>
+          Edit & Add
+        </Button>
+      </div>
         <body className='everythingcontainer'>
           <body className='diagramcontainer'>
               <Diagrams />

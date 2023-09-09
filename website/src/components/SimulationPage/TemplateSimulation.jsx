@@ -50,9 +50,7 @@ const TemplateSimulation = ({sims}) => {
   }
 
   return (
-    <Box
-      container
-    >
+    <Box container>
       <Toolbar
         sx={{
           height: 10,

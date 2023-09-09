@@ -12,6 +12,8 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ActivitiesPage from "./pages/ActivitiesPage";
 import NavBar from "./components/HomePage/NavBar";
+import CreateSessionPage from "./pages/CreateSessionPage";
+import SessionsPage from "./pages/SessionsPage";
 
 function App() {
   const location = useLocation();
@@ -57,6 +59,8 @@ function App() {
             <Route path="/activities" element={<ActivitiesPage />} />
           </Route>
           <Route path="/simulations/:id" element={<TemplateSimulation sims={sims}/>} />
+          <Route path="/csesh" element={<CreateSessionPage />} />
+          <Route path="/sesh" element={<SessionsPage />} />
         </Routes>
       </AuthProvider>
     </div>
