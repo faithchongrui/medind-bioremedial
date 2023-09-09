@@ -50,26 +50,31 @@ const ActivitiesPage = () => {
   ];
 
   const filterData = (query, data, unit) => {
-    if (!query) {
+    if (!query && unit.length === 0) {
       return data;
     } else {
-      const results = data.filter(
-        (sim) => {
-          if (unit.length === 0) {
-            return sim.unit.toLowerCase().includes(query.toLowerCase());
-          } 
-
-          // insert check to filter out typefilter too
-
-          else {
+      if (!query) {
+        return data.filter((sim) => {
+          return unit.includes(sim.unit);
+        });
+      }
+      else {
+        if (unit.length > 0) {
+          const results = data.filter((sim) => {
             return (
-              sim.unit.toLowerCase().includes(query.toLowerCase()) &&
-              unit.includes(sim.unit)
+              unit.includes(sim.unit) &&
+              sim.set.toLowerCase().includes(query.toLowerCase())
             );
-          }
+          });
+          return results;
         }
-      );
-      return results
+        else {
+          const results = data.filter((sim) => {
+            return sim.set.toLowerCase().includes(query.toLowerCase())
+          })
+          return results
+        }
+      }
     }
   };
 

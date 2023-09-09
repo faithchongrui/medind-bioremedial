@@ -3,6 +3,27 @@ import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 // https://codesandbox.io/s/beer-finder-mz7nx9v02j?file=/src/Beer.jsx
+const DescriptionTypography = ({ description }) => {
+  if (description) {
+    return (
+      <Typography
+        component="body"
+        variant="body1"
+        sx={{
+          paddingX: 1,
+          fontSize: 15,
+          mt: 1,
+          color: "#CBE4DE",
+          backgroundColor: "inherit",
+          overflow: "hidden",
+        }}
+      >
+        {description}
+      </Typography>
+    );
+  }
+  return null; // Don't render anything if description is not provided
+};
 const SimulationCard = ({ title, description, imageurl }) => {
   return (
     <Grid container item xs={6} sm={4} md={6}>
@@ -35,20 +56,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
                 >
                   {title}
                 </Typography>
-                <Typography
-                  component="body"
-                  variant="body1"
-                  sx={{
-                    paddingX: 1,
-                    fontSize: 15,
-                    mt: 1,
-                    color: "#CBE4DE",
-                    backgroundColor: "inherit",
-                    overflow: "hidden",
-                  }}
-                >
-                  {description}
-                </Typography>
+                <DescriptionTypography description={description}/>
               </CardContent>
             </Grid>
             <Grid
