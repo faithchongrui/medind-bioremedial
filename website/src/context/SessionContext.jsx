@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../config/firebase";
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, setDoc, doc } from "firebase/firestore";
 
 const SessionContext = createContext();
 
@@ -36,9 +36,33 @@ export const SessionProvider = ({ children }) => {
     fetchSessionsData();
   }, [])
 
-  const setActiveSessionById = (sessionId) => {
+  const FindActiveSessionById = (sessionId) => {
     const selectedSession = sessions.find((session) => session.id === sessionId);
     setActiveSession(selectedSession);
+  };
+
+  const setActiveSessionById = async (sessionId) => {
+    try {
+      // Set the active field to true for the selected session
+      await updateDoc(doc(db, 'users', auth.currentUser.uid, 'sessions', sessionId), {
+        active: true,
+      });
+  
+      // Set the active field to false for all other sessions
+      const sessionsSnapshot = await getDocs(collection(db, 'users', auth.currentUser.uid, 'sessions'));
+      const batch = db.batch();
+      sessionsSnapshot.docs.forEach((doc) => {
+        if (doc.id !== sessionId) {
+          batch.update(doc.ref, { active: false });
+        }
+      });
+      await batch.commit();
+  
+      // Update the local state to reflect the active session
+      setActiveSession(sessionId);
+    } catch (error) {
+      console.error('Error setting the active session:', error);
+    }
   };
 
   const updateSelectedFlashcards = async (flashcards) => {
@@ -54,11 +78,14 @@ export const SessionProvider = ({ children }) => {
     }
   }
 
+
+
   const value = {
     sessions,
     activeSession,
     setActiveSessionById,
     updateSelectedFlashcards,
+    FindActiveSessionById
   };
 
   return (

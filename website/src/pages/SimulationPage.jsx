@@ -33,15 +33,32 @@ const SimulationPage = () => {
     },
   ];
 
-  const filterData = (query, data) => {
-    if (!query) {
+  const filterData = (query, data, unit) => {
+    if (!query && unit.length === 0) {
       return data;
     } else {
-      return data.filter(
-        (sim) =>
-          sim.title.toLowerCase().includes(query.toLowerCase())
-          // sim.description.toLowerCase().includes(query.toLowerCase())
-      );
+      if (!query) {
+        return data.filter((sim) => {
+          return unit.includes(sim.unit);
+        });
+      }
+      else {
+        if (unit.length > 0) {
+          const results = data.filter((sim) => {
+            return (
+              unit.includes(sim.unit) &&
+              sim.set.toLowerCase().includes(query.toLowerCase())
+            );
+          });
+          return results;
+        }
+        else {
+          const results = data.filter((sim) => {
+            return sim.set.toLowerCase().includes(query.toLowerCase())
+          })
+          return results
+        }
+      }
     }
   };
 
