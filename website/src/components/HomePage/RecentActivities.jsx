@@ -38,21 +38,10 @@ const RecentActivities = ({ items, username }) => {
     );
   };
 
-  // change later
-  // for (let index = 0; index < array.length; index++) {
-  //     const smallModActNumber = array[index];
-
-  // }
-  // const getItems = () =>
-  //     Array(20)
-  //     .fill(0)
-  //     .map((_, ind) => ({ id: getId(ind) }));
-
-  // const [items] = React.useState(getItems);
   return (
     <ScrollMenu style={{ display: "flex" }}>
       <div className="recentactivities">
-        <h1 className="recentactivities">{username} Activities completed</h1>
+        <h1 className="recentactivitiesheading">{username} Activities completed</h1>
         <body className="activitycontainer" onWheel={handleScroll}>
           {items.length > 0 ? (
             items.map((item, index) => {
@@ -65,7 +54,7 @@ const RecentActivities = ({ items, username }) => {
               );
             })
           ) : (
-            <h2>No activities yet!</h2>
+            <p className="emptyactivities"><b>Seems like there aren't any activities here yet.</b> Try some in the Simulations or Activities tabs!</p>
           )}
         </body>
       </div>

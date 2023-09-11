@@ -3,19 +3,17 @@ import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
+const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
 
   const Search = styled("div")({
     position: "relative",
-    borderRadius: 10,
+    borderRadius: 30,
     backgroundColor: "#2C3333",
+    color: "#CBE4DE",
     "&:hover": {
-      borderBottomColor: "rgb(20, 110, 114)",
+      backgroundColor: "#2E4F4F",
     },
-    mx: "2rem",
-    width: "100%",
-    borderBottom: "10px solid #2E4F4F",
-    marginBottom: "1rem",
+    width: "400%",
   });
 
   const SearchIconWrapper = styled("div")({
@@ -31,7 +29,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   const StyledInputBase = styled(InputBase)({
     color: "inherit",
     "& .MuiInputBase-input": {
-      padding: "1rem",
+      padding: 9.5,
       paddingLeft: "3rem",
     },
     width: "100%",
@@ -40,7 +38,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
     <Search sx={{ my: "1rem" }}>
       <SearchIconWrapper>
-        <SearchIcon />
+        <SearchIcon sx={{color: "#CBE4DE",}}/>
       </SearchIconWrapper>
       <StyledInputBase
         type="text"
@@ -48,10 +46,9 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
         inputProps={{ "aria-label": "search" }}
         onChange={(e) => setSearchQuery(e.target.value)}
         value={searchQuery}
-        autoFocus={true}
       />
     </Search>
   );
 };
 
-export default SearchBar;
+export default SessionsSearchBar;

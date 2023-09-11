@@ -6,11 +6,8 @@ const About = () => {
       <header>
         <h3>About</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
-          felis et arcu sagittis euismod. Suspendisse consectetur neque lectus,
-          non haha vehicula lectus eleifend a. Sed ultricies odio ex, quis
-          egestas metus finibus non. Donec maximus dui a sollicitudin vulputate.
-          Phasellus efficitur maximus varius.
+          Hello! Bioremedial is a website run by a group of SST students that aims to help Biotechnology students in our school. 
+          Through the use of interactive activities and visuals, students can grasp and master the overwhelming amount of Biotechnology concepts and ace their exams.
         </p>
       </header>
     </div>

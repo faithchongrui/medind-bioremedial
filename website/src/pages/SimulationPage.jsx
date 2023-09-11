@@ -1,63 +1,81 @@
-import { useState } from "react";
-import React from "react";
+import { React, useEffect, useState } from "react";
 import {
   Grid,
   Box,
   Typography,
-  styled,
-  InputBase,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
 import SearchBar from "../components/SearchBar/SearchBar";
+import UnitFilter from "../components/UnitFilter/UnitFilter";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const SimulationPage = () => {
-  const images = require.context("../images", false);
-  const imageList = images.keys().map((image) => images(image));
-  const [unit, setUnit] = useState("");
+  const [unit, setUnit] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [sims, setSims] = useState([]);
 
-  const sims = [
-    {
-      title: "Fluid Mosaic Model",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Diffusion",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Osmosis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "website/src/images/2.png",
-    },
-  ];
-
-  const handleChange = (event) => {
-    setUnit(event.target.value);
-  };
+  const fetchSimulations = async () => {
+    try {
+      const collectionRef = collection(db, "simulations");
+      const querySnapshot = await getDocs(collectionRef);
   
-  const filterData = (query, data) => {
-    if (!query) {
-      return data;
-    } else {
-      return data.filter(
-        (sim) =>
-          sim.title.toLowerCase().includes(query.toLowerCase()) ||
-          sim.description.toLowerCase().includes(query.toLowerCase())
+      const data = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const documentData = {
+            ...doc.data(),
+          };
+          return documentData;
+        })
       );
+  
+      return data;
+  
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
-  const dataFiltered = filterData(searchQuery, sims);
+  useEffect(() => {
+    fetchSimulations()
+    .then(data => {
+      setSims(data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }, []);
+
+  const filterData = (query, data, unit) => {
+    if (!query && unit.length === 0) {
+      return data;
+    } else {
+      if (!query) {
+        return data.filter((sim) => {
+          return unit.includes(sim.unit);
+        });
+      }
+      else {
+        if (unit.length > 0) {
+          const results = data.filter((sim) => {
+            return (
+              unit.includes(sim.unit) &&
+              sim.set.toLowerCase().includes(query.toLowerCase())
+            );
+          });
+          return results;
+        }
+        else {
+          const results = data.filter((sim) => {
+            return sim.set.toLowerCase().includes(query.toLowerCase())
+          })
+          return results
+        }
+      }
+    }
+  };
+
+  const dataFiltered = filterData(searchQuery, sims, unit);
 
   return (
     <Grid
@@ -71,7 +89,7 @@ const SimulationPage = () => {
       <Box
         sx={{
           width: "100%",
-          paddingX: "2rem",
+          paddingX: "5rem",
         }}
       >
         <Typography
@@ -82,93 +100,39 @@ const SimulationPage = () => {
             // backgroundColor: "#2C3333",
             color: "#CBE4DE",
             fontWeight: 600,
-            paddingX: "2rem",
-            // paddingBottom: "2rem",
+            // paddingX: 1,
+            paddingBottom: 2,
           }}
         >
           Browse Simulations
         </Typography>
+        <Box
+        sx={{
+          background: "rgba(20, 110, 114, 0.1)",
+          borderRadius: 5,
+          padding: 2,
+          mb: 1,
+        }}
+      >
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <UnitFilter unit={unit} setUnit={setUnit} width={"50%"} />
+        </Box>
       </Box>
       <Box
         sx={{
           mx: 10,
           width: "100%",
-        }}
-      >
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <FormControl
-          variant="standard"
-          sx={{
-            width: "20%",
-            backgroundColor: "#2E4F4F",
-          }}
-        >
-          <InputLabel id="unit-label">Unit</InputLabel>
-          <Select
-            labelId="unit-label"
-            id="unit"
-            value={unit}
-            label="Unit"
-            onChange={handleChange}
-            sx={{
-              padding: 1,
-              m: 1,
-            }}
-          >
-            <MenuItem value={10}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.1 Biomolecules
-              </Typography>
-            </MenuItem>
-            <MenuItem value={20}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.2 Eukaryotic Cells
-              </Typography>
-            </MenuItem>
-            <MenuItem value={30}>
-              <Typography
-                sx={{
-                  width: "fit-content",
-                  backgroundColor: "#2C3333",
-                  borderRadius: 10,
-                  color: "#CBE4DE",
-                  paddingX: 1,
-                }}
-              >
-                U1.3 Prokaryotic Cells
-              </Typography>
-            </MenuItem>
-          </Select>
-        </FormControl>
+        }}> 
         <div>
           <Grid container sx={{}}>
             {dataFiltered.map((sim) => (
               <SimulationCard
                 title={sim.title}
                 description={sim.description}
-                imageurl={sim.imageurl}
+                imageurl={sim.image}
               />
             ))}
           </Grid>
-          {imageList.map((image, index) => (
-            <img key={index} src={image} alt={`image-${index}`} />
-          ))}
         </div>
       </Box>
     </Grid>
