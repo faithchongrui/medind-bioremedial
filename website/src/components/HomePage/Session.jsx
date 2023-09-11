@@ -13,9 +13,11 @@ import {
   styled,
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { useNavigate } from 'react-router-dom'
 
 const Session = () => {
   const [session, setSession] = React.useState('');
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSession(event.target.value);
@@ -35,12 +37,15 @@ const Session = () => {
   });
 
     const keywords = [
-      "polymers",
-      "monosaccharides",
       "disaccharides",
       "polysaccharides",
       "triglycerides",
       "cholesterol",
+    ]
+
+    const donekeywords = [
+      "polymers",
+      "monosaccharides",
     ]
 
     const progress = [
@@ -56,7 +61,7 @@ const Session = () => {
       return (
         <div>
             <div className='completed'>
-              {keywords.map((term) => (
+              {donekeywords.map((term) => (
                 <div className="terms">- {term}</div>
               ))}
             </div>
@@ -138,7 +143,9 @@ const Session = () => {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
-        }}>
+        }}
+        onClick={navigate()}
+        >
           <EditRoundedIcon sx={{ paddingRight: 1 }}/>
           Edit & Add
         </Button>

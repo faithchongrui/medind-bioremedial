@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import {
   Grid,
   Button,
@@ -15,7 +16,7 @@ import SessionsSearchBar from "../components/SessionsPage/SessionsSearchBar";
 import CreatedSession from "../components/SessionsPage/CreatedSession";
 
 const SessionsPage = () => {
-    // const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
         <Box>
