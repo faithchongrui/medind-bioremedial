@@ -15,7 +15,6 @@ import SessionsSearchBar from "../components/SessionsPage/SessionsSearchBar";
 import CreatedSession from "../components/SessionsPage/CreatedSession";
 
 const SessionsPage = () => {
-    // const navigate = useNavigate();
   return (
     <div>
         <Box>
@@ -25,8 +24,8 @@ const SessionsPage = () => {
             // height: 10,
             // width: "100%",
             alignItems: "center",
-            padding: 2,
-            paddingBottom: 1
+            padding: 2
+            
           }}>
             <Grid item>
             <IconButton
