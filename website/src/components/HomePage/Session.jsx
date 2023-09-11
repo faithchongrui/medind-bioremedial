@@ -13,8 +13,10 @@ import {
   styled,
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { useNavigate } from 'react-router-dom';
 
 const Session = () => {
+  const navigate = useNavigate();
   const [session, setSession] = React.useState('');
 
   const handleChange = (event) => {
@@ -138,7 +140,10 @@ const Session = () => {
             backgroundColor: "#1E1E1E",
             boxShadow: "none",
           },
-        }}>
+        }}
+        onClick={() => navigate("/create-session")}
+        
+        >
           <EditRoundedIcon sx={{ paddingRight: 1 }}/>
           Edit & Add
         </Button>

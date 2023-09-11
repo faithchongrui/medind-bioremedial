@@ -15,27 +15,6 @@ const SimulationPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sims, setSims] = useState([]);
 
-  // const sims = [
-  //   {
-  //     title: "Fluid Mosaic Model",
-  //     description:
-  //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-  //     imageurl: "2.png",
-  //   },
-  //   {
-  //     title: "Diffusion",
-  //     description:
-  //       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-  //     imageurl: "2.png",
-  //   },
-  //   {
-  //     title: "Osmosis",
-  //     description:
-  //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-  //     imageurl: "2.png",
-  //   },
-  // ];
-
   const fetchSimulations = async () => {
     try {
       const collectionRef = collection(db, "simulations");
