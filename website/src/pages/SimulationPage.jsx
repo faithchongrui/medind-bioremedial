@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import {
   Grid,
   Box,
@@ -7,31 +7,65 @@ import {
 import SimulationCard from "../components/SimulationPage/SimulationCard";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const SimulationPage = () => {
   const [unit, setUnit] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [sims, setSims] = useState([]);
 
-  const sims = [
-    {
-      title: "Fluid Mosaic Model",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "2.png",
-    },
-    {
-      title: "Diffusion",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "2.png",
-    },
-    {
-      title: "Osmosis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "2.png",
-    },
-  ];
+  // const sims = [
+  //   {
+  //     title: "Fluid Mosaic Model",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
+  //     imageurl: "2.png",
+  //   },
+  //   {
+  //     title: "Diffusion",
+  //     description:
+  //       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
+  //     imageurl: "2.png",
+  //   },
+  //   {
+  //     title: "Osmosis",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
+  //     imageurl: "2.png",
+  //   },
+  // ];
+
+  const fetchSimulations = async () => {
+    try {
+      const collectionRef = collection(db, "simulations");
+      const querySnapshot = await getDocs(collectionRef);
+  
+      const data = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const documentData = {
+            ...doc.data(),
+          };
+          return documentData;
+        })
+      );
+  
+      return data;
+  
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSimulations()
+    .then(data => {
+      setSims(data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }, []);
 
   const filterData = (query, data, unit) => {
     if (!query && unit.length === 0) {
@@ -62,7 +96,7 @@ const SimulationPage = () => {
     }
   };
 
-  const dataFiltered = filterData(searchQuery, sims);
+  const dataFiltered = filterData(searchQuery, sims, unit);
 
   return (
     <Grid
@@ -116,7 +150,7 @@ const SimulationPage = () => {
               <SimulationCard
                 title={sim.title}
                 description={sim.description}
-                imageurl={sim.imageurl}
+                imageurl={sim.image}
               />
             ))}
           </Grid>
