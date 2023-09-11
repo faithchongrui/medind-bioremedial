@@ -37,12 +37,15 @@ const Session = () => {
   });
 
     const keywords = [
-      "polymers",
-      "monosaccharides",
       "disaccharides",
       "polysaccharides",
       "triglycerides",
       "cholesterol",
+    ]
+
+    const donekeywords = [
+      "polymers",
+      "monosaccharides",
     ]
 
     const progress = [
@@ -58,7 +61,7 @@ const Session = () => {
       return (
         <div>
             <div className='completed'>
-              {keywords.map((term) => (
+              {donekeywords.map((term) => (
                 <div className="terms">- {term}</div>
               ))}
             </div>
