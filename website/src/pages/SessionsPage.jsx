@@ -25,8 +25,8 @@ const SessionsPage = () => {
             // height: 10,
             // width: "100%",
             alignItems: "center",
-            padding: 2
-            
+            padding: 2,
+            paddingBottom: 1
           }}>
             <Grid item>
             <IconButton

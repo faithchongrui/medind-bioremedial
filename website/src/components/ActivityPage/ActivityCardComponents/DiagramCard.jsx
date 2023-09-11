@@ -36,7 +36,7 @@ const DiagramCard = () => {
           fontWeight: 600,
           color: "#CBE4DE",
         }}>
-            DiagramCard
+            Diagram
         </Typography>
         <Typography
           component="body"
