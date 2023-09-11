@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Person2Icon from "@mui/icons-material/Person2";
-import logo from "../../images/1.png";
+import logo from "../../images/2.png";
 import { useAuth } from '../../context/AuthContext'
 
 const StyledTextField = styled(TextField)({
