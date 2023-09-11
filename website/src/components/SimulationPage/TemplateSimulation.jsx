@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Box,
@@ -21,8 +21,29 @@ import ZoomInRoundedIcon from "@mui/icons-material/ZoomInRounded";
 import ZoomOutRoundedIcon from "@mui/icons-material/ZoomOutRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { useParams, useNavigate } from "react-router-dom";
+import { getDownloadURL, ref } from "firebase/storage";
+import { images } from "../../config/firebase";
+
+const fetchImage = async (image) => {
+  const pathReference = ref(images, image);
+  const imageURL = await getDownloadURL(pathReference);
+  return await imageURL;
+};
 
 const TemplateSimulation = ({sims}) => {
+
+  const [image, setImage] = useState()
+  const { id } = useParams()
+  const simulation = sims.find(sim => sim.title === id)
+  console.log(simulation.image)
+
+  useEffect(() => {
+    (async () => {
+      const image = await fetchImage(simulation.image);
+      console.log(image)
+      setImage(image);
+    })()
+  }, []);
 
   const navigate = useNavigate();
 
@@ -40,10 +61,6 @@ const TemplateSimulation = ({sims}) => {
   const toggleAccordion = () => {
     setExpand((prev) => !prev)
   }
-
-  const { id } = useParams()
-
-  const simulation = sims.find(sim => sim.title === id)
 
   if (!simulation) {
     return <div> Simulation not found </div>;
@@ -76,7 +93,7 @@ const TemplateSimulation = ({sims}) => {
           <ArrowBackIosRoundedIcon />
         </IconButton>
       </Toolbar>
-      <Box>{/* insert sim here */}</Box>
+      <Box><img src={image}/></Box>
       <Box>
         <Accordion
           expanded={expand}

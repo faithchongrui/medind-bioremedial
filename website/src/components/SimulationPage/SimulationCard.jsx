@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { images } from "../../config/firebase";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const DescriptionTypography = ({ description }) => {
   if (description) {
@@ -23,7 +25,22 @@ const DescriptionTypography = ({ description }) => {
   }
   return null; // Don't render anything if description is not provided
 };
+
+const fetchImage = async (image) => {
+  const pathReference = ref(images, image);
+  const imageURL = await getDownloadURL(pathReference);
+  return await imageURL;
+};
 const SimulationCard = ({ title, description, imageurl }) => {
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const image = await fetchImage(imageurl);
+      setImage(image);
+    })()
+  }, []);
+
   return (
     <Grid container item xs={6} sm={4} md={6}>
       <Link to={`/simulations/${title}`} style={{ textDecoration: "none" }}>
@@ -55,7 +72,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
                 >
                   {title}
                 </Typography>
-                <DescriptionTypography description={description}/>
+                <DescriptionTypography description={description} />
               </CardContent>
             </Grid>
             <Grid
@@ -70,7 +87,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
             >
               <CardMedia
                 component="img"
-                src={require("../../images/" + imageurl)}
+                src={image}
                 sx={{
                   padding: 1,
                   backgroundColor: "#CBE4DE",

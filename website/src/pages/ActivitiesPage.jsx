@@ -1,53 +1,50 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import TypeFilter from "../components/TypeFilter/TypeFilter";
 import ActivityCard from "../components/ActivityPage/ActivityCard";
+import { db } from '../config/firebase'
+import { doc, setDoc, collection, deleteDoc, getDoc, getDocs } from 'firebase/firestore';
 
 const ActivitiesPage = () => {
   const [unit, setUnit] = useState([]);
   const [type, setType] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [unitContent, setUnitContent] = useState([]);
 
-  const unitContent = [
-    {
-      unit: "U1.1 Biomolecules",
-      terms: 12,
-      set: "Biomolecule Functions",
-    },
-    {
-      unit: "U1.2 Eukaryotic Cells",
-      terms: 13,
-      set: "Eukaryotic Functions",
-    },
-    {
-      unit: "U1.3 Prokaryotic Cells",
-      terms: 14,
-      set: "Prokaryotic Functions",
-    },
-  ];
+  const fetchUnitContent = async () => {
+    try {
+      const collectionRef = collection(db, "activities");
+      const querySnapshot = await getDocs(collectionRef);
+  
+      const data = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const subCollectionRef = collection(doc.ref, 'keywords');
+          const subCollectionSnapshot = await getDocs(subCollectionRef);
+          const keywordsCount = subCollectionSnapshot.size;
+          const documentData = {
+            ...doc.data(),
+            terms: keywordsCount,
+          };
+          return documentData;
+        })
+      );
+  
+      return data;
+  
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
 
-  const sims = [
-    {
-      title: "Fluid Mosaic Model",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Diffusion",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "website/src/images/2.png",
-    },
-    {
-      title: "Osmosis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "website/src/images/2.png",
-    },
-  ];
+  useEffect(() => {
+    (async () => {
+      const data = await fetchUnitContent();
+      setUnitContent(data);
+    })();
+  }, []);
 
   const filterData = (query, data, unit) => {
     if (!query && unit.length === 0) {
@@ -100,10 +97,8 @@ const ActivitiesPage = () => {
           variant="h4"
           sx={{
             width: "100%",
-            // backgroundColor: "#2C3333",
             color: "#CBE4DE",
             fontWeight: 600,
-            // paddingX: 1,
             paddingBottom: 2,
           }}
         >
@@ -132,14 +127,14 @@ const ActivitiesPage = () => {
         </Box>
         <Box
           sx={{
-            // mx: 10,
             width: "100%",
           }}
         >
           <div>
             <Grid container sx={{}}>
-              {dataFiltered.map((unitcontent) => (
+              {dataFiltered.map((unitcontent, index) => (
                 <ActivityCard
+                  key={index}
                   unit={unitcontent.unit}
                   terms={unitcontent.terms}
                   set={unitcontent.set}
