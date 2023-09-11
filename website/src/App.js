@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Start from './pages/StartPage';
@@ -14,30 +14,43 @@ import ActivitiesPage from "./pages/ActivitiesPage";
 import NavBar from "./components/HomePage/NavBar";
 import CreateSessionPage from "./pages/CreateSessionPage";
 import SessionsPage from "./pages/SessionsPage";
+import { db } from "./config/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
   const location = useLocation();
+  const [sims, setSims] = useState([])
 
-  const sims = [
-    {
-      title: "Fluid Mosaic Model",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis autem vel pariatur obcaecati ex sequi necessitatibus velit eum consectetur laboriosam provident, consequatur cupiditate veritatis tenetur voluptate atque sed neque placeat.",
-      imageurl: "2.png",
-    },
-    {
-      title: "Diffusion",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam cumque commodi illo quo temporibus! Atque, sed consequatur illum reprehenderit voluptatem voluptates laudantium saepe distinctio beatae veritatis obcaecati, aliquid doloremque.",
-      imageurl: "2.png",
-    },
-    {
-      title: "Osmosis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae saepe temporibus voluptate doloribus labore assumenda laudantium corporis illo, vel unde rerum mollitia minus maxime, expedita tempora pariatur? Rem, repellendus voluptatibus.",
-      imageurl: "2.png",
-    },
-  ];
+  const fetchSimulations = async () => {
+    try {
+      const collectionRef = collection(db, "simulations");
+      const querySnapshot = await getDocs(collectionRef);
+  
+      const data = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const documentData = {
+            ...doc.data(),
+          };
+          return documentData;
+        })
+      );
+  
+      return data;
+  
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSimulations()
+    .then(data => {
+      setSims(data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }, []);
 
   return (
     <div>
