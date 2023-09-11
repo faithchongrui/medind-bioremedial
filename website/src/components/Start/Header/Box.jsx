@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import "./Box.css";
-import logo from "../../../images/1.png";
+import logo from "../../../images/2.png";
 import About from "../About/About.jsx";
 import { Link } from 'react-router-dom';
 

@@ -16,10 +16,10 @@ body {
 }
 
 :root {
-  --dark-two: rgb(30, 30, 30);
-  --dark-one: rgb(44, 51, 51);
+  --dark-two: #1e1e1e;
+  --dark-one: #2C3333;
   --medium-two: #2E4F4F;
-  --medium-one: rgb(20, 110, 114);
+  --medium-one: #146e72;
   --light: #CBE4DE;
 }
 

@@ -58,8 +58,6 @@ const CreateSessionPage = () => {
         </Typography>
         </Grid>
         <Grid item container xs={1} columns={2} spacing={2} justifyContent="right">
-
-        
           <Grid item>
             <Button
             sx={{
