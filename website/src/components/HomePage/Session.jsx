@@ -13,11 +13,11 @@ import {
   styled,
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Session = () => {
-  const [session, setSession] = React.useState('');
   const navigate = useNavigate();
+  const [session, setSession] = React.useState('');
 
   const handleChange = (event) => {
     setSession(event.target.value);
@@ -144,7 +144,8 @@ const Session = () => {
             boxShadow: "none",
           },
         }}
-        onClick={navigate()}
+        onClick={() => navigate("/create-session")}
+        
         >
           <EditRoundedIcon sx={{ paddingRight: 1 }}/>
           Edit & Add
