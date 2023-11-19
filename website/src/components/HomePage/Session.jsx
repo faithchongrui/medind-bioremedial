@@ -144,7 +144,7 @@ const Session = () => {
             boxShadow: "none",
           },
         }}
-        onClick={() => navigate("/create-session")}
+        onClick={() => navigate("/csesh")}
         
         >
           <EditRoundedIcon sx={{ paddingRight: 1 }}/>
