@@ -72,7 +72,7 @@ function App() {
             <Route path="/activities" element={<ActivitiesPage />} />
           </Route>
           <Route path="/simulations/:id" element={<TemplateSimulation sims={sims}/>} />
-          <Route path="/create-session" element={<CreateSessionPage />} />
+          <Route path="/csesh" element={<CreateSessionPage />} />
           <Route path="/sesh" element={<SessionsPage />} />
         </Routes>
       </AuthProvider>
