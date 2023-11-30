@@ -14,6 +14,7 @@ import ActivitiesPage from "./pages/ActivitiesPage";
 import NavBar from "./components/HomePage/NavBar";
 import CreateSessionPage from "./pages/CreateSessionPage";
 import SessionsPage from "./pages/SessionsPage";
+import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/FlashcardPage/TemplateFlashcard";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -74,6 +75,7 @@ function App() {
           <Route path="/simulations/:id" element={<TemplateSimulation sims={sims}/>} />
           <Route path="/csesh" element={<CreateSessionPage />} />
           <Route path="/sesh" element={<SessionsPage />} />
+          <Route path="/flashcards/:id" element={<TemplateFlashcard />} />
         </Routes>
       </AuthProvider>
     </div>

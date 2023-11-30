@@ -1,6 +1,6 @@
 import { Box, Typography, Grid } from "@mui/material";
 import React from "react";
-import FlashcardCard from "./ActivityCardComponents/FlashcardCard";
+import FlashcardCard from "./ActivityCardComponents/FlashcardPage/FlashcardCard";
 import DiagramCard from "./ActivityCardComponents/DiagramCard";
 import DragDropCard from "./ActivityCardComponents/DragDropCard";
 import TypeCard from "./ActivityCardComponents/TypeCard";
