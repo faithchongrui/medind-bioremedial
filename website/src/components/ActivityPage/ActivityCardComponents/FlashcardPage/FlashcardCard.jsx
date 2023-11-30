@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { 
     Card,
     CardContent,
@@ -8,6 +9,7 @@ import {
  import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
 
 const FlashcardCard = ({ terms, set }) => {
+  const navigate = useNavigate();
   return (
     <Card component="div"
     sx={{
@@ -19,7 +21,9 @@ const FlashcardCard = ({ terms, set }) => {
          textOverflow: 'ellipsis',
          // whiteSpace: 'nowrap',
          height: "fit-content",
-    }}>
+    }}
+    onClick={() => navigate("/flashcards/:id")}
+    >
         <CardContent>
           <Grid container columns={2}>
             <Grid item>
