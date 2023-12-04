@@ -15,8 +15,11 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
+import { useNavigate } from 'react-router-dom';
 
 const CreateSessionPage = () => {
+
+  const navigate = useNavigate()
 
   const FillField = styled("div")({
     borderRadius: 10,
@@ -71,6 +74,7 @@ const CreateSessionPage = () => {
           </Grid>
           <Grid item>
             <Button
+            onClick={() => navigate(-1)}
             sx={{
               textTransform: "none",
               backgroundColor: "#2C3333",

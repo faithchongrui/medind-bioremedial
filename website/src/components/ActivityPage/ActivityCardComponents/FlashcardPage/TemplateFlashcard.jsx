@@ -1,76 +1,83 @@
 import React, { useState, useEffect } from "react";
-import { 
-    Card,
-    CardContent,
-    Typography,
-    Grid,
- } from '@mui/material'
- import Flashcard from "./Flashcard";
- 
+import { Card, CardContent, Typography, Grid } from "@mui/material";
+import Flashcard from "./Flashcard";
+import './CardPage.css'
+
 const TemplateFlashcard = () => {
-    const [flashcarddata, setFlashcarddata] = useState([]);
+  const [flashcarddata, setFlashcarddata] = useState([]);
 
-    useEffect(() => {
-        // (async () => {
-        //   const image = await fetchImage(simulation.image);
-        //   console.log(image)
-        //   setImage(image);
-        // })()
+  useEffect(() => {
+    const url =
+      "https://api.airtable.com/v0/appqY5UZYlf41Q5VT/Table%201?api_key=keyPZ9SKzXIt4Ek1v";
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        setFlashcarddata(json.records);
       }, []);
+  });
 
-      const cards = flashcarddata.map((card) => {
-        return <Flashcard card={card} key={card.id} />;
-      });
-    
-    const loading = <div className="loading">loading...</div>;
+  // https://www.debuggr.io/react-map-of-undefined/
+  const cards = flashcarddata.map((card) => {
+    return <Flashcard card={card} key={card.id} />;
+  });
 
-    // navigation in cards
-    const [current, setCurrent] = useState(0);
-    function previousCard() {
-        setCurrent(current - 1);
-    }
-    function nextCard() {
-        setCurrent(current + 1);
-    }
-    return (
+  const loading = <div className="loading">Loading flashcard content...</div>;
+
+  // navigation in cards
+  const [current, setCurrent] = useState(0);
+  function previousCard() {
+    setCurrent(current - 1);
+  }
+  function nextCard() {
+    setCurrent(current + 1);
+  }
+
+  // if (flashcarddata) {
+  //   return (
+  //     <div>
+  //       <div>The number of cards is: {flashcarddata.length}</div>
+  //       {cards[0]}
+  //     </div>
+  //   );
+  // } else {
+  //   return <div>Loading...</div>;
+  // }
+  return (
     <div>
-        {/* /number of cards */}
-        {flashcarddata && flashcarddata.length > 0 ? (
+      {/* number of cards */}
+      {flashcarddata && flashcarddata.length > 0 ? (
         <div className="cardNumber">
           Card {current + 1} of {flashcarddata.length}
         </div>
       ) : (
         ""
       )}
+      {/* /number of cards */}
 
-        {/* render cards */}
-        {flashcarddata && flashcarddata.length > 0 ? cards[current] : loading}
+      {/* render cards */}
+      {flashcarddata && flashcarddata.length > 0 ? cards[current] : loading}
+      {/* /render cards */}
 
-        {/* /render nav buttons */}
-        <Grid container columns={2}>
-            <Grid item>
-            {current > 0 ? (
+      {/* render nav buttons */}
+      <div className="nav">
+        {current > 0 ? (
           <button onClick={previousCard}>Previous card</button>
         ) : (
           <button className="disabled" disabled>
             Previous card
           </button>
         )}
-            </Grid>
-            <Grid item>
-            {current < flashcarddata.length - 1 ? (
+        {current < flashcarddata.length - 1 ? (
           <button onClick={nextCard}>Next card</button>
         ) : (
           <button className="disabled" disabled>
             Next card
           </button>
         )}
-            </Grid>
-        
-        
-      </Grid>
+        {/* /render nav buttons */}
+      </div>
     </div>
-    )
-}
-  
-  export default TemplateFlashcard
+  );
+};
+
+export default TemplateFlashcard;
