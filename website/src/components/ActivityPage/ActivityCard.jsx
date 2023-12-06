@@ -36,7 +36,7 @@ const ActivityCard = ({unit, terms, set}) => {
         </Grid>
         <Grid item xs={1}>
           <Grid item>
-            <FlashcardCard terms={terms} set={set} />
+            <FlashcardCard unit={unit} terms={terms} set={set} />
           </Grid>
           <Grid item>
             <QuizCard terms={terms} set={set} />

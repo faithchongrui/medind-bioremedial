@@ -8,7 +8,7 @@ import {
  } from '@mui/material'
  import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
 
-const FlashcardCard = ({ terms, set }) => {
+const FlashcardCard = ({ unit, terms, set }) => {
   const navigate = useNavigate();
   return (
     <Card component="div"
@@ -22,7 +22,7 @@ const FlashcardCard = ({ terms, set }) => {
          // whiteSpace: 'nowrap',
          height: "fit-content",
     }}
-    onClick={() => navigate("/flashcards/:id")}
+    onClick={() => navigate(`/flashcards/${unit}`)}
     >
         <CardContent>
           <Grid container columns={2}>

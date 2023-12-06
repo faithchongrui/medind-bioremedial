@@ -1,24 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid } from "@mui/material";
 import Flashcard from "./Flashcard";
-import './CardPage.css'
+import "./CardPage.css";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../../../config/firebase";
+import { useParams } from "react-router-dom";
 
+const fetchFlashcardsQuery = async (unit) => {
+  try {
+    const collectionRef = collection(db, "activities");
+    const flashcardQuery = query(collectionRef, where("unit", "==", unit));
+    return flashcardQuery;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 const TemplateFlashcard = () => {
-  const [flashcarddata, setFlashcarddata] = useState([]);
+  const [flashcards, setFlashcards] = useState([]);
+
+  const { id } = useParams();
 
   useEffect(() => {
-    const url =
-      "https://api.airtable.com/v0/appqY5UZYlf41Q5VT/Table%201?api_key=keyPZ9SKzXIt4Ek1v";
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        setFlashcarddata(json.records);
-      }, []);
-  });
+    (async () => {
+      const queryFlashcards = await fetchFlashcardsQuery(id);
+      const querySnapshot = await getDocs(queryFlashcards)
+      querySnapshot.forEach(async (doc) => {
+        const flashcardsRef = collection(db, "activities", doc.id, "keywords")
+        const flashcardSnapshot = await getDocs(flashcardsRef)
+        flashcardSnapshot.forEach((doc) => {
+          const data = {
+            ...doc.data(),
+            id: doc.id,
+          };
+          setFlashcards((flashcards) => [...flashcards, data]);
+        })
+      })
+    })();
+  }, [id]);
+
+  // useEffect(() => {
+  //   // const url =
+  //   //   "https://api.airtable.com/v0/appqY5UZYlf41Q5VT/Table%201?api_key=keyPZ9SKzXIt4Ek1v";
+  //   // fetch(url)
+  //   //   .then((response) => response.json())
+  //   //   .then((json) => {
+  //   //     setflashcards(json.records);
+  //   //   }, []);
+
+  // });
 
   // https://www.debuggr.io/react-map-of-undefined/
-  const cards = flashcarddata.map((card) => {
-    return <Flashcard card={card} key={card.id} />;
+  const cards = flashcards.map((card) => {
+    return <Flashcard card={card} />;
   });
 
   const loading = <div className="loading">Loading flashcard content...</div>;
@@ -32,22 +70,12 @@ const TemplateFlashcard = () => {
     setCurrent(current + 1);
   }
 
-  // if (flashcarddata) {
-  //   return (
-  //     <div>
-  //       <div>The number of cards is: {flashcarddata.length}</div>
-  //       {cards[0]}
-  //     </div>
-  //   );
-  // } else {
-  //   return <div>Loading...</div>;
-  // }
   return (
     <div>
       {/* number of cards */}
-      {flashcarddata && flashcarddata.length > 0 ? (
+      {flashcards && flashcards.length > 0 ? (
         <div className="cardNumber">
-          Card {current + 1} of {flashcarddata.length}
+          Card {current + 1} of {flashcards.length}
         </div>
       ) : (
         ""
@@ -55,7 +83,7 @@ const TemplateFlashcard = () => {
       {/* /number of cards */}
 
       {/* render cards */}
-      {flashcarddata && flashcarddata.length > 0 ? cards[current] : loading}
+      {flashcards && flashcards.length > 0 ? cards[current] : loading}
       {/* /render cards */}
 
       {/* render nav buttons */}
@@ -67,7 +95,7 @@ const TemplateFlashcard = () => {
             Previous card
           </button>
         )}
-        {current < flashcarddata.length - 1 ? (
+        {current < flashcards.length - 1 ? (
           <button onClick={nextCard}>Next card</button>
         ) : (
           <button className="disabled" disabled>
