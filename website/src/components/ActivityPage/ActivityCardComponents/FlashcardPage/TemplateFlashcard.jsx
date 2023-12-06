@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
 import Flashcard from "./Flashcard";
 import './CardPage.css'
 
@@ -21,7 +20,7 @@ const TemplateFlashcard = () => {
     return <Flashcard card={card} key={card.id} />;
   });
 
-  const loading = <div className="loading">Loading flashcard content...</div>;
+  const loading = <div className="loading">Loading terms...</div>;
 
   // navigation in cards
   const [current, setCurrent] = useState(0);
@@ -32,18 +31,9 @@ const TemplateFlashcard = () => {
     setCurrent(current + 1);
   }
 
-  // if (flashcarddata) {
-  //   return (
-  //     <div>
-  //       <div>The number of cards is: {flashcarddata.length}</div>
-  //       {cards[0]}
-  //     </div>
-  //   );
-  // } else {
-  //   return <div>Loading...</div>;
-  // }
   return (
     <div>
+      
       {/* number of cards */}
       {flashcarddata && flashcarddata.length > 0 ? (
         <div className="cardNumber">
@@ -79,5 +69,7 @@ const TemplateFlashcard = () => {
     </div>
   );
 };
-
+// add like a little toolbar thingy at the bottom that you can expand out and also flip to other activities with
+// also add ability to flag flashcards
+// the toolbar could unfold up and the full list of terms unfolds down + the buttons for adding flaging editing (edit + delete)
 export default TemplateFlashcard;

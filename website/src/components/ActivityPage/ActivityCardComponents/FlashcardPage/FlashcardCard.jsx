@@ -21,6 +21,7 @@ const FlashcardCard = ({ terms, set }) => {
          textOverflow: 'ellipsis',
          // whiteSpace: 'nowrap',
          height: "fit-content",
+         cursor: "pointer",
     }}
     onClick={() => navigate("/flashcards/:id")}
     >
