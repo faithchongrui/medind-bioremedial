@@ -1,11 +1,5 @@
 import React, { useState } from "react";
 import './CardStyles.css';
-import { 
-    Card,
-    CardContent,
-    Typography,
-    Grid,
- } from '@mui/material'
  
 const Flashcard = ({card}) => {
     const [side, setSide] = useState(false);

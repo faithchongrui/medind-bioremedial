@@ -1,3 +1,5 @@
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import "./App.css";
 import React, { useEffect, useState } from "react";
 
@@ -52,7 +54,17 @@ function App() {
       });
   }, []);
 
+  const theme = createTheme({
+        typography: {
+          allVariants: {
+            fontFamily: ['Rubik', 'sans-serif'].join(','),
+          }
+        },
+    }
+)
+
   return (
+    <ThemeProvider theme={theme}>
     <div>
       <AuthProvider>
         {["/home", "/simulations", "/activities"].includes(
@@ -81,6 +93,7 @@ function App() {
         </Routes>
       </AuthProvider>
     </div>
+    </ThemeProvider>
   );
 }
 

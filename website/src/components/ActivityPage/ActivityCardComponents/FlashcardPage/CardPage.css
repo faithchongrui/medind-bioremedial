@@ -10,16 +10,20 @@ body {
 }
 
 .nav {
-  width: var(--layout-width);
+  width: 350px;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: rgba(20, 110, 114, 0.1);
+  border-radius: var(--border-radius);
 }
 
 .nav button {
   border: none;
-  background: #111122;
-  color: white;
+  background: var(--dark-one);
+  color: var(--light);
   font-size: 0.9em;
   padding: 0.8em 1.2em;
   border-radius: var(--border-radius);
@@ -45,7 +49,8 @@ body {
 }
 
 .cardNumber {
-  color: white;
+  color: var(--light);
   display: flex;
   justify-content: center;
+  padding-top: 100px;
 }

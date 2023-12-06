@@ -1,4 +1,13 @@
-@import url("https://rsms.me/inter/inter.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+:root {
+  --dark-two: #1e1e1e;
+  --dark-one: #2C3333;
+  --medium-two: #2e4f4f;
+  --medium-one: #146E72;
+  --light: #CBE4DE;
+  --border-radius: 15px;
+}
 
 body {
   height: 100%;
@@ -11,16 +20,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Rubik", sans-serif;
   scroll-behavior: smooth;
-}
-
-:root {
-  --dark-two: #1e1e1e;
-  --dark-one: #2C3333;
-  --medium-two: #2E4F4F;
-  --medium-one: #146e72;
-  --light: #CBE4DE;
 }
 
 .App {
@@ -87,8 +88,6 @@ header p {
   margin-right: 30px;
 }
 
-
-
 .about {
   width: 100vw;
   height: auto;
@@ -129,12 +128,12 @@ input.test:-webkit-autofill:active{
 /* side bar styling */
 #tabbar {
   border: var(--dark-one);
-  background-color: rgb(44, 51, 51);
+  background-color: var(--medium-two);
   width: 200px;
   opacity: 10000;
 
   #tabbar:hover {
-    background-color: #146E72;
+    background-color: var(--medium-one);
   }
   .menu-anchor:hover {
     background-color: var(--medium-one);
@@ -197,7 +196,7 @@ input.test:-webkit-autofill:active{
 }
 
 .smallmoduleactivities {
-  background-color: rgb(46, 79, 79);
+  background-color: var(--medium-one);
   margin-left: 1rem;
   margin-right: 1rem;
   padding: 1rem 1rem;

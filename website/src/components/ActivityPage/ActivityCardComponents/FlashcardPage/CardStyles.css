@@ -1,13 +1,13 @@
 .card {
     margin: 10px auto;
-    background: var(--grad-one);
-    height: 350px;
+    background: var(--medium-one);
+    height: 500px;
     width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
     /* flex-direction: column; */
-    color: #ffffff;
+    color: var(--light);
     font-size: 24px;
     font-weight: 400;
     border-radius: var(--border-radius);
@@ -24,7 +24,7 @@
   
   /* when card is clicked adding .side class */
   .side {
-    background: var(--grad-two);
+    background: var(--medium-two);
     transform: rotateY(-180deg);
   }
   
@@ -50,7 +50,7 @@
   }
   
   .card small {
-    opacity: 0.7;
+    opacity: 0;
     font-size: 0.7em;
     position: absolute;
     top: 3rem;
@@ -67,7 +67,7 @@
   }
   
   .loading {
-    color: white;
+    color: var(--light);
     width: 350px;
     text-align: center;
     margin: 20px auto;

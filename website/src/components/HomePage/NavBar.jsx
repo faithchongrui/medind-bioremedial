@@ -3,8 +3,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  createTheme,
-  ThemeProvider,
   IconButton,
   Divider,
   Collapse,
@@ -39,12 +37,6 @@ const data = [
   },
 ];
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Inter",
-  },
-});
-
 function NavBar1() {
 
 const navigate = useNavigate();
@@ -63,7 +55,6 @@ const navigate = useNavigate();
   const getList = () => (
     <div style={{ width: 250 }}>
       {data.map((item, index) => (
-        <ThemeProvider theme={theme}>
           <div>
             <ListItemButton
               key={index}
@@ -80,18 +71,15 @@ const navigate = useNavigate();
             </ListItemButton>
             <Divider sx={{ backgroundColor: "#2C3333", borderBottomWidth: 3}} />
           </div>
-        </ThemeProvider>
       ))}
       <Collapse in={openSubMenu} timeout="auto" unmountOnExit>
         {data.map((item) =>
           item.submenu?.map((subItem, index2) => (
-            <ThemeProvider theme={theme}>
               <List component="div" disablePadding>
                 <ListItemButton key={index2}>
                   <ListItemText primary={subItem.name} sx={{ color: "#CBE4DE" }} />
                 </ListItemButton>
               </List>
-            </ThemeProvider>
           ))
         )}
       </Collapse>
