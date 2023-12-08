@@ -24,7 +24,7 @@ const CreateSessionPage = () => {
   const [activitySearchQuery, setActivitySearchQuery] = useState("");
 
   const FillField = styled("div")({
-    borderRadius: 10,
+    // borderRadius: 10,
     padding: "1rem",
     paddingLeft: "3rem",
     backgroundColor: "none",
@@ -59,7 +59,7 @@ const CreateSessionPage = () => {
               width: "100%",
               color: "#CBE4DE",
               fontSize: 25,
-              borderRadius: 10,
+              // borderRadius: 10,
             }}
           >
             Add a New Session
@@ -156,7 +156,7 @@ const CreateSessionPage = () => {
           mx: 6,
           backgroundColor: "rgba(20, 110, 114, 0.1)",
           color: "#CBE4DE",
-          borderRadius: 5,
+          // borderRadius: 5,
         }}
       >
         <AccordionSummary
@@ -191,7 +191,7 @@ const CreateSessionPage = () => {
           mx: 6,
           backgroundColor: "rgba(20, 110, 114, 0.1)",
           color: "#CBE4DE",
-          borderRadius: 5,
+          // borderRadius: 5,
         }}
       >
         <AccordionSummary
