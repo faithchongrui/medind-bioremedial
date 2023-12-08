@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { useNavigate } from "react-router-dom";
+import SimulationPage from "./SimulationPage";
 
 const CreateSessionPage = () => {
   const navigate = useNavigate();
@@ -179,8 +180,9 @@ const CreateSessionPage = () => {
               mb: 1,
             }}
           >
-            <SearchBar searchQuery={simulationSearchQuery} setSearchQuery={setSimulationSearchQuery}/>
+            {/* <SearchBar searchQuery={simulationSearchQuery} setSearchQuery={setSimulationSearchQuery}/> */}
             {/* <UnitFilter width={"50%"} /> */}
+            <SimulationPage searchQuery={simulationSearchQuery} setSearchQuery={setSimulationSearchQuery}/>
           </Box>
         </AccordionDetails>
       </Accordion>

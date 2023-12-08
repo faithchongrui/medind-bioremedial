@@ -24,6 +24,7 @@ import { SessionProvider } from "./context/SessionContext";
 function App() {
   const location = useLocation();
   const [sims, setSims] = useState([]);
+  const [simSearchQuery, setSimSearchQuery] = useState('');
 
   const fetchSimulations = async () => {
     try {
@@ -68,7 +69,7 @@ function App() {
       <div>
         <AuthProvider>
           <SessionProvider>
-            {["/home", "/simulations", "/activities"].includes(
+            {["/home", "/simulations", "/activities", "/sesh"].includes(
               location.pathname
             ) && <NavBar />}
             <Routes>
@@ -79,7 +80,7 @@ function App() {
               <Route path="/login" element={<Auth />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route exact path="/simulations" element={<PrivateRoute />}>
-                <Route path="/simulations" element={<SimulationPage />} />
+                <Route path="/simulations" element={<SimulationPage searchQuery={simSearchQuery} setSearchQuery={setSimSearchQuery} />} />
               </Route>
               <Route exact path="/activities" element={<PrivateRoute />}>
                 <Route path="/activities" element={<ActivitiesPage />} />

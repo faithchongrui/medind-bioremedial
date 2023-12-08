@@ -16,6 +16,7 @@ import {
 } from "@mui/icons-material";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import DatasetIcon from '@mui/icons-material/Dataset';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,6 +36,11 @@ const data = [
     icon: <Casino />,
     link: "/activities"
   },
+  {
+    name: "Sessions",
+    icon: <DatasetIcon/>,
+    link: "/sesh"
+  }
 ];
 
 function NavBar1() {
