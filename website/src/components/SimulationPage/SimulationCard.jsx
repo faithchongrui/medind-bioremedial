@@ -39,7 +39,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
       const image = await fetchImage(imageurl);
       setImage(image);
     })()
-  }, []);
+  }, [imageurl]);
 
   return (
     <Grid container item xs={6} sm={4} md={6}>

@@ -16,6 +16,7 @@ import SessionsSearchBar from "../components/SessionsPage/SessionsSearchBar";
 import CreatedSession from "../components/SessionsPage/CreatedSession";
 
 const SessionsPage = () => {
+  const [sessionSearchQuery, setSessionSearchQuery] = useState("");
   return (
     <div>
         <Box>
@@ -28,24 +29,6 @@ const SessionsPage = () => {
             padding: 2
             
           }}>
-            <Grid item>
-            <IconButton
-                edge="start"
-                aria-label="menu"
-                sx={{
-                    ml: 1,
-                    padding: 1,
-                    color: "#CBE4DE",
-                    backgroundColor: "#2C3333",
-                    "&:hover": {
-                        backgroundColor: "#2E4F4F",
-                    },
-                }}
-                //   onClick={() => navigate(-1)}
-                >
-                <ArrowBackIosRoundedIcon fontSize="medium" />
-                </IconButton>
-            </Grid>
             <Grid item>
             <Typography
           component="h1"
@@ -91,7 +74,7 @@ const SessionsPage = () => {
         </IconButton>
             </Grid>
             <Grid item>
-                <SessionsSearchBar sx={{justifyContent: "right", alignItems: "right",}} />
+                <SessionsSearchBar sx={{justifyContent: "right", alignItems: "right",}} searchQuery={sessionSearchQuery} setSearchQuery={setSessionSearchQuery}/>
             </Grid>
           </Grid>
           </Box>

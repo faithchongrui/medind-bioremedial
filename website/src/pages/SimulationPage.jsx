@@ -10,9 +10,8 @@ import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const SimulationPage = () => {
+const SimulationPage = ({searchQuery, setSearchQuery}) => {
   const [unit, setUnit] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [sims, setSims] = useState([]);
 
   const fetchSimulations = async () => {
