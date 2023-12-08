@@ -13,10 +13,12 @@ export const SessionProvider = ({ children }) => {
   const [sessions, setSessions] = useState([]);
   
   const [activeSession, setActiveSession] = useState({
+    id: '',
+    name: '',
     selectedFlashcards: [],
     diagrams: [],
     simulations: [],
-    flashcardsProgress: {}
+    flashcardsProgress: 0
   })
 
   useEffect(() => {
@@ -64,6 +66,10 @@ export const SessionProvider = ({ children }) => {
       console.error('Error setting the active session:', error);
     }
   };
+
+  const addNewSession = async () => {
+    
+  }
 
   const updateSelectedFlashcards = async (flashcards) => {
     if (activeSession) {

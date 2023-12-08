@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { useNavigate } from 'react-router-dom';
+import { useSession } from '../../context/SessionContext';
 
 const Session = () => {
+  const { sessions } = useSession();
   const navigate = useNavigate();
   const [session, setSession] = React.useState('');
 
@@ -127,8 +129,15 @@ const Session = () => {
           <MenuItem value="">
             <em>No session selected!</em>
           </MenuItem>
-          <MenuItem value={10}>Session 3: Class Test</MenuItem>
-          <MenuItem value={21}>Session 4: EOYS</MenuItem>
+          {/* <MenuItem value={10}>Session 3: Class Test</MenuItem>
+          <MenuItem value={21}>Session 4: EOYS</MenuItem> */}
+          {sessions?.map((session) => {
+            return (
+              <MenuItem value={session.id}>{session.name}</MenuItem>
+            );
+          })
+
+          }
         </Select>
       </FormControl>
         <Button
