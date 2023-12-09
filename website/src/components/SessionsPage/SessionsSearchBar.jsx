@@ -46,6 +46,7 @@ const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
         inputProps={{ "aria-label": "search" }}
         onChange={(e) => setSearchQuery(e.target.value)}
         value={searchQuery}
+        autoFocus={true}
       />
     </Search>
   );
