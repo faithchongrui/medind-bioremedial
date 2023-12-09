@@ -2,7 +2,7 @@
     margin: 10px auto;
     background: var(--medium-one);
     height: 500px;
-    width: 350px;
+    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,3 +73,6 @@
     margin: 20px auto;
   }
   
+  /* .cardNumber {
+    height: 10px;
+  } */

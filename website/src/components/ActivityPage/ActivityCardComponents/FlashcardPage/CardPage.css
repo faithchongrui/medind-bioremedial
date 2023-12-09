@@ -1,3 +1,10 @@
+.cardNumber {
+  color: var(--light);
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
 .nav {
   width: 350px;
   margin: auto;
@@ -37,9 +44,4 @@
   outline: none;
 }
 
-.cardNumber {
-  color: var(--light);
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
-}
+

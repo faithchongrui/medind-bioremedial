@@ -9,6 +9,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { useParams } from "react-router-dom";
+import TermsDrawer from "../TermsDrawer";
+import { Grid } from '@mui/material'
 
 const fetchFlashcardsQuery = async (unit) => {
   try {
@@ -71,7 +73,7 @@ const TemplateFlashcard = () => {
 
   return (
     <div>
-      
+      <TermsDrawer></TermsDrawer>
       {/* number of cards */}
       {flashcards && flashcards.length > 0 ? (
         <div className="cardNumber">
@@ -104,6 +106,7 @@ const TemplateFlashcard = () => {
         )}
         {/* /render nav buttons */}
       </div>
+
     </div>
   );
 };

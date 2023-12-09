@@ -18,3 +18,4 @@ const Flashcard = ({card}) => {
 }
   
   export default Flashcard
+  
