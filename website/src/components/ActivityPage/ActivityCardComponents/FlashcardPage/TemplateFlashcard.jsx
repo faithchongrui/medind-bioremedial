@@ -73,7 +73,7 @@ const TemplateFlashcard = () => {
 
   return (
     <div>
-      <TermsDrawer></TermsDrawer>
+      <TermsDrawer cards={flashcards}/>
       {/* number of cards */}
       {flashcards && flashcards.length > 0 ? (
         <div className="cardNumber">
