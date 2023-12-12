@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { useNavigate } from 'react-router-dom';
+import { useSession } from '../../context/SessionContext';
 
 const Session = () => {
+  const { sessions } = useSession();
   const navigate = useNavigate();
   const [session, setSession] = React.useState('');
 
@@ -53,39 +55,67 @@ const Session = () => {
      { name: "incomplete", number: 60, color: "#2E4F4F" }
     ]
 
+    const empty = [
+      { name: "complete", number: 0, color: "#1E1E1E" },
+      { name: "incomplete", number: 100, color: "#2E4F4F" }
+     ]
+
     const simuls = [
       "dehydration & hydrolysis reaction",
       "fluid mosaic model",
     ]
-    const Diagrams = () => {
+    
+    const Flashcards = () => {
       return (
         <div>
-            <div className='completed'>
-              {donekeywords.map((term) => (
-                <div className="terms">- {term}</div>
-              ))}
-            </div>
-            <div className='yettocomplete'>
-             {keywords.map((term) => (
-                <div className="terms">- {term}</div>
-              ))}
-            </div>
+          <Grid item sx={{
+            padding: "0.5rem",
+            backgroundColor: "#2E4F4F",
+            opacity: "40%",
+            pl: "25px",
+          }}>
+            {session.length > 0 ? (
+              donekeywords.map((term) => (
+                <div>- {term}</div>
+              ))
+            ) : (
+              <p> Session not selected! </p>
+            )} 
+          </Grid>
+          <Grid item sx={{
+            padding: "0.5rem",
+            backgroundColor: "#2E4F4F",
+            pl: "25px",
+          }}>
+             {session.length > 0 ? (
+              keywords.map((term) => (
+                <div>- {term}</div>
+              ))
+             ) : (
+              <p> Session not selected! </p>
+             )}
+            </Grid>
         </div>
       )
     }
 
-    const Flashcards = () => {
+    const Diagrams = () => {
       return (
         <PieChart
-          className="flashcards"
           width={250}
           height={250}
           >
+            {session.length > 0 ? (
             <text x={125} y={125} dy={8} textAnchor="middle" fill="#CBE4DE" fontSize={20}>
-              {progress[0].number}% learned
-            </text>
+                {progress[0].number}% learned
+                </text>
+            ) : (
+              <text x={125} y={125} dy={8} textAnchor="middle" fill="#CBE4DE" fontSize={20}>
+                  No session!
+              </text>
+             )}
             <Pie 
-            data={progress}
+            data={session.length > 0 ? (progress) : (empty)}
             dataKey="number"
             outerRadius={125}
             innerRadius={85}
@@ -104,17 +134,48 @@ const Session = () => {
     const Simulations = () => {
       return (
         <div>
-              {simuls.map((sim) => (
-                <div className="sims">{sim}</div>
-                // change to a button later
-              ))}
+          {session.length > 0 ? (
+              simuls.map((sim) => (
+                <Button sx={{
+                  color: "#CBE4DE",
+                  backgroundColor: "#2E4F4F",
+                  padding: "10%",
+                  mb: "1rem",
+                  textAlign: "center",
+                  width: "100%",
+                  textTransform: 'none',
+                  fontSize: 15,
+                  lineHeight: 1.4,
+                  ":hover": {
+                    backgroundColor: "rgb(20, 110, 114)",
+                    boxShadow: "none",
+                    fontWeight:"bold"
+                  },
+                }}>
+                    {sim}
+                </Button>
+              ))
+          ) : (
+            <Button disabled sx={{
+              color: "#CBE4DE",
+              backgroundColor: "#2E4F4F",
+              padding: "10%",
+              mb: "1rem",
+              textAlign: "center",
+              width: "100%",
+              textTransform: 'none',
+              fontSize: 15,
+              lineHeight: 1.4,
+            }}>
+              Session not selected!
+            </Button>
+          )}
         </div>
       )
     }
   
   return (
-    <div className='sessioncontainer'>
-      <div className='sindex'>
+    <Box sx={{ backgroundColor: "#2C3333", p: "1rem" }}>
         <FormControl sx={{ minWidth: 120 }} size="small">
         <Select
           id="demo-simple-select-autowidth"
@@ -127,8 +188,18 @@ const Session = () => {
           <MenuItem value="">
             <em>No session selected!</em>
           </MenuItem>
-          <MenuItem value={10}>Session 3: Class Test</MenuItem>
-          <MenuItem value={21}>Session 4: EOYS</MenuItem>
+          <MenuItem value="1">
+            <em>test</em>
+          </MenuItem>
+          {/* <MenuItem value={10}>Session 3: Class Test</MenuItem>
+          <MenuItem value={21}>Session 4: EOYS</MenuItem> */}
+          {sessions?.map((session) => {
+            return (
+              <MenuItem value={session.id}>{session.name}</MenuItem>
+            );
+          })
+
+          }
         </Select>
       </FormControl>
         <Button
@@ -144,28 +215,51 @@ const Session = () => {
             boxShadow: "none",
           },
         }}
-        onClick={() => navigate("/csesh")}
-        
+        onClick={() => navigate("/csesh")}  
         >
           <EditRoundedIcon sx={{ paddingRight: 1 }}/>
           Edit & Add
         </Button>
-      </div>
-        <body className='everythingcontainer'>
-          <body className='diagramcontainer'>
-              <Diagrams />
-              <div className='diagramtitle'>Diagram</div>
-          </body>
-          <body className='flashcardcontainer'>
+      <Grid container columns={3} sx={{ py: 2 }}>
+        <Grid item xs={1} sx={{
+          color: "#CBE4DE",
+          backgroundColor: "#2C3333",
+          pr: 4,
+        }}>
             <Flashcards />
-            <div className='flashcardtitle'>Flashcards</div>
-          </body>
-          <body className='simulationcontainer'>
+        </Grid>
+          <Grid item xs={1} sx={{
+            color: "#CBE4DE",
+            backgroundColor: "#2C3333",
+          }}>
+            <Diagrams />
+        </Grid>
+          <Grid item xs={1} sx={{
+            color: "#CBE4DE",
+            backgroundColor: "#2C3333",
+          }}>
             <Simulations />
-            <div className='simulationtitle'>Simulations</div>
-          </body>
-        </body>
-    </div>
+        </Grid>
+          
+      </Grid>
+      <Grid container columns={3} sx={{mt: 2}}>
+        <Grid item xs={1} >
+        <Typography component="h3" variant="h6" sx={{ color: "#CBE4DE", textAlign: "center" }}>
+          Flashcards
+        </Typography>
+        </Grid>
+        <Grid item xs={1}>
+        <Typography component="h3" variant="h6" sx={{ color: "#CBE4DE", textAlign: "center" }}>
+          Diagrams
+        </Typography>
+        </Grid>
+        <Grid item xs={1}>
+        <Typography component="h3" variant="h6" sx={{ color: "#CBE4DE", textAlign: "center" }}>
+          Simulations
+        </Typography>
+        </Grid>
+      </Grid>
+    </Box>
   )
 }
 

@@ -1,17 +1,40 @@
 import React from 'react'
 import Sets from './Sets'
 import Session from './Session'
+import {
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 
 const Progress = () => {
   return (
-    <div className="progess">
-        <h1 className="progress"> Your progress </h1>
-        <body className="progresscontainer">
-            <Session></Session>
-            <Sets></Sets>
-        </body>
-        
-    </div>
+      <Box>
+        <Typography component="h1" variant="h4" sx={{
+          color: "#CBE4DE",
+          fontWeight: 600,
+          pb: 2,
+          ml: 8,
+          position: "top",
+        }}>
+          Your progress
+        </Typography>
+        <Grid container spacing={2} sx={{
+          // backgroundColor: "#FFFFFF", 
+          pb: "20px",
+          px: 6,
+          display: "flex",
+          flexWrap: "nowrap",
+          overflowY: "hidden",
+          }}>
+          <Grid item xs={8}>
+            <Session />
+          </Grid>
+          <Grid item xs={4}>
+            <Sets />
+          </Grid>
+        </Grid>
+        </Box>
   )
 }
 

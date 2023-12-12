@@ -8,6 +8,7 @@ import "@fontsource/ibm-plex-mono";
 
 import { firebaseConfig } from "./firebase-config.ts";  
 import { activitiesCollection } from "./collections/activities.tsx";
+import { simulationsCollection } from "./collections/simulations.tsx";
 
 export default function App() {
 
@@ -33,7 +34,7 @@ export default function App() {
     return <FirebaseCMSApp
         name={"Bioremedial"}
         authentication={myAuthenticator}
-        collections={[activitiesCollection]}
+        collections={[activitiesCollection, simulationsCollection]}
         firebaseConfig={firebaseConfig}
     />;
 }

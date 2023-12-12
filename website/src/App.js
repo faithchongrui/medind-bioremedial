@@ -1,3 +1,5 @@
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import "./App.css";
 import React, { useEffect, useState } from "react";
 
@@ -17,10 +19,12 @@ import SessionsPage from "./pages/SessionsPage";
 import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/FlashcardPage/TemplateFlashcard";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { SessionProvider } from "./context/SessionContext";
 
 function App() {
   const location = useLocation();
   const [sims, setSims] = useState([]);
+  const [simSearchQuery, setSimSearchQuery] = useState('');
 
   const fetchSimulations = async () => {
     try {
@@ -52,35 +56,47 @@ function App() {
       });
   }, []);
 
+  const theme = createTheme({
+    typography: {
+      allVariants: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+      },
+    },
+  });
+
   return (
-    <div>
-      <AuthProvider>
-        {["/home", "/simulations", "/activities"].includes(
-          location.pathname
-        ) && <NavBar />}
-        <Routes>
-          <Route path="/" element={<Start />} />
-          <Route exact path="/home" element={<PrivateRoute />}>
-            <Route exact path="/home" element={<HomePage />} />
-          </Route>
-          <Route path="/login" element={<Auth />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route exact path="/simulations" element={<PrivateRoute />}>
-            <Route path="/simulations" element={<SimulationPage />} />
-          </Route>
-          <Route exact path="/activities" element={<PrivateRoute />}>
-            <Route path="/activities" element={<ActivitiesPage />} />
-          </Route>
-          <Route
-            path="/simulations/:id"
-            element={<TemplateSimulation sims={sims} />}
-          />
-          <Route path="/csesh" element={<CreateSessionPage />} />
-          <Route path="/sesh" element={<SessionsPage />} />
-          <Route path="/flashcards/:id" element={<TemplateFlashcard />} />
-        </Routes>
-      </AuthProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <AuthProvider>
+          <SessionProvider>
+            {["/home", "/simulations", "/activities", "/sesh"].includes(
+              location.pathname
+            ) && <NavBar />}
+            <Routes>
+              <Route path="/" element={<Start />} />
+              <Route exact path="/home" element={<PrivateRoute />}>
+                <Route exact path="/home" element={<HomePage />} />
+              </Route>
+              <Route path="/login" element={<Auth />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route exact path="/simulations" element={<PrivateRoute />}>
+                <Route path="/simulations" element={<SimulationPage searchQuery={simSearchQuery} setSearchQuery={setSimSearchQuery} />} />
+              </Route>
+              <Route exact path="/activities" element={<PrivateRoute />}>
+                <Route path="/activities" element={<ActivitiesPage />} />
+              </Route>
+              <Route
+                path="/simulations/:id"
+                element={<TemplateSimulation sims={sims} />}
+              />
+              <Route path="/csesh" element={<CreateSessionPage />} />
+              <Route path="/sesh" element={<SessionsPage />} />
+              <Route path="/flashcards/:id" element={<TemplateFlashcard />} />
+            </Routes>
+          </SessionProvider>
+        </AuthProvider>
+      </div>
+    </ThemeProvider>
   );
 }
 

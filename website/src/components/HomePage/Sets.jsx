@@ -15,13 +15,8 @@ const Sets = () => {
   return (
     <Grid
       container
-      item
-      xs={false}
-      // sm={true}
-      md={5.4}
       sx={{
-        // padding: "1rem",
-      // display: "flex",
+        pb: "10px",
       flexDirection: "column",
       alignItems: "left",
         backgroundColor: "#2C3333",
@@ -65,14 +60,13 @@ const Sets = () => {
       {arr.map((number) => (
           <Button
             variant="contained"
-            disableRipple="true"
+            // disableRipple="true"
             sx={{
               mx: 2,
               mb: 1,
               backgroundColor: "#2E4F4F",
               boxShadow: "none",
               borderRadius: 7,
-              width: "92%",
               textAlign:"left",
               display: 'inline',
               color: "#CBE4DE",

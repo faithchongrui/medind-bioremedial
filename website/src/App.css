@@ -1,4 +1,14 @@
-@import url("https://rsms.me/inter/inter.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+/* styling for the whole website DONT TOUCH / MAKE OTHER ONES */
+:root {
+  --dark-two: #1e1e1e;
+  --dark-one: #2C3333;
+  --medium-two: #2e4f4f;
+  --medium-one: #146E72;
+  --light: #CBE4DE;
+  --border-radius: 15px;
+}
 
 body {
   height: 100%;
@@ -11,16 +21,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Rubik", sans-serif;
   scroll-behavior: smooth;
-}
-
-:root {
-  --dark-two: #1e1e1e;
-  --dark-one: #2C3333;
-  --medium-two: #2E4F4F;
-  --medium-one: #146e72;
-  --light: #CBE4DE;
 }
 
 .App {
@@ -87,7 +89,7 @@ header p {
   margin-right: 30px;
 }
 
-
+/* styling for the whole website DONT TOUCH / MAKE OTHER ONES */
 
 .about {
   width: 100vw;
@@ -129,12 +131,12 @@ input.test:-webkit-autofill:active{
 /* side bar styling */
 #tabbar {
   border: var(--dark-one);
-  background-color: rgb(44, 51, 51);
+  background-color: var(--medium-two);
   width: 200px;
   opacity: 10000;
 
   #tabbar:hover {
-    background-color: #146E72;
+    background-color: var(--medium-one);
   }
   .menu-anchor:hover {
     background-color: var(--medium-one);
@@ -178,7 +180,6 @@ input.test:-webkit-autofill:active{
   
   .emptyactivities {
     padding: 2rem;
-
   }
 }
 
@@ -197,7 +198,7 @@ input.test:-webkit-autofill:active{
 }
 
 .smallmoduleactivities {
-  background-color: rgb(46, 79, 79);
+  background-color: var(--medium-one);
   margin-left: 1rem;
   margin-right: 1rem;
   padding: 1rem 1rem;
@@ -224,128 +225,5 @@ input.test:-webkit-autofill:active{
     /* margin-top: 1rem; */
     /* margin-bottom: 1rem; */
     vertical-align: baseline;
-  }
-}
-
-/* progress styling */
-.progress {
-  position: top;
-  z-index: 20;
-  color: var(--light);
-  padding-left: 2rem; 
-
-  padding-bottom: 1rem;
-  margin-left: 2rem;
-}
-
-.progresscontainer {
-  background-color: #1E1E1E;
-  display:flex;
-  flex-wrap: nowrap;
-  padding: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  /* overflow: hidden; */
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
-  overflow-y: hidden;
-}
-
-.sessioncontainer {
-  background-color: #2C3333;
-  width: 100%;
-  padding: 1rem;
-  padding-bottom: 3rem;
-  margin-right: 1rem;
-
-  .sindex {
-    vertical-align: center;
-    width: fit-content;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .everythingcontainer {
-    background-color: #2C3333;
-    display: flex;
-    flex-wrap: nowrap;
-    /* margin-right: 2rem */
-  }
-
-  .diagramcontainer {
-    background-color: #2C3333;
-    padding-top: 1rem;
-    padding-left: 0rem;
-    /* padding-right: 1rem; */
-    margin-right: 2rem;
-    width: 20rem;
-    /* height: fit-content; */
-    /* padding-right: 30%; */
-    
-  
-    color: var(--light);
-    
-    
-    .completed {
-      padding: 0.5rem;
-      /* padding-right: 30%; */
-      background-color: #2E4F4F;
-      font-weight: 300;
-      opacity: 40%;
-      text-indent: 7%;
-      /* margin-right: 2rem; */
-    }
-  
-    .yettocomplete {
-      padding: 0.5rem;
-      background-color: #2E4F4F;
-      font-weight: 300;
-      text-indent: 7%;
-      /* margin-right: 2rem; */
-    }
-  
-    .diagramtitle {
-      padding-top: 1rem;
-      font-size: larger;
-      font-weight: 600;
-      text-align: center;
-    }
-  }
-}
-
-.flashcardcontainer {
-  padding-top: 1rem;
-  background-color: #2C3333;
-  color: var(--light);
-  margin-right: 2rem;
-
-  .flashcards {
-    background-color: #2C3333;
-  }
-  .flashcardtitle {
-    padding-top: 1rem;
-    font-size: larger;
-    font-weight: 600;
-    text-align: center;
-  }
-}
-
-.simulationcontainer {
-  padding-top: 1rem;
-  background-color: #2C3333;
-  color: var(--light);
-
-  .sims {
-    background-color: #2E4F4F;
-    padding: 10%;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: 300;
-  }
-  .simulationtitle {
-    padding-top: 1rem;
-    font-size: larger;
-    font-weight: 600;
-    text-align: center;
   }
 }
