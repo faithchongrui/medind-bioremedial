@@ -59,14 +59,14 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
           const results = data.filter((sim) => {
             return (
               unit.includes(sim.unit) &&
-              sim.set.toLowerCase().includes(query.toLowerCase())
+              sim.title.toLowerCase().includes(query.toLowerCase())
             );
           });
           return results;
         }
         else {
           const results = data.filter((sim) => {
-            return sim.set.toLowerCase().includes(query.toLowerCase())
+            return sim.title.toLowerCase().includes(query.toLowerCase())
           })
           return results
         }
