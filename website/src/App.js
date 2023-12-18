@@ -17,6 +17,8 @@ import NavBar from "./components/HomePage/NavBar";
 import CreateSessionPage from "./pages/CreateSessionPage";
 import SessionsPage from "./pages/SessionsPage";
 import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/FlashcardPage/TemplateFlashcard";
+import TemplateQuiz from "./components/ActivityPage/ActivityCardComponents/QuizPage/TemplateQuiz";
+import TemplateActivity from "./components/ActivityPage/TemplateActivity";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { SessionProvider } from "./context/SessionContext";
@@ -92,6 +94,8 @@ function App() {
               <Route path="/csesh" element={<CreateSessionPage />} />
               <Route path="/sesh" element={<SessionsPage />} />
               <Route path="/flashcards/:id" element={<TemplateFlashcard />} />
+              <Route path="/quiz/:id" element={<TemplateQuiz/>} />
+              <Route path="/activity/:id" element={<TemplateActivity/>} />
             </Routes>
           </SessionProvider>
         </AuthProvider>
