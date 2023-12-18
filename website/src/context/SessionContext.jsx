@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../config/firebase";
-import { collection, getDocs, updateDoc, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, setDoc, doc, addDoc } from "firebase/firestore";
+import { useAuth } from "./AuthContext";
 
 const SessionContext = createContext();
 
@@ -11,15 +12,28 @@ export function useSession() {
 export const SessionProvider = ({ children }) => {
   // This is a provider for a dashboard which keeps track of a user's progress in a 'session'. A 'session' is a collection of selected flashcard sets in the firestore, diagrams and simulations. It also keeps track of the progress of flashcards learnt.
   const [sessions, setSessions] = useState([]);
+
+  const { currentUser } = useAuth();
   
   const [activeSession, setActiveSession] = useState({
     id: '',
-    name: '',
+    title: '',
+    description: '',
     selectedFlashcards: [],
     diagrams: [],
     simulations: [],
     flashcardsProgress: 0
   })
+
+  const [newSession, setNewSession] = useState({
+    id: '',
+    title: '',
+    description: '',
+    selectedFlashcards: [],
+    diagrams: [],
+    simulations: [],
+    flashcardsProgress: 0
+  });
 
   useEffect(() => {
     const fetchSessionsData = async () => {
@@ -67,8 +81,16 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const addNewSession = async () => {
-    
+  const addNewSession = async (title, description) => {
+    try {
+      const sessionDocRef = await addDoc(collection(db, "users", currentUser.uid, "sessions"), {
+        "title": title,
+        "description": description,
+      })  
+    } 
+    catch {
+
+    }
   }
 
   const updateSelectedFlashcards = async (flashcards) => {

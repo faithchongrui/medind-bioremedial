@@ -24,6 +24,8 @@ const CreateSessionPage = () => {
   const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
   const [activitySearchQuery, setActivitySearchQuery] = useState("");
 
+  
+
   const FillField = styled("div")({
     // borderRadius: 10,
     padding: "1rem",
