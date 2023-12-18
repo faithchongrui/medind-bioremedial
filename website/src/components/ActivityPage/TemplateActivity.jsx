@@ -27,6 +27,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { useParams } from 'react-router-dom';
 
 const drawerWidth = 400;
 
@@ -202,6 +203,7 @@ const TermNavDrawer = ({cards}) => {
 }
 
 const TemplateActivity = () => {
+  const { id } = useParams()
     return (
         <div>
             <TermNavDrawer />
