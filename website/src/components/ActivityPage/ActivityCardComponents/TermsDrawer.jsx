@@ -22,9 +22,9 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
 
 import TemplateFlashcard from "./FlashcardPage/TemplateFlashcard";
 
@@ -109,6 +109,7 @@ const TermCard = ({ card }) => {
     </Card>
   );
 };
+
 const TermsDrawer = ({cards}) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -125,24 +126,6 @@ const TermsDrawer = ({cards}) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const terms = [
-    "Inbox",
-    "Starred",
-    "Send email",
-    "Drafts",
-    "dragst",
-    "Inbox",
-    "Starred",
-    "Send email",
-    "Drafts",
-    "dragst",
-    "Inbox",
-    "Starred",
-    "Send email",
-    "Drafts",
-    "dragst",
-  ];
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -244,6 +227,8 @@ const TermsDrawer = ({cards}) => {
         </DrawerHeader>
         <Divider />
         <Typography
+        component="h1"
+        variant="h4"
           sx={{
             color: "#CBE4DE",
             display: "flex",

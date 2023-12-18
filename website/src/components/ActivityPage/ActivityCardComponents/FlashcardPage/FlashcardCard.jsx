@@ -23,7 +23,7 @@ const FlashcardCard = ({ unit, terms, set }) => {
          height: "fit-content",
          cursor: "pointer",
     }}
-    onClick={() => navigate(`/flashcards/${unit}`)}
+    // onClick={() => navigate(`/flashcards/${unit}`)}
     >
         <CardContent>
           <Grid container columns={2}>
