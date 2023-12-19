@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TermsDrawer from "../TermsDrawer";
 import { Grid } from '@mui/material'
 
@@ -25,6 +25,7 @@ const TemplateFlashcard = () => {
   const [flashcards, setFlashcards] = useState([]);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -43,6 +44,25 @@ const TemplateFlashcard = () => {
       })
     })();
   }, [id]);
+
+  useEffect(() => {
+    const keyDownHandler = event => {
+      console.log('User pressed: ', event.key);
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+
+        
+        navigate(-1);
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [])
 
   // useEffect(() => {
   //   // const url =

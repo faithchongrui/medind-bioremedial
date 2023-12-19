@@ -167,9 +167,9 @@ const ActivitySegment = ({link, unit}) => {
   </Box>
 };
 
-const TemplateActivity = ({link, unit}) => {
+const TemplateActivity = () => {
     const navigate = useNavigate();
-  const { id } = useParams();
+    const { id } = useParams();
   return (
     <div>
       <Grid container columns={3}>
@@ -191,7 +191,7 @@ const TemplateActivity = ({link, unit}) => {
             open={true}
         sx={{ position: "absolute", height: "105%", color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Button 
-            onClick={() => navigate(`/${link}/${unit}`)}
+            onClick={() => navigate(`/flashcards/${id}`)}
             sx={{
                 backgroundColor: "#146E72",
                 color: "#FFFFFF",
