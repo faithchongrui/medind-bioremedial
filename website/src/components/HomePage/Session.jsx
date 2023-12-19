@@ -221,7 +221,7 @@ const Session = () => {
             boxShadow: "none",
           },
         }}
-        onClick={() => navigate("/csesh")}
+        onClick={() => navigate("/sesh")}
       >
         <EditRoundedIcon sx={{ paddingRight: 1 }} />
         Edit & Add

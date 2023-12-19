@@ -36,11 +36,6 @@ const data = [
     icon: <Casino />,
     link: "/activities"
   },
-  {
-    name: "Sessions",
-    icon: <DatasetIcon/>,
-    link: "/sesh"
-  }
 ];
 
 function NavBar1() {

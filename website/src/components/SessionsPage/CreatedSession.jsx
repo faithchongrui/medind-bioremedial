@@ -1,29 +1,43 @@
 import React, { useState } from "react";
-import { Card, CardMedia, CardContent, Typography, Grid, Accordion,AccordionSummary, AccordionDetails, Box, IconButton } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Grid, Accordion,AccordionSummary, AccordionDetails, Box, IconButton, Checkbox } from "@mui/material";
 import { Link } from "react-router-dom";
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
-import PlayCircleOutlineRoundedIcon from '@mui/icons-material/PlayCircleOutlineRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import RadioButtonCheckedRoundedIcon from '@mui/icons-material/RadioButtonCheckedRounded';
 
-const CreatedSession = () => {
-  
+const CreatedSession = ({ deleting }) => {
+  // const [selected, setSelected] = useState(true)
   return (
     <div>
-
    <Grid container spacing={2} sx={{ alignItems: "center", justifyContent: "center"}}>
-    <Grid item xs={1}>
-        <IconButton
+   {deleting === true &&
+    <Grid item>
+      <Checkbox
+      sx={{
+            padding: 1,
+            mr: 1,
+            color: "#CBE4DE",
+            '&.Mui-checked': {
+              color: "#CBE4DE",
+            },
+            backgroundColor: "#2C3333",
+            "&:hover": {
+                backgroundColor: "#2E4F4F",
+            },
+            '& .MuiSvgIcon-root': { fontSize: 25 },
+          }}/>
+        {/* <IconButton
         sx={{
             padding: 1,
-            color: "#C14058",
+            mr: 1,
+            color: "#CBE4DE",
             backgroundColor: "#2C3333",
             "&:hover": {
                 backgroundColor: "#2E4F4F",
             },
           }}>
-
-        </IconButton>
-    </Grid>
+              <RadioButtonUncheckedRoundedIcon fontSize="medium" />
+        </IconButton> */}
+    </Grid>}
     <Grid item xs>
     <Card
     component="div"

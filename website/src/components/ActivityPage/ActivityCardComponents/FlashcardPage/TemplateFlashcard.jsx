@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Flashcard from "./Flashcard";
 import "./CardPage.css";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import TermsDrawer from "../TermsDrawer";
-import { Grid } from '@mui/material'
+import { Grid, Toolbar, IconButton, Box } from "@mui/material";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 
 const fetchFlashcardsQuery = async (unit) => {
   try {
@@ -26,43 +22,41 @@ const TemplateFlashcard = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  // const history = useHistory();
 
   useEffect(() => {
     (async () => {
       const queryFlashcards = await fetchFlashcardsQuery(id);
-      const querySnapshot = await getDocs(queryFlashcards)
+      const querySnapshot = await getDocs(queryFlashcards);
       querySnapshot.forEach(async (doc) => {
-        const flashcardsRef = collection(db, "activities", doc.id, "keywords")
-        const flashcardSnapshot = await getDocs(flashcardsRef)
+        const flashcardsRef = collection(db, "activities", doc.id, "keywords");
+        const flashcardSnapshot = await getDocs(flashcardsRef);
         flashcardSnapshot.forEach((doc) => {
           const data = {
             ...doc.data(),
             id: doc.id,
           };
           setFlashcards((flashcards) => [...flashcards, data]);
-        })
-      })
+        });
+      });
     })();
   }, [id]);
 
   useEffect(() => {
-    const keyDownHandler = event => {
-      console.log('User pressed: ', event.key);
-
-      if (event.key === 'Escape') {
+    const keyDownHandler = (event) => {
+      console.log("User pressed: ", event.key);
+      if (event.key === "Escape") {
         event.preventDefault();
-
-        
         navigate(-1);
       }
     };
 
-    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener("keydown", keyDownHandler);
 
     return () => {
-      document.removeEventListener('keydown', keyDownHandler);
+      document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   // const url =
@@ -93,7 +87,21 @@ const TemplateFlashcard = () => {
 
   return (
     <div>
-      {/* <TermsDrawer cards={flashcards}/> */}
+      {/* <TermsDrawer/> */}
+      <Toolbar
+        color="inherit"
+        position="fixed"
+        variant="dense"
+        sx={{ flexGrow: 1 }}
+      >
+        <Box sx={{ flexGrow: 1 }} component="div" />
+        <IconButton
+          // onClick={navigate(-1)}
+          sx={{ width: 50, height: 50, mt: 1, mx: 1 }}
+        >
+          <ChevronLeftRoundedIcon sx={{ color: "#FFFFFF", fontSize: 30 }} />
+        </IconButton>
+      </Toolbar>
       {/* number of cards */}
       {flashcards && flashcards.length > 0 ? (
         <div className="cardNumber">
@@ -126,7 +134,6 @@ const TemplateFlashcard = () => {
         )}
         {/* /render nav buttons */}
       </div>
-
     </div>
   );
 };

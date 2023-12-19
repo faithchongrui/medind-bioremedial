@@ -13,7 +13,6 @@ const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
     "&:hover": {
       backgroundColor: "#2E4F4F",
     },
-    width: "400%",
   });
 
   const SearchIconWrapper = styled("div")({
@@ -32,7 +31,7 @@ const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
       padding: 9.5,
       paddingLeft: "3rem",
     },
-    width: "100%",
+    // width: "100%",
   });
 
   return (

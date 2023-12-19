@@ -2,8 +2,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./App.css";
 import React, { useEffect, useState } from "react";
-
-import { Routes, Route, useLocation } from "react-router-dom";
+import TermsNavDrawer from "./components/ActivityPage/TermsNavDrawer";
+import { Routes, Route, useLocation, useHistory } from "react-router-dom";
 import Start from "./pages/StartPage";
 import HomePage from "./pages/HomePage";
 import Auth from "./components/Auth/auth";
@@ -18,7 +18,7 @@ import CreateSessionPage from "./pages/CreateSessionPage";
 import SessionsPage from "./pages/SessionsPage";
 import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/FlashcardPage/TemplateFlashcard";
 import TemplateQuiz from "./components/ActivityPage/ActivityCardComponents/QuizPage/TemplateQuiz";
-import TemplateActivity from "./components/ActivityPage/TemplateActivity";
+import ActivityLayout from "./components/ActivityPage/ActivityLayout";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { SessionProvider } from "./context/SessionContext";
@@ -26,7 +26,7 @@ import { SessionProvider } from "./context/SessionContext";
 function App() {
   const location = useLocation();
   const [sims, setSims] = useState([]);
-  const [simSearchQuery, setSimSearchQuery] = useState('');
+  const [simSearchQuery, setSimSearchQuery] = useState("");
 
   const fetchSimulations = async () => {
     try {
@@ -71,7 +71,7 @@ function App() {
       <div>
         <AuthProvider>
           <SessionProvider>
-            {["/home", "/simulations", "/activities", "/sesh"].includes(
+            {["/home", "/simulations", "/activities"].includes(
               location.pathname
             ) && <NavBar />}
             <Routes>
@@ -82,7 +82,15 @@ function App() {
               <Route path="/login" element={<Auth />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route exact path="/simulations" element={<PrivateRoute />}>
-                <Route path="/simulations" element={<SimulationPage searchQuery={simSearchQuery} setSearchQuery={setSimSearchQuery} />} />
+                <Route
+                  path="/simulations"
+                  element={
+                    <SimulationPage
+                      searchQuery={simSearchQuery}
+                      setSearchQuery={setSimSearchQuery}
+                    />
+                  }
+                />
               </Route>
               <Route exact path="/activities" element={<PrivateRoute />}>
                 <Route path="/activities" element={<ActivitiesPage />} />
@@ -93,9 +101,11 @@ function App() {
               />
               <Route path="/csesh" element={<CreateSessionPage />} />
               <Route path="/sesh" element={<SessionsPage />} />
-              <Route path="/flashcards/:id" element={<TemplateFlashcard />} />
-              <Route path="/quiz/:id" element={<TemplateQuiz/>} />
-              <Route path="/activity/:id" element={<TemplateActivity/>} />
+              <Route element={<ActivityLayout />}>
+                <Route path="flashcards/:id" element={<TemplateFlashcard />} />
+                <Route path="quiz/:id" element={<TemplateQuiz />} />
+              </Route>
+              {/* <Route path="/test" element={<ActivityLayout/>}/> */}
             </Routes>
           </SessionProvider>
         </AuthProvider>

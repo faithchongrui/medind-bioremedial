@@ -41,7 +41,7 @@ const InputField = ({ text, setText, label, placeholder }) => {
     <FillField sx={{ px: 2, mx: 4 }}>
       <StyledInputBase
         type="text"
-        placeholder="Enter a title, like 'Session 3: Class Test'"
+        placeholder={placeholder}
         aria-describedby="standard-weight-helper-text"
         inputProps={{ "aria-label": "search" }}
         onChange={(e) => setText(e.target.value)}
@@ -60,7 +60,7 @@ const InputField = ({ text, setText, label, placeholder }) => {
   );
 };
 
-const CreateSessionPage = () => {
+const CreateSessionPage = (placeholder) => {
   const navigate = useNavigate();
 
   const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
