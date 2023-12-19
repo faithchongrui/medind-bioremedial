@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../config/firebase";
-import { collection, getDocs, updateDoc, setDoc, doc, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  updateDoc,
+  setDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
 import { useAuth } from "./AuthContext";
 
 const SessionContext = createContext();
@@ -14,58 +21,69 @@ export const SessionProvider = ({ children }) => {
   const [sessions, setSessions] = useState([]);
 
   const { currentUser } = useAuth();
-  
+
   const [activeSession, setActiveSession] = useState({
-    id: '',
-    title: '',
-    description: '',
+    id: "",
+    title: "",
+    description: "",
     selectedFlashcards: [],
     diagrams: [],
     simulations: [],
-    flashcardsProgress: 0
-  })
+    flashcardsProgress: 0,
+  });
 
   const [newSession, setNewSession] = useState({
-    id: '',
-    title: '',
-    description: '',
+    id: "",
+    title: "",
+    description: "",
     selectedFlashcards: [],
     diagrams: [],
     simulations: [],
-    flashcardsProgress: 0
+    flashcardsProgress: 0,
   });
 
   useEffect(() => {
     const fetchSessionsData = async () => {
       try {
-        const sessionsSnapshot = await getDocs(collection(db, 'users', auth.currentUser.uid, 'sessions'))
+        const sessionsSnapshot = await getDocs(
+          collection(db, "users", currentUser.uid, "sessions")
+        );
         const sessionData = sessionsSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setSessions(sessionData);
       } catch (error) {
-        console.error('Error fetching sessions data: ', error)
+        console.error("Error fetching sessions data: ", error);
       }
-    }
+    };
+
+    console.log(sessions);
 
     fetchSessionsData();
-  }, [])
+  }, [currentUser.uid]);
 
   const FindActiveSessionById = (sessionId) => {
-    const selectedSession = sessions.find((session) => session.id === sessionId);
+    const selectedSession = sessions.find(
+      (session) => session.id === sessionId
+    );
     setActiveSession(selectedSession);
   };
 
   const setActiveSessionById = async (sessionId) => {
     try {
       // Set the active field to true for the selected session
-      await updateDoc(doc(db, 'users', auth.currentUser.uid, 'sessions', sessionId), {
-        active: true,
-      });
-  
+      await updateDoc(
+        doc(db, "users", auth.currentUser.uid, "sessions", sessionId),
+        {
+          active: true,
+        }
+      );
+
       // Set the active field to false for all other sessions
-      const sessionsSnapshot = await getDocs(collection(db, 'users', auth.currentUser.uid, 'sessions'));
+      const sessionsSnapshot = await getDocs(
+        collection(db, "users", auth.currentUser.uid, "sessions")
+      );
       const batch = db.batch();
       sessionsSnapshot.docs.forEach((doc) => {
         if (doc.id !== sessionId) {
@@ -73,47 +91,53 @@ export const SessionProvider = ({ children }) => {
         }
       });
       await batch.commit();
-  
+
       // Update the local state to reflect the active session
       setActiveSession(sessionId);
     } catch (error) {
-      console.error('Error setting the active session:', error);
+      console.error("Error setting the active session:", error);
     }
   };
 
   const addNewSession = async (title, description) => {
     try {
-      const sessionDocRef = await addDoc(collection(db, "users", currentUser.uid, "sessions"), {
-        "title": title,
-        "description": description,
-      })  
-    } 
-    catch {
-
+      const sessionDocRef = await addDoc(
+        collection(db, "users", currentUser.uid, "sessions"),
+        {
+          title: title,
+          description: description,
+        }
+      );
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
 
   const updateSelectedFlashcards = async (flashcards) => {
     if (activeSession) {
-      await setDoc(doc(db, 'users', auth.currentUser.uid, 'sessions', activeSession.id), {
-        selectedFlashcards: flashcards,
-      }, { merge: true });
+      await setDoc(
+        doc(db, "users", auth.currentUser.uid, "sessions", activeSession.id),
+        {
+          selectedFlashcards: flashcards,
+        },
+        { merge: true }
+      );
 
       setActiveSession((prevSession) => ({
         ...prevSession,
         selectedFlashcards: flashcards,
       }));
     }
-  }
-
-
+  };
 
   const value = {
     sessions,
     activeSession,
+    setNewSession,
+    addNewSession,
     setActiveSessionById,
     updateSelectedFlashcards,
-    FindActiveSessionById
+    FindActiveSessionById,
   };
 
   return (

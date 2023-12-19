@@ -1,16 +1,12 @@
 import { React, useEffect, useState } from "react";
-import {
-  Grid,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const SimulationPage = ({searchQuery, setSearchQuery}) => {
+const SimulationPage = ({ searchQuery, setSearchQuery }) => {
   const [unit, setUnit] = useState([]);
   const [sims, setSims] = useState([]);
 
@@ -18,7 +14,7 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
     try {
       const collectionRef = collection(db, "simulations");
       const querySnapshot = await getDocs(collectionRef);
-  
+
       const data = await Promise.all(
         querySnapshot.docs.map(async (doc) => {
           const documentData = {
@@ -27,9 +23,8 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
           return documentData;
         })
       );
-  
+
       return data;
-  
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -37,12 +32,12 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
 
   useEffect(() => {
     fetchSimulations()
-    .then(data => {
-      setSims(data)
-    })
-    .catch(error => {
-      console.error(error)
-    })
+      .then((data) => {
+        setSims(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   const filterData = (query, data, unit) => {
@@ -53,22 +48,20 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
         return data.filter((sim) => {
           return unit.includes(sim.unit);
         });
-      }
-      else {
+      } else {
         if (unit.length > 0) {
           const results = data.filter((sim) => {
             return (
               unit.includes(sim.unit) &&
-              sim.set.toLowerCase().includes(query.toLowerCase())
+              sim.title.toLowerCase().includes(query.toLowerCase())
             );
           });
           return results;
-        }
-        else {
+        } else {
           const results = data.filter((sim) => {
-            return sim.set.toLowerCase().includes(query.toLowerCase())
-          })
-          return results
+            return sim.title.toLowerCase().includes(query.toLowerCase());
+          });
+          return results;
         }
       }
     }
@@ -106,14 +99,17 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
           Browse Simulations
         </Typography>
         <Box
-        sx={{
-          background: "rgba(20, 110, 114, 0.1)",
-          borderRadius: 5,
-          padding: 2,
-          mb: 1,
-        }}
-      >
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          sx={{
+            background: "rgba(20, 110, 114, 0.1)",
+            borderRadius: 5,
+            padding: 2,
+            mb: 1,
+          }}
+        >
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
           <UnitFilter unit={unit} setUnit={setUnit} width={"50%"} />
         </Box>
       </Box>
@@ -121,7 +117,8 @@ const SimulationPage = ({searchQuery, setSearchQuery}) => {
         sx={{
           mx: 10,
           width: "100%",
-        }}> 
+        }}
+      >
         <div>
           <Grid container sx={{}}>
             {dataFiltered.map((sim) => (

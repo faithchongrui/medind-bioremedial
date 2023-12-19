@@ -16,7 +16,49 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { useNavigate } from "react-router-dom";
+import { useSession } from "../context/SessionContext";
 import SimulationPage from "./SimulationPage";
+import ActivitiesPage from "./ActivitiesPage";
+
+const FillField = styled("div")({
+  // borderRadius: 10,
+  padding: "1rem",
+  paddingLeft: "3rem",
+  backgroundColor: "none",
+  "&:hover": {
+    backgroundColor: "rgba(20, 110, 114, 0.1)",
+  },
+});
+
+const StyledInputBase = styled(InputBase)({
+  color: "#CBE4DE",
+  borderBottom: "3px solid #CBE4DE",
+  width: "100%",
+});
+
+const InputField = ({ text, setText, label, placeholder }) => {
+  return (
+    <FillField sx={{ px: 2, mx: 4 }}>
+      <StyledInputBase
+        type="text"
+        placeholder="Enter a title, like 'Session 3: Class Test'"
+        aria-describedby="standard-weight-helper-text"
+        inputProps={{ "aria-label": "search" }}
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+        // value={simulationSearchQuery}
+      />
+      <FormHelperText
+        id="standard-weight-helper-text"
+        sx={{
+          color: "#CBE4DE",
+        }}
+      >
+        {label}
+      </FormHelperText>
+    </FillField>
+  );
+};
 
 const CreateSessionPage = () => {
   const navigate = useNavigate();
@@ -24,23 +66,15 @@ const CreateSessionPage = () => {
   const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
   const [activitySearchQuery, setActivitySearchQuery] = useState("");
 
-  
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
-  const FillField = styled("div")({
-    // borderRadius: 10,
-    padding: "1rem",
-    paddingLeft: "3rem",
-    backgroundColor: "none",
-    "&:hover": {
-      backgroundColor: "rgba(20, 110, 114, 0.1)",
-    },
-  });
+  const { addNewSession } = useSession();
 
-  const StyledInputBase = styled(InputBase)({
-    color: "#CBE4DE",
-    borderBottom: "3px solid #CBE4DE",
-    width: "100%",
-  });
+  function handleSubmit(text, description) {
+    addNewSession(text, description);
+    navigate(-1);
+  }
 
   return (
     <div>
@@ -78,6 +112,7 @@ const CreateSessionPage = () => {
         >
           <Grid item>
             <Button
+              onClick={() => handleSubmit(title, description)}
               sx={{
                 textTransform: "none",
                 backgroundColor: "#2C3333",
@@ -103,42 +138,18 @@ const CreateSessionPage = () => {
           </Grid>
         </Grid>
       </Grid>
-      <FillField sx={{ px: 2, mx: 4 }}>
-        <StyledInputBase
-          type="text"
-          placeholder="Enter a title, like 'Session 3: Class Test'"
-          aria-describedby="standard-weight-helper-text"
-          inputProps={{ "aria-label": "search" }}
-          // onChange={}
-          // value={simulationSearchQuery}
-        />
-        <FormHelperText
-          id="standard-weight-helper-text"
-          sx={{
-            color: "#CBE4DE",
-          }}
-        >
-          Title
-        </FormHelperText>
-      </FillField>
-      <FillField sx={{ px: 2, mx: 4 }}>
-        <StyledInputBase
-          type="text"
-          placeholder="Enter a description "
-          aria-describedby="standard-weight-helper-text"
-          inputProps={{ "aria-label": "search" }}
-          // onChange={}
-          // value={simulationSearchQuery}
-        />
-        <FormHelperText
-          id="standard-weight-helper-text"
-          sx={{
-            color: "#CBE4DE",
-          }}
-        >
-          Description (Optional)
-        </FormHelperText>
-      </FillField>
+      <InputField
+        text={title}
+        setText={setTitle}
+        placeholder="Enter a title, like 'Session 3: Class Test'"
+        label="Title"
+      />
+      <InputField
+        text={description}
+        setText={setDescription}
+        placeholder="Enter a description"
+        label="Description (Optional)"
+      />
       <Typography
         sx={{
           width: "100%",
@@ -182,9 +193,10 @@ const CreateSessionPage = () => {
               mb: 1,
             }}
           >
-            {/* <SearchBar searchQuery={simulationSearchQuery} setSearchQuery={setSimulationSearchQuery}/> */}
-            {/* <UnitFilter width={"50%"} /> */}
-            <SimulationPage searchQuery={simulationSearchQuery} setSearchQuery={setSimulationSearchQuery}/>
+            <SimulationPage
+              searchQuery={simulationSearchQuery}
+              setSearchQuery={setSimulationSearchQuery}
+            />
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -218,7 +230,11 @@ const CreateSessionPage = () => {
               mb: 1,
             }}
           >
-            <SearchBar searchQuery={activitySearchQuery} setSearchQuery={setActivitySearchQuery}/>
+            {/* <SearchBar
+              searchQuery={activitySearchQuery}
+              setSearchQuery={setActivitySearchQuery}
+            /> */}
+            <ActivitiesPage />
             {/* <UnitFilter width={"50%"} /> */}
           </Box>
         </AccordionDetails>
