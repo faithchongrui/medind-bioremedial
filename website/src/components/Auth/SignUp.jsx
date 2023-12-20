@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { auth, db } from "../../config/firebase";
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -13,11 +13,17 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import logo from "../../images/1.png";
-import { getFirestore, doc, setDoc, collection, deleteDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
 
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from "../../context/AuthContext";
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -36,47 +42,46 @@ const StyledTextField = styled(TextField)({
     },
   },
   backgroundColor: "rgb(30, 30, 30)",
-  borderRadius: 3
+  borderRadius: 3,
 });
 
-
 const SignUp = () => {
-
   const navigate = useNavigate();
 
-  const { signUp } = useAuth()
+  const { signUp } = useAuth();
 
   const createUser = async (email, password, username, uid) => {
-  
-    const usersCollectionRef = collection(db, 'users');
-  
+    const usersCollectionRef = collection(db, "users");
+
     await setDoc(doc(usersCollectionRef, uid), {
       email: email,
       password: password,
       username: username,
     });
-  
+
     const recentActivitiesCollectionRef = collection(
       doc(usersCollectionRef, uid),
-      'RecentActivities'
+      "RecentActivities"
     );
-  
-    await setDoc(doc(recentActivitiesCollectionRef, 'initial'), {
-      id: 'prokaryotic',
-      description: 'lorem ipsum',
+
+    await setDoc(doc(recentActivitiesCollectionRef, "initial"), {
+      id: "prokaryotic",
+      description: "lorem ipsum",
       progress: 0.0,
     });
 
     const progressedKeyWordsCollectionRef = collection(
-      recentActivitiesCollectionRef, 'initial', 'ProgressedKeywords'
-    )
+      recentActivitiesCollectionRef,
+      "initial",
+      "ProgressedKeywords"
+    );
 
-    await setDoc(doc(progressedKeyWordsCollectionRef, 'initial'), {
+    await setDoc(doc(progressedKeyWordsCollectionRef, "initial"), {
       id: "prokaryotic",
-      keyword: 'cell'
+      keyword: "cell",
     });
 
-    await deleteDoc(doc(recentActivitiesCollectionRef, 'initial'))
+    await deleteDoc(doc(recentActivitiesCollectionRef, "initial"));
   };
 
   const handleSubmit = (event) => {
@@ -88,9 +93,14 @@ const SignUp = () => {
         localStorage.setItem("isAuth", true);
         const user = userCredential.user;
         try {
-          createUser(data.get("email"), data.get("password"), data.get("username"), user.uid)
+          createUser(
+            data.get("email"),
+            data.get("password"),
+            data.get("username"),
+            user.uid
+          );
         } catch (e) {
-          console.error(e)
+          console.error(e);
         }
         navigate("/login");
       })
@@ -104,7 +114,12 @@ const SignUp = () => {
   // Front-end
 
   return (
-    <Grid container component="main" justifyContent="center" sx={{ height: "100vh", backgroundColor: "#1E1E1E" }}>
+    <Grid
+      container
+      component="main"
+      justifyContent="center"
+      sx={{ height: "100vh", backgroundColor: "primary.darkest" }}
+    >
       <Grid
         container
         item
@@ -114,117 +129,119 @@ const SignUp = () => {
         justifyContent="center"
         sx={{
           backgroundRepeat: "no-repeat",
-          backgroundColor: "#2C3333",
+          backgroundColor: "primary.dark",
           // backgroundSize: "cover",
           backgroundPosition: "center",
           alignItems: "center",
-        }}>
-          <img src={logo} alt="Logo" style={{width: "30%", margin: 50}} />
-          <Grid 
-            item
-            xs={12}
-            sm={8}
-            md={6}
-            elevation={0}
-            component={Paper}
+        }}
+      >
+        <img src={logo} alt="Logo" style={{ width: "30%", margin: 50 }} />
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={6}
+          elevation={0}
+          component={Paper}
+          sx={{
+            backgroundColor: "primary.dark",
+          }}
+        >
+          <Box
             sx={{
-              backgroundColor: "#2C3333",
-            }}>
-           
-            <Box
+              my: 6,
+              mx: 4,
+              padding: "2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: 15,
+              color: "primary.text",
+              backgroundColor: "primary.main",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "primary.light" }}>
+              <Person2OutlinedIcon />
+            </Avatar>
+            <Typography
+              component="h1"
+              variant="h5"
               sx={{
-                my: 6,
-                mx: 4,
-                padding: "2.5rem",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                borderRadius: 15,
-                color: "#CBE4DE",
-                backgroundColor: "#2E4F4F",
+                my: 1,
+                fontSize: 30,
+                fontWeight: "bold",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "rgb(20, 110, 114)" }}>
-                <Person2OutlinedIcon />
-              </Avatar>
-              <Typography 
-                component="h1"
-                variant="h5"
+              Create a new account
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1, color: "primary.text" }}
+            >
+              <StyledTextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoFocus
+              />
+              <StyledTextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                // class="test"
+              />
+              <StyledTextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              {/* confirm password */}
+              <StyledTextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
                 sx={{
-                  my: 1,
-                  fontSize: 30,
-                  fontWeight: "bold",
-                }}>
-                Create a new account
-              </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 1, color: "#CBE4DE" }}
+                  my: 2,
+                  backgroundColor: "primary.light",
+                  boxShadow: "none",
+                  // inlineSize: "70%",
+                  ":hover": {
+                    backgroundColor: "#188C92",
+                    boxShadow: "0px 0px 3px 3px #188C92",
+                  },
+                }}
               >
-                <StyledTextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoFocus
-                />
-                <StyledTextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  // class="test"
-                />
-                <StyledTextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                {/* confirm password */}
-                <StyledTextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Confirm Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    my: 2,
-                    backgroundColor: "rgb(20, 110, 114)",
-                    boxShadow: "none",
-                    // inlineSize: "70%",
-                    ":hover": {
-                      backgroundColor: "#188C92",
-                      boxShadow: "0px 0px 3px 3px #188C92",
-                    },
-                  }}
-                >
-                  Sign Up
-                </Button>
-              </Box>
+                Sign Up
+              </Button>
             </Box>
-          </Grid>
+          </Box>
         </Grid>
+      </Grid>
     </Grid>
   );
 };

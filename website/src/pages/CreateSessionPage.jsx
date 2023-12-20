@@ -50,9 +50,7 @@ const InputField = ({ text, setText, label, placeholder }) => {
       />
       <FormHelperText
         id="standard-weight-helper-text"
-        sx={{
-          color: "#CBE4DE",
-        }}
+        sx={ {color: "primary.text" }}
       >
         {label}
       </FormHelperText>
@@ -94,9 +92,8 @@ const CreateSessionPage = (placeholder) => {
             variant="h4"
             sx={{
               width: "100%",
-              color: "#CBE4DE",
+              color: "primary.text",
               fontSize: 25,
-              // borderRadius: 10,
             }}
           >
             Add a New Session
@@ -115,8 +112,8 @@ const CreateSessionPage = (placeholder) => {
               onClick={() => handleSubmit(title, description)}
               sx={{
                 textTransform: "none",
-                backgroundColor: "#2C3333",
-                color: "#CBE4DE",
+                backgroundColor: "primary.dark",
+                color: "primary.text",
                 borderRadius: 10,
               }}
             >
@@ -128,8 +125,8 @@ const CreateSessionPage = (placeholder) => {
               onClick={() => navigate(-1)}
               sx={{
                 textTransform: "none",
-                backgroundColor: "#2C3333",
-                color: "#C14058",
+                backgroundColor: "primary.dark",
+                color: "warning.main",
                 borderRadius: 10,
               }}
             >
@@ -153,8 +150,7 @@ const CreateSessionPage = (placeholder) => {
       <Typography
         sx={{
           width: "100%",
-          // backgroundColor: "#2C3333",
-          color: "#CBE4DE",
+          color: "primary.text",
           fontSize: 15,
           mx: 6,
           mt: 1,
@@ -165,29 +161,24 @@ const CreateSessionPage = (placeholder) => {
       </Typography>
       <Accordion
         sx={{
-          // width: "80%",
           mt: 2,
           mx: 6,
-          backgroundColor: "rgba(20, 110, 114, 0.1)",
-          color: "#CBE4DE",
+          backgroundColor: "primary.transparency",
+          color: "primary.text",
           // borderRadius: 5,
         }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "#CBE4DE" }} />}
+          expandIcon={<ExpandMoreIcon sx={{ color: "primary.text" }} />}
           aria-controls="simulation-content"
           id="simulation-header"
         >
           <Typography>Simulations</Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{
-            color: "#CBE4DE",
-          }}
-        >
+        <AccordionDetails sx={{ color: "primary.text" }}>
           <Box
             sx={{
-              background: "rgba(20, 110, 114, 0.1)",
+              background: "primary.transparency",
               borderRadius: 5,
               padding: 2,
               mb: 1,
@@ -202,29 +193,23 @@ const CreateSessionPage = (placeholder) => {
       </Accordion>
       <Accordion
         sx={{
-          // width: "80%",
           mt: 2,
           mx: 6,
-          backgroundColor: "rgba(20, 110, 114, 0.1)",
-          color: "#CBE4DE",
-          // borderRadius: 5,
+          backgroundColor: "primary.transparency",
+          color: "primary.text"
         }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "#CBE4DE" }} />}
+          expandIcon={<ExpandMoreIcon sx={{ color: "primary.text" }} />}
           aria-controls="simulation-content"
           id="simulation-header"
         >
           <Typography>Flashcards & Diagrams</Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{
-            color: "#CBE4DE",
-          }}
-        >
+        <AccordionDetails sx={{ color: "primary.text" }}>
           <Box
             sx={{
-              background: "rgba(20, 110, 114, 0.1)",
+              background: "primary.transparency",
               borderRadius: 5,
               padding: 2,
               mb: 1,

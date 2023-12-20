@@ -4,7 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
 const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
-
   const Search = styled("div")({
     position: "relative",
     borderRadius: 30,
@@ -37,7 +36,7 @@ const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
     <Search sx={{ my: "1rem" }}>
       <SearchIconWrapper>
-        <SearchIcon sx={{color: "#CBE4DE",}}/>
+        <SearchIcon sx={{ color: "primary.text" }} />
       </SearchIconWrapper>
       <StyledInputBase
         type="text"

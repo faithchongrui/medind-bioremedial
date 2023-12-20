@@ -4,19 +4,33 @@ import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
-
   const Search = styled("div")({
     position: "relative",
     borderRadius: 10,
     backgroundColor: "#2C3333",
     "&:hover": {
-      borderBottomColor: "rgb(20, 110, 114)",
+      borderBottomColor: "primary.light",
     },
     mx: "2rem",
     width: "100%",
     borderBottom: "10px solid #2E4F4F",
     marginBottom: "1rem",
   });
+  // const Search = () => {
+  //   return (
+  //     <div sx={{
+  //       position: "relative",
+  //     borderRadius: 10,
+  //     backgroundColor: "primary.dark",
+  //     "&:hover": {
+  //       borderBottomColor: "primary.light",
+  //     },
+  //     mx: "2rem",
+  //     width: "100%",
+  //     borderBottom: "10px solid #2E4F4F",
+  //     marginBottom: "1rem",}} />
+  //   )
+  //   }
 
   const SearchIconWrapper = styled("div")({
     padding: "1rem",

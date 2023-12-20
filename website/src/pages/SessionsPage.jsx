@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import SessionsSearchBar from "../components/SessionsPage/SessionsSearchBar";
 import CreatedSession from "../components/SessionsPage/CreatedSession";
@@ -22,6 +22,15 @@ const SessionsPage = () => {
   const [deleting, setDeleting] = useState(false);
   const navigate = useNavigate();
 
+  const [cards, setCards] = useState([1, 2, 3, 4, 5]);
+  const [cardsToDelete, setCardsToDelete] = useState([]);
+
+  function handleConfirm() {
+    setCards(cards.filter((value) => !cardsToDelete.includes(value)));
+    setDeleting(false);
+    setCardsToDelete([]);
+  }
+
   return (
     <div>
       <Box>
@@ -29,7 +38,7 @@ const SessionsPage = () => {
           container
           spacing={2}
           sx={{
-            // backgroundColor: "rgba(20, 110, 114, 0.1)",
+            // backgroundColor: "primary.transparency",
             // height: 10,
             // width: "100%",
             alignItems: "center",
@@ -38,14 +47,14 @@ const SessionsPage = () => {
         >
           <Grid item>
             <IconButton
-              onClick={() => navigate('/home')}
+              onClick={() => navigate("/home")}
               sx={{
                 padding: 1,
                 ml: 2,
-                color: "#CBE4DE",
-                backgroundColor: "#2C3333",
+                color: "primary.text",
+                backgroundColor: "primary.dark",
                 "&:hover": {
-                  backgroundColor: "#2E4F4F",
+                  backgroundColor: "primary.main",
                 },
               }}
             >
@@ -57,9 +66,9 @@ const SessionsPage = () => {
               component="h1"
               variant="h4"
               sx={{
-                width: "100%",
-                // backgroundColor: "#2C3333",
-                color: "#CBE4DE",
+                // width: "100%",
+                // backgroundColor: "primary.dark",
+                color: "primary.text",
                 fontSize: 25,
                 borderRadius: 10,
                 padding: 1,
@@ -75,10 +84,10 @@ const SessionsPage = () => {
               sx={{
                 padding: 1,
                 mr: 2,
-                color: "#CBE4DE",
-                backgroundColor: "#2C3333",
+                color: "primary.text",
+                backgroundColor: "primary.dark",
                 "&:hover": {
-                  backgroundColor: "#2E4F4F",
+                  backgroundColor: "primary.main",
                 },
               }}
             >
@@ -89,34 +98,50 @@ const SessionsPage = () => {
               sx={{
                 padding: 1,
                 mr: 2,
-                color: "#CBE4DE",
-                backgroundColor: "#2C3333",
+                color: "primary.text",
+                backgroundColor: "primary.dark",
                 "&:hover": {
-                  backgroundColor: "#2E4F4F",
+                  backgroundColor: "primary.main",
                 },
               }}
             >
               <EditRoundedIcon fontSize="medium" />
             </IconButton>
             <Checkbox
-            icon={<DeleteOutlineRoundedIcon fontSize="medium" />}
-            checkedIcon={<DeleteOutlineRoundedIcon fontSize="medium" />}
-            checked={deleting}
-            onChange={() => setDeleting(true)}
-            sx={{
-              padding: 1,
-              color: "#C14058",
-              '&.Mui-checked': {
-                color: "#C14058",
-                backgroundColor:"#c27a87"
-              },
-              backgroundColor: "#2C3333",
-            }}
-            >
-
-            </Checkbox>
+              icon={<DeleteOutlineRoundedIcon fontSize="medium" />}
+              checkedIcon={<DeleteOutlineRoundedIcon fontSize="medium" />}
+              checked={deleting}
+              onChange={() => setDeleting(!deleting)}
+              sx={{
+                padding: 1,
+                color: "warning.main",
+                "&.Mui-checked": {
+                  color: "warning.main",
+                  backgroundColor: "warning.light",
+                },
+                backgroundColor: "primary.dark",
+              }}
+            />
+            {deleting === true && (
+              <Button
+                sx={{
+                  borderRadius: 5,
+                  padding: 1,
+                  ml: 2,
+                  color: "warning.main",
+                  backgroundColor: "warning.light",
+                  "&:hover": {
+                    backgroundColor: "warning.light",
+                  },
+                  textTransform: "none",
+                }}
+                onClick={handleConfirm}
+              >
+                Confirm
+              </Button>
+            )}
           </Grid>
-          <Grid item sx={{ width: "65%" }}>
+          <Grid item xs={7} sx={{ width: "100%" }}>
             <SessionsSearchBar
               sx={{ justifyContent: "right", alignItems: "right" }}
               searchQuery={sessionSearchQuery}
@@ -127,10 +152,14 @@ const SessionsPage = () => {
       </Box>
       <Box>
         <Stack spacing={2} sx={{ mx: 3, mt: 2 }}>
-          {/* should be a map function here */}
-          <CreatedSession deleting={deleting} />
-          <CreatedSession deleting={deleting} />
-          <CreatedSession deleting={deleting} />
+          {cards.map((value) => (
+            <CreatedSession
+              deleting={deleting}
+              value={value}
+              cards={cardsToDelete}
+              setCards={setCardsToDelete}
+            />
+          ))}
         </Stack>
       </Box>
     </div>

@@ -1,13 +1,13 @@
 box {
-    position: absolute;
-    width: 1280px;
-    height: 500px;
-    left: 0px;
-    top: 0px;
+  position: absolute;
+  width: 1280px;
+  height: 500px;
+  left: 0px;
+  top: 0px;
 }
 
 title {
-    color: var(--light);
-    height: 200px;
-    text-align: center;
+  color: var(--text);
+  height: 200px;
+  text-align: center;
 }

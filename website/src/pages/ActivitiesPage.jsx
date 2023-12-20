@@ -4,8 +4,15 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import TypeFilter from "../components/TypeFilter/TypeFilter";
 import ActivityCard from "../components/ActivityPage/ActivityCard";
-import { db } from '../config/firebase'
-import { doc, setDoc, collection, deleteDoc, getDoc, getDocs } from 'firebase/firestore';
+import { db } from "../config/firebase";
+import {
+  doc,
+  setDoc,
+  collection,
+  deleteDoc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 
 const ActivitiesPage = () => {
   const [unit, setUnit] = useState([]);
@@ -17,10 +24,10 @@ const ActivitiesPage = () => {
     try {
       const collectionRef = collection(db, "activities");
       const querySnapshot = await getDocs(collectionRef);
-  
+
       const data = await Promise.all(
         querySnapshot.docs.map(async (doc) => {
-          const subCollectionRef = collection(doc.ref, 'keywords');
+          const subCollectionRef = collection(doc.ref, "keywords");
           const subCollectionSnapshot = await getDocs(subCollectionRef);
           const keywordsCount = subCollectionSnapshot.size;
           const documentData = {
@@ -30,14 +37,12 @@ const ActivitiesPage = () => {
           return documentData;
         })
       );
-  
+
       return data;
-  
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
 
   useEffect(() => {
     (async () => {
@@ -54,8 +59,7 @@ const ActivitiesPage = () => {
         return data.filter((sim) => {
           return unit.includes(sim.unit);
         });
-      }
-      else {
+      } else {
         if (unit.length > 0) {
           const results = data.filter((sim) => {
             return (
@@ -64,12 +68,11 @@ const ActivitiesPage = () => {
             );
           });
           return results;
-        }
-        else {
+        } else {
           const results = data.filter((sim) => {
-            return sim.set.toLowerCase().includes(query.toLowerCase())
-          })
-          return results
+            return sim.set.toLowerCase().includes(query.toLowerCase());
+          });
+          return results;
         }
       }
     }
@@ -83,7 +86,7 @@ const ActivitiesPage = () => {
       item
       xs={12}
       sx={{
-        color: "#CBE4DE",
+        color: "primary.text",
       }}
     >
       <Box
@@ -97,7 +100,7 @@ const ActivitiesPage = () => {
           variant="h4"
           sx={{
             width: "100%",
-            color: "#CBE4DE",
+            color: "primary.text",
             fontWeight: 600,
             paddingBottom: 2,
           }}

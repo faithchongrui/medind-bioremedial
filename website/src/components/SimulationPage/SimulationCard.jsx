@@ -14,7 +14,7 @@ const DescriptionTypography = ({ description }) => {
           paddingX: 1,
           fontSize: 15,
           mt: 1,
-          color: "#CBE4DE",
+          color: "primary.text",
           backgroundColor: "inherit",
           overflow: "hidden",
         }}
@@ -38,7 +38,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
     (async () => {
       const image = await fetchImage(imageurl);
       setImage(image);
-    })()
+    })();
   }, [imageurl]);
 
   return (
@@ -48,7 +48,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
           component="div"
           sx={{
             // width: "70%",
-            backgroundColor: "#2E4F4F",
+            backgroundColor: "primary.main",
             borderRadius: 3,
             cursor: "pointer",
             m: 1,
@@ -66,7 +66,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
                   variant="h5"
                   sx={{
                     fontSize: 20,
-                    color: "#CBE4DE",
+                    color: "primary.text",
                     textDecorationLine: "underline",
                   }}
                 >
@@ -80,7 +80,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
               xs={1}
               sx={{
                 padding: 1,
-                backgroundColor: "#CBE4DE",
+                backgroundColor: "primary.text",
                 alignItems: "center",
                 justifyItems: "center",
               }}
@@ -90,7 +90,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
                 src={image}
                 sx={{
                   padding: 1,
-                  backgroundColor: "#CBE4DE",
+                  backgroundColor: "primary.text",
                   maxHeight: "fit-content",
                 }}
               />

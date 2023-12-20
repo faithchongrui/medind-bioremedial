@@ -58,17 +58,6 @@ const TemplateFlashcard = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   // const url =
-  //   //   "https://api.airtable.com/v0/appqY5UZYlf41Q5VT/Table%201?api_key=keyPZ9SKzXIt4Ek1v";
-  //   // fetch(url)
-  //   //   .then((response) => response.json())
-  //   //   .then((json) => {
-  //   //     setflashcards(json.records);
-  //   //   }, []);
-
-  // });
-
   // https://www.debuggr.io/react-map-of-undefined/
   const cards = flashcards.map((card) => {
     return <Flashcard card={card} />;
@@ -87,22 +76,7 @@ const TemplateFlashcard = () => {
 
   return (
     <div>
-      {/* <TermsDrawer/> */}
-      <Toolbar
-        color="inherit"
-        position="fixed"
-        variant="dense"
-        sx={{ flexGrow: 1 }}
-      >
-        <Box sx={{ flexGrow: 1 }} component="div" />
-        <IconButton
-          // onClick={navigate(-1)}
-          sx={{ width: 50, height: 50, mt: 1, mx: 1 }}
-        >
-          <ChevronLeftRoundedIcon sx={{ color: "#FFFFFF", fontSize: 30 }} />
-        </IconButton>
-      </Toolbar>
-      {/* number of cards */}
+    {/* number of cards */}
       {flashcards && flashcards.length > 0 ? (
         <div className="cardNumber">
           Card {current + 1} of {flashcards.length}

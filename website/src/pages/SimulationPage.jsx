@@ -75,7 +75,7 @@ const SimulationPage = ({ searchQuery, setSearchQuery }) => {
       item
       xs={12}
       sx={{
-        color: "#CBE4DE",
+        color: "primary.text",
       }}
     >
       <Box
@@ -89,8 +89,8 @@ const SimulationPage = ({ searchQuery, setSearchQuery }) => {
           variant="h4"
           sx={{
             width: "100%",
-            // backgroundColor: "#2C3333",
-            color: "#CBE4DE",
+            // backgroundColor: "primary.dark",
+            color: "primary.text",
             fontWeight: 600,
             // paddingX: 1,
             paddingBottom: 2,

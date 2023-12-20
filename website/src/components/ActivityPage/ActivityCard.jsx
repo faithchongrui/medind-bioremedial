@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import FlashcardCard from "./ActivityCardComponents/FlashcardPage/FlashcardCard";
 import DiagramCard from "./ActivityCardComponents/DiagramCard";
@@ -7,7 +7,7 @@ import DragDropCard from "./ActivityCardComponents/DragDropCard";
 import TypeCard from "./ActivityCardComponents/TypeCard";
 import QuizCard from "./ActivityCardComponents/QuizCard";
 
-const ActivityCard = ({unit, terms, set}) => {
+const ActivityCard = ({ unit, terms, set }) => {
   const navigate = useNavigate();
   return (
     <Box
@@ -26,8 +26,8 @@ const ActivityCard = ({unit, terms, set}) => {
         variant="h5"
         sx={{
           width: "100%",
-          // backgroundColor: "#2C3333",
-          color: "#CBE4DE",
+          // backgroundColor: "primary.dark",
+          color: "primary.text",
           fontWeight: 500,
           // paddingX: 1,
         }}

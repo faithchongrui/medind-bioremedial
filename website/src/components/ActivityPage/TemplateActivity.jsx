@@ -5,18 +5,7 @@ import {
   CardContent,
   Typography,
   Grid,
-  Drawer,
-  Toolbar,
-  List,
-  ListItem,
-  IconButton,
-  Divider,
   Box,
-  Select,
-  MenuItem,
-  FormControl,
-  CardMedia,
-  AppBar,
   Button,
   Backdrop,
 } from "@mui/material";
@@ -25,53 +14,6 @@ import {
 import { useParams } from "react-router-dom";
 import TemplateFlashcard from "./ActivityCardComponents/FlashcardPage/TemplateFlashcard";
 import TermsNavDrawer from "./TermsNavDrawer";
-
-const TermCard = ({ card }) => {
-  return (
-    <Card
-      component="div"
-      sx={{
-        width: "100%",
-        backgroundColor: "#2C3333",
-        borderRadius: 3,
-        mx: 1,
-        mb: 1,
-        color: "#CBE4DE",
-      }}
-    >
-      <Grid container item xs={6} columns={2}>
-        <Grid
-          item
-          xs={1}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            padding: 1,
-            backgroundColor: "#146E72",
-          }}
-        >
-          <Typography sx={{ padding: 1, maxHeight: "fit-content" }}>
-            {card.word}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={1}
-          sx={{
-            padding: 1,
-            backgroundColor: "#2e4f4f",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={{ padding: 1, maxHeight: "fit-content" }}>
-            {card.meaning}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Card>
-  );
-};
 
 const ActivitySegment = ({ link, unit }) => {
   <Box></Box>;
@@ -109,14 +51,14 @@ const TemplateActivity = () => {
             <Button
               onClick={() => navigate(`/flashcards/${id}`)}
               sx={{
-                backgroundColor: "#146E72",
-                color: "#FFFFFF",
+                backgroundColor: "primary.light",
+                color: "primary.white",
                 width: "20%",
                 height: "10%",
                 textTransform: "none",
                 fontSize: 15,
                 ":hover": {
-                  backgroundColor: "rgb(20, 110, 114)",
+                  backgroundColor: "primary.light",
                   boxShadow: "none",
                   fontWeight: "bold",
                 },

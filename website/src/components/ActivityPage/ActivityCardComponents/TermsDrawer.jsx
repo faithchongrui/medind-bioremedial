@@ -26,8 +26,6 @@ import ListItem from "@mui/material/ListItem";
 // import ListItemIcon from "@mui/material/ListItemIcon";
 // import ListItemText from "@mui/material/ListItemText";
 
-
-
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -67,13 +65,13 @@ const TermCard = ({ card }) => {
       component="div"
       sx={{
         width: "100%",
-        backgroundColor: "#2C3333",
+        backgroundColor: "primary.dark",
         borderRadius: 3,
         mx: 1,
         mb: 1,
         // whiteSpace: 'nowrap',
         // height: "50vh"
-        color: "#CBE4DE",
+        color: "primary.text",
       }}
     >
       <Grid container item xs={6} columns={2}>
@@ -84,7 +82,7 @@ const TermCard = ({ card }) => {
             display: "flex",
             alignItems: "center",
             padding: 1,
-            backgroundColor: "#146E72",
+            backgroundColor: "primary.light",
           }}
         >
           <Typography sx={{ padding: 1, maxHeight: "fit-content" }}>
@@ -96,7 +94,7 @@ const TermCard = ({ card }) => {
           xs={1}
           sx={{
             padding: 1,
-            backgroundColor: "#2e4f4f",
+            backgroundColor: "primary.main",
             display: "flex",
             alignItems: "center",
           }}
@@ -110,7 +108,7 @@ const TermCard = ({ card }) => {
   );
 };
 
-const TermsDrawer = ({cards}) => {
+const TermsDrawer = ({ cards }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [age, setAge] = React.useState("");
@@ -143,7 +141,7 @@ const TermsDrawer = ({cards}) => {
           onClick={handleDrawerOpen}
           sx={{ ...(open && { display: "none" }) }}
         >
-          <MenuRoundedIcon sx={{ color: "#CBE4DE", fontSize: 25 }} />
+          <MenuRoundedIcon sx={{ color: "primary.text", fontSize: 25 }} />
         </IconButton>
       </Toolbar>
       <Main open={open}>
@@ -155,7 +153,7 @@ const TermsDrawer = ({cards}) => {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            backgroundColor: "#2C3333",
+            backgroundColor: "primary.dark",
           },
         }}
         variant="persistent"
@@ -165,7 +163,10 @@ const TermsDrawer = ({cards}) => {
         <DrawerHeader>
           <Grid container>
             <Grid item>
-              <IconButton onClick={handleDrawerClose} sx={{ color: "#146E72" }}>
+              <IconButton
+                onClick={handleDrawerClose}
+                sx={{ color: "primary.light" }}
+              >
                 {theme.direction === "rtl" ? (
                   <ChevronLeftRoundedIcon />
                 ) : (
@@ -176,7 +177,7 @@ const TermsDrawer = ({cards}) => {
             <Grid
               item
               sx={{
-                color: "#FFFFFF",
+                color: "primary.white",
                 display: "flex",
                 justifyContent: "flex-end",
                 alignItems: "center",
@@ -186,7 +187,7 @@ const TermsDrawer = ({cards}) => {
                 <Grid container sx={{ alignItems: "center" }}>
                   <Grid item>
                     <IconButton>
-                      <ChevronLeftRoundedIcon sx={{ color: "#FFFFFF" }} />
+                      <ChevronLeftRoundedIcon sx={{ color: "primary.white" }} />
                     </IconButton>
                   </Grid>
 
@@ -203,8 +204,8 @@ const TermsDrawer = ({cards}) => {
                           ".MuiOutlinedInput-notchedOutline": {
                             borderStyle: "none",
                           },
-                          color: "#FFFFFF",
-                          "& .MuiSvgIcon-root": { color: "#FFFFFF" },
+                          color: "primary.white",
+                          "& .MuiSvgIcon-root": { color: "primary.white" },
                         }}
                       >
                         <MenuItem value="">current page</MenuItem>
@@ -217,7 +218,9 @@ const TermsDrawer = ({cards}) => {
 
                   <Grid item>
                     <IconButton>
-                      <ChevronRightRoundedIcon sx={{ color: "#FFFFFF" }} />
+                      <ChevronRightRoundedIcon
+                        sx={{ color: "primary.white" }}
+                      />
                     </IconButton>
                   </Grid>
                 </Grid>
@@ -227,10 +230,10 @@ const TermsDrawer = ({cards}) => {
         </DrawerHeader>
         <Divider />
         <Typography
-        component="h1"
-        variant="h4"
+          component="h1"
+          variant="h4"
           sx={{
-            color: "#CBE4DE",
+            color: "primary.text",
             display: "flex",
             alignItems: "center",
             mx: 2,
@@ -240,10 +243,10 @@ const TermsDrawer = ({cards}) => {
           {" "}
           Terms{" "}
         </Typography>
-        <List sx={{ color: "#CBE4DE" }}>
+        <List sx={{ color: "primary.text" }}>
           {cards.map((card) => (
             <ListItem disablePadding>
-              <TermCard card={card}/>
+              <TermCard card={card} />
             </ListItem>
           ))}
         </List>

@@ -30,19 +30,18 @@ const fetchImage = async (image) => {
   return await imageURL;
 };
 
-const TemplateSimulation = ({sims}) => {
-
-  const [image, setImage] = useState()
-  const { id } = useParams()
-  const simulation = sims.find(sim => sim.title === id)
-  console.log(simulation.image)
+const TemplateSimulation = ({ sims }) => {
+  const [image, setImage] = useState();
+  const { id } = useParams();
+  const simulation = sims.find((sim) => sim.title === id);
+  console.log(simulation.image);
 
   useEffect(() => {
     (async () => {
       const image = await fetchImage(simulation.image);
-      console.log(image)
+      console.log(image);
       setImage(image);
-    })()
+    })();
   }, []);
 
   const navigate = useNavigate();
@@ -56,11 +55,11 @@ const TemplateSimulation = ({sims}) => {
     },
   });
 
-  const [expand, setExpand] = useState(false)
+  const [expand, setExpand] = useState(false);
 
   const toggleAccordion = () => {
-    setExpand((prev) => !prev)
-  }
+    setExpand((prev) => !prev);
+  };
 
   if (!simulation) {
     return <div> Simulation not found </div>;
@@ -82,10 +81,10 @@ const TemplateSimulation = ({sims}) => {
           sx={{
             mt: 2,
             padding: 2,
-            color: "#CBE4DE",
-            backgroundColor: "#2E4F4F",
+            color: "primary.text",
+            backgroundColor: "primary.main",
             "&:hover": {
-              backgroundColor: "rgb(20, 110, 114)",
+              backgroundColor: "primary.light",
             },
           }}
           onClick={() => navigate(-1)}
@@ -93,7 +92,9 @@ const TemplateSimulation = ({sims}) => {
           <ArrowBackIosRoundedIcon />
         </IconButton>
       </Toolbar>
-      <Box><img src={image}/></Box>
+      <Box>
+        <img src={image} />
+      </Box>
       <Box>
         <Accordion
           expanded={expand}
@@ -122,13 +123,13 @@ const TemplateSimulation = ({sims}) => {
               <PlayArrowRoundedIcon />
             </StyledToolButtons>
             <StyledToolButtons onClick={toggleAccordion}>
-              <ZoomOutMapRoundedIcon/>
+              <ZoomOutMapRoundedIcon />
             </StyledToolButtons>
           </AccordionSummary>
           <AccordionDetails
             sx={{
               backgroundColor: "rgba(44, 51, 51, 1)",
-              color: "#CBE4DE",
+              color: "primary.text",
             }}
           >
             <Typography
@@ -148,7 +149,7 @@ const TemplateSimulation = ({sims}) => {
                 paddingX: 1,
                 fontSize: 15,
                 mt: 1,
-                color: "#CBE4DE",
+                color: "primary.text",
                 backgroundColor: "inherit",
               }}
             >

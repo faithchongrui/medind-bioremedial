@@ -39,10 +39,7 @@ const TypeFilter = ({ type, setType, width }) => {
     },
   });
 
-  const types = [
-    "Diagrams",
-    "Flashcards",
-  ];
+  const types = ["Diagrams", "Flashcards"];
 
   const handleChange = (event) => {
     const {
@@ -74,7 +71,7 @@ const TypeFilter = ({ type, setType, width }) => {
                 sx={{
                   width: "fit-content",
                   borderRadius: 10,
-                  color: "#CBE4DE",
+                  color: "primary.text",
                   paddingX: 1,
                 }}
               />
@@ -83,10 +80,10 @@ const TypeFilter = ({ type, setType, width }) => {
         )}
       >
         {types.map((type) => (
-        <MenuItem key={type} value={type}>
-          {type}
-        </MenuItem>
-      ))}
+          <MenuItem key={type} value={type}>
+            {type}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

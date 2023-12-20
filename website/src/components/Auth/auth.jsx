@@ -16,7 +16,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Person2Icon from "@mui/icons-material/Person2";
 import logo from "../../images/2.png";
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from "../../context/AuthContext";
 
 const StyledTextField = styled(TextField)({
   "& label": {
@@ -35,7 +35,7 @@ const StyledTextField = styled(TextField)({
     },
   },
   backgroundColor: "rgb(30, 30, 30)",
-  borderRadius: 3
+  borderRadius: 3,
 });
 
 const Auth = () => {
@@ -43,7 +43,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useAuth()
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -85,12 +85,13 @@ const Auth = () => {
         justifyContent="center"
         sx={{
           backgroundRepeat: "no-repeat",
-          backgroundColor: "#2C3333",
+          backgroundColor: "primary.dark",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          alignItems: "center"
-        }}>
-        <img src={logo} alt="Logo" style={{width: "50%", margin: 20}} />
+          alignItems: "center",
+        }}
+      >
+        <img src={logo} alt="Logo" style={{ width: "50%", margin: 20 }} />
       </Grid>
       <Grid
         item
@@ -110,12 +111,12 @@ const Auth = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            backgroundColor: "#2E4F4F",
+            backgroundColor: "primary.main",
             borderRadius: 15,
-            color: "#CBE4DE",
+            color: "primary.text",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "rgb(20, 110, 114)" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.light" }}>
             <Person2Icon />
           </Avatar>
           <Typography
@@ -133,7 +134,7 @@ const Auth = () => {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 1, color: "#CBE4DE" }}
+            sx={{ mt: 1, color: "primary.text" }}
           >
             <StyledTextField
               margin="normal"
@@ -159,7 +160,11 @@ const Auth = () => {
               control={
                 <Checkbox
                   value="remember"
-                  sx={{ color: "#CBE4DE", accentColor: "#CBE4DE", "&.Mui-checked": { color: "#CBE4DE"} }}
+                  sx={{
+                    color: "primary.text",
+                    accentColor: "primary.text",
+                    "&.Mui-checked": { color: "primary.text" },
+                  }}
                 />
               }
               label="Remember me"
@@ -170,7 +175,7 @@ const Auth = () => {
               variant="contained"
               sx={{
                 my: 2,
-                backgroundColor: "rgb(20, 110, 114)",
+                backgroundColor: "primary.light",
                 boxShadow: "none",
                 // inlineSize: "70%",
                 ":hover": {
@@ -187,10 +192,10 @@ const Auth = () => {
                   href="/sign-up"
                   variant="body2"
                   sx={{
-                    color: "#CBE4DE",
-                    textDecorationColor: "#2E4F4F",
+                    color: "primary.text",
+                    textDecorationColor: "primary.main",
                     ":hover": {
-                      textDecorationColor: "#CBE4DE",
+                      textDecorationColor: "primary.text",
                     },
                   }}
                 >

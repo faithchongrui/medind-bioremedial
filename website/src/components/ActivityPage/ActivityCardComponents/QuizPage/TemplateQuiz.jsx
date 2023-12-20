@@ -52,10 +52,6 @@ const TemplateQuiz = () => {
   return (
     
     <div>
-    {/* <TermsDrawer /> */}
-    <div>
-        {location.pathname}
-    </div>
     <div className="quiz-container">
       {!showResult ? (
         <div>

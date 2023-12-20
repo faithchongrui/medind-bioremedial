@@ -1,14 +1,14 @@
 .card {
   margin: 10px auto;
-  background: var(--medium-one);
-  height: 600px;
+  background: var(--light);
+  height: 580px;
   width: 700px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   /* flex-direction: column; */
-  color: var(--light);
+  color: var(--text);
   font-size: 24px;
   font-weight: 400;
   border-radius: var(--border-radius);
@@ -25,7 +25,7 @@
 
 /* when card is clicked adding .side class */
 .side {
-  background: var(--medium-two);
+  background: var(--main);
   transform: rotateY(-180deg);
 }
 
@@ -68,7 +68,7 @@
 }
 
 .loading {
-  color: var(--light);
+  color: var(--text);
   width: 350px;
   text-align: center;
   margin: 20px auto;

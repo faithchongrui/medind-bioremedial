@@ -66,7 +66,7 @@ const Session = () => {
           item
           sx={{
             padding: "0.5rem",
-            backgroundColor: "#2E4F4F",
+            backgroundColor: "primary.main",
             opacity: "40%",
             pl: "25px",
           }}
@@ -81,7 +81,7 @@ const Session = () => {
           item
           sx={{
             padding: "0.5rem",
-            backgroundColor: "#2E4F4F",
+            backgroundColor: "primary.main",
             pl: "25px",
           }}
         >
@@ -146,8 +146,8 @@ const Session = () => {
           simuls.map((sim) => (
             <Button
               sx={{
-                color: "#CBE4DE",
-                backgroundColor: "#2E4F4F",
+                color: "primary.text",
+                backgroundColor: "primary.main",
                 padding: "10%",
                 mb: "1rem",
                 textAlign: "center",
@@ -156,7 +156,7 @@ const Session = () => {
                 fontSize: 15,
                 lineHeight: 1.4,
                 ":hover": {
-                  backgroundColor: "rgb(20, 110, 114)",
+                  backgroundColor: "primary.light",
                   boxShadow: "none",
                   fontWeight: "bold",
                 },
@@ -169,8 +169,8 @@ const Session = () => {
           <Button
             disabled
             sx={{
-              color: "#CBE4DE",
-              backgroundColor: "#2E4F4F",
+              color: "primary.text",
+              backgroundColor: "primary.main",
               padding: "10%",
               mb: "1rem",
               textAlign: "center",
@@ -188,7 +188,7 @@ const Session = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#2C3333", p: "1rem" }}>
+    <Box sx={{ backgroundColor: "primary.dark", p: "1rem" }}>
       <FormControl sx={{ minWidth: 120 }} size="small">
         <Select
           id="demo-simple-select-autowidth"
@@ -210,14 +210,14 @@ const Session = () => {
       </FormControl>
       <Button
         sx={{
-          color: "#CBE4DE",
-          backgroundColor: "rgb(20, 110, 114)",
+          color: "primary.text",
+          backgroundColor: "primary.light",
           mx: 2,
           padding: 1,
           borderRadius: 7,
           textTransform: "none",
           ":hover": {
-            backgroundColor: "#1E1E1E",
+            backgroundColor: "primary.darkest",
             boxShadow: "none",
           },
         }}
@@ -231,8 +231,8 @@ const Session = () => {
           item
           xs={1}
           sx={{
-            color: "#CBE4DE",
-            backgroundColor: "#2C3333",
+            color: "primary.text",
+            backgroundColor: "primary.dark",
             pr: 4,
           }}
         >
@@ -242,8 +242,8 @@ const Session = () => {
           item
           xs={1}
           sx={{
-            color: "#CBE4DE",
-            backgroundColor: "#2C3333",
+            color: "primary.text",
+            backgroundColor: "primary.dark",
           }}
         >
           <Diagrams />
@@ -252,8 +252,8 @@ const Session = () => {
           item
           xs={1}
           sx={{
-            color: "#CBE4DE",
-            backgroundColor: "#2C3333",
+            color: "primary.text",
+            backgroundColor: "primary.dark",
           }}
         >
           <Simulations />
@@ -264,7 +264,7 @@ const Session = () => {
           <Typography
             component="h3"
             variant="h6"
-            sx={{ color: "#CBE4DE", textAlign: "center" }}
+            sx={{ color: "primary.text", textAlign: "center" }}
           >
             Flashcards
           </Typography>
@@ -273,7 +273,7 @@ const Session = () => {
           <Typography
             component="h3"
             variant="h6"
-            sx={{ color: "#CBE4DE", textAlign: "center" }}
+            sx={{ color: "primary.text", textAlign: "center" }}
           >
             Diagrams
           </Typography>
@@ -282,7 +282,7 @@ const Session = () => {
           <Typography
             component="h3"
             variant="h6"
-            sx={{ color: "#CBE4DE", textAlign: "center" }}
+            sx={{ color: "primary.text", textAlign: "center" }}
           >
             Simulations
           </Typography>

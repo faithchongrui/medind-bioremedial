@@ -64,7 +64,24 @@ function App() {
         fontFamily: ["Rubik", "sans-serif"].join(","),
       },
     },
-  });
+    palette: {
+      primary: {
+        darkest: "#1E1E1E",
+        dark: "#2C3333",
+        main: "#2E4F4F",
+        light: "#146E72",
+        text: "#CBE4DE",
+        transparency: "rgba(20, 110, 114, 0.1)",
+        white: "#FFFFFF"
+      },
+      warning: {
+        main: "#C14058",
+        light: "#C27A87",
+    },
+  },
+  }
+  );
+
 
   return (
     <ThemeProvider theme={theme}>

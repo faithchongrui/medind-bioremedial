@@ -74,9 +74,9 @@ const UnitFilter = ({ unit, setUnit, width }) => {
                 label={value}
                 sx={{
                   width: "fit-content",
-                  backgroundColor: "rgb(20, 110, 114)",
+                  backgroundColor: "primary.light",
                   borderRadius: 10,
-                  color: "#CBE4DE",
+                  color: "primary.text",
                   paddingX: 1,
                 }}
               />
