@@ -73,7 +73,7 @@ const TermNavDrawer = ({ cards }) => {
           <ActivityButton activity={"Quiz"} link={"quiz"} unit={id} />
         </ListItem>
         <ListItem disablePadding>
-          <ActivityButton activity={"Drag & Drop"} link={"quiz"} unit={id} />
+          <ActivityButton activity={"Drag & Drop"} link={"drag-drop"} unit={id} />
         </ListItem>
         <ListItem disablePadding>
           <ActivityButton activity={"Type"} link={"type"} unit={id} />

@@ -102,10 +102,11 @@ function App() {
               <Route path="/csesh" element={<CreateSessionPage />} />
               <Route path="/sesh" element={<SessionsPage />} />
               <Route element={<ActivityLayout />}>
+                <Route path="activity/:id" element={<div></div>} />
                 <Route path="flashcards/:id" element={<TemplateFlashcard />} />
                 <Route path="quiz/:id" element={<TemplateQuiz />} />
               </Route>
-              {/* <Route path="/test" element={<ActivityLayout/>}/> */}
+
             </Routes>
           </SessionProvider>
         </AuthProvider>

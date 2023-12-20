@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams, Outlet } from "react-router-dom";
+import { useNavigate, useParams, Outlet, useLocation } from "react-router-dom";
 import { Grid, Button, Backdrop } from "@mui/material";
 import TermsNavDrawer from "./TermsNavDrawer";
 
@@ -30,6 +30,7 @@ const StartLearning = () => {
 };
 
 const ActivityLayout = () => {
+  const location = useLocation()
   return (
     <div>
       <Grid container columns={3}>
@@ -55,7 +56,7 @@ const ActivityLayout = () => {
               zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
           >
-            <StartLearning />
+            {location.pathname.includes("activity") === false && <StartLearning />}
           </Backdrop>
           <Outlet />
         </Grid>
