@@ -46,7 +46,6 @@ const ActivityLayout = () => {
             position: "relative",
           }}
         >
-          <StartLearning />
           <Backdrop
             open={true}
             sx={{
@@ -55,7 +54,9 @@ const ActivityLayout = () => {
               color: "#fff",
               zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
-          ></Backdrop>
+          >
+            <StartLearning />
+          </Backdrop>
           <Outlet />
         </Grid>
       </Grid>
