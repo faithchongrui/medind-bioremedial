@@ -8,11 +8,13 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     borderRadius: 10,
     backgroundColor: theme.palette.primary.dark,
     "&:hover": {
-      borderBottomColor: "primary.light",
+      borderBottomColor: theme.palette.primary.light,
     },
     mx: "2rem",
     width: "100%",
-    borderBottom: "10px solid #2E4F4F",
+    borderBottomWidth: "10px",
+    borderBottomStyle: "solid",
+    borderBottomColor: theme.palette.primary.main,
     marginBottom: "1rem",
   }));
   // const Search = () => {
@@ -31,7 +33,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   //   )
   //   }
 
-  const SearchIconWrapper = styled("div")({
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: "1rem",
     height: "100%",
     position: "absolute",
@@ -39,16 +41,16 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  });
+  }));
 
-  const StyledInputBase = styled(InputBase)({
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {
       padding: "1rem",
       paddingLeft: "3rem",
     },
     width: "100%",
-  });
+  }));
 
   return (
     <Search sx={{ my: "1rem" }}>

@@ -15,10 +15,12 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
+import SimulationSelection from "../components/CreateSessionPage/SimulationSelection";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../context/SessionContext";
 import SimulationPage from "./SimulationPage";
 import ActivitiesPage from "./ActivitiesPage";
+
 
 const FillField = styled("div")(({ theme }) => ({
   // borderRadius: 10,
@@ -184,10 +186,11 @@ const CreateSessionPage = (placeholder) => {
               mb: 1,
             }}
           >
-            <SimulationPage
+            {/* <SimulationPage
               searchQuery={simulationSearchQuery}
               setSearchQuery={setSimulationSearchQuery}
-            />
+            /> */}
+            <SimulationSelection></SimulationSelection>
           </Box>
         </AccordionDetails>
       </Accordion>

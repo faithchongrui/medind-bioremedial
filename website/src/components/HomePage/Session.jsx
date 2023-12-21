@@ -26,7 +26,7 @@ const Session = () => {
   };
 
   const StyledSelectSesh = styled(InputBase)(({ theme }) => ({
-      padding: "10px",
+      padding: 5,
       borderRadius: 20,
       background: theme.palette.primary.main,
       position: "relative",
@@ -189,18 +189,16 @@ const Session = () => {
     <Box sx={{ backgroundColor: "primary.dark", p: "1rem" }}>
       <FormControl sx={{ minWidth: 120 }} size="small">
         <Select
-          id="demo-simple-select-autowidth"
+          id="session-select"
           value={session}
           onChange={handleChange}
           autoWidth
-          label="Age"
+          label="sessionselect"
           input={<StyledSelectSesh />}
         >
           <MenuItem value="">
             <em>No session selected!</em>
           </MenuItem>
-          {/* <MenuItem value={10}>Session 3: Class Test</MenuItem>
-          <MenuItem value={21}>Session 4: EOYS</MenuItem> */}
           {sessions?.map((session) => {
             return <MenuItem value={session.id}>{session.title}</MenuItem>;
           })}

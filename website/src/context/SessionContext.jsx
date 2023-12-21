@@ -51,7 +51,7 @@ export const SessionProvider = ({ children }) => {
       }
     };
 
-    console.log(sessions);
+    console.log(currentUser.uid);
 
     fetchSessionsData();
   }, [currentUser.uid]);
@@ -99,9 +99,6 @@ export const SessionProvider = ({ children }) => {
         {
           title: title,
           description: description,
-          // selectedFlashcards: [],
-          // diagrams: [],
-          // simulations: [],
           complete: {
             name: "complete",
             number: 0
@@ -114,10 +111,21 @@ export const SessionProvider = ({ children }) => {
       );
       const sessionRef = doc(db, "users", currentUser.uid, "sessions", sessionDocRef.id)
       const selectedFlashcardsRef = collection(sessionRef, "selectedFlashcards")
-      const diagramsRef = collection(sessionRef)
+      const diagramsRef = collection(sessionRef, "selectedDiagrams")
+      const simulationsRef = collection(sessionRef, "selectedSimulations")
       selectedFlashcards.forEach( async (flashcard) => {
         await addDoc(selectedFlashcardsRef, {
           name: flashcard
+        })
+      })
+      diagrams.forEach( async (diagram) => {
+        await addDoc(diagramsRef, {
+          name: diagram
+        })
+      })
+      simulations.forEach( async (simulation) => {
+        await addDoc(simulationsRef, {
+          name: simulation
         })
       })
     } catch (error) {
