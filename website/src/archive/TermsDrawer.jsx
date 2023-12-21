@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "@emotion/styled";
 import {
   Card,
   CardContent,
@@ -15,7 +16,7 @@ import {
   FormControl,
   CardMedia,
 } from "@mui/material";
-import { styled, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";

@@ -7,6 +7,7 @@ import {
   setDoc,
   doc,
   addDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
 
@@ -29,18 +30,10 @@ export const SessionProvider = ({ children }) => {
     selectedFlashcards: [],
     diagrams: [],
     simulations: [],
-    flashcardsProgress: 0,
+    complete: {},
+    incomplete: {}
   });
 
-  const [newSession, setNewSession] = useState({
-    id: "",
-    title: "",
-    description: "",
-    selectedFlashcards: [],
-    diagrams: [],
-    simulations: [],
-    flashcardsProgress: 0,
-  });
 
   useEffect(() => {
     const fetchSessionsData = async () => {
@@ -99,19 +92,48 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const addNewSession = async (title, description) => {
+  const addNewSession = async (title, description, selectedFlashcards, diagrams, simulations) => {
     try {
       const sessionDocRef = await addDoc(
         collection(db, "users", currentUser.uid, "sessions"),
         {
           title: title,
           description: description,
+          // selectedFlashcards: [],
+          // diagrams: [],
+          // simulations: [],
+          complete: {
+            name: "complete",
+            number: 0
+          },
+          incomplete: {
+            name: "incomplete",
+            number: 100
+          },
         }
       );
+      const sessionRef = doc(db, "users", currentUser.uid, "sessions", sessionDocRef.id)
+      const selectedFlashcardsRef = collection(sessionRef, "selectedFlashcards")
+      const diagramsRef = collection(sessionRef)
+      selectedFlashcards.forEach( async (flashcard) => {
+        await addDoc(selectedFlashcardsRef, {
+          name: flashcard
+        })
+      })
     } catch (error) {
       console.error(error);
     }
   };
+
+  const deleteNewSession = async (idList) => {
+    try {
+      idList.forEach(async (id) => {
+        await deleteDoc(doc(db, "users", currentUser.uid, "sessions", id));
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const updateSelectedFlashcards = async (flashcards) => {
     if (activeSession) {
@@ -133,8 +155,8 @@ export const SessionProvider = ({ children }) => {
   const value = {
     sessions,
     activeSession,
-    setNewSession,
     addNewSession,
+    deleteNewSession,
     setActiveSessionById,
     updateSelectedFlashcards,
     FindActiveSessionById,

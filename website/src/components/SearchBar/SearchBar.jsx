@@ -1,13 +1,12 @@
+import React from "react";
 import styled from "@emotion/styled";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
-
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
-  const Search = styled("div")({
+  const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: 10,
-    backgroundColor: "#2C3333",
+    backgroundColor: theme.palette.primary.dark,
     "&:hover": {
       borderBottomColor: "primary.light",
     },
@@ -15,7 +14,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     width: "100%",
     borderBottom: "10px solid #2E4F4F",
     marginBottom: "1rem",
-  });
+  }));
   // const Search = () => {
   //   return (
   //     <div sx={{

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "@emotion/styled";
 import { PieChart, Pie, Cell } from "recharts";
 import {
   Grid,
@@ -10,7 +11,6 @@ import {
   FormControl,
   MenuItem,
   InputBase,
-  styled,
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useNavigate } from "react-router-dom";
@@ -25,18 +25,16 @@ const Session = () => {
     setSession(event.target.value);
   };
 
-  const StyledSelectSesh = styled(InputBase)({
-    "& .MuiInputBase-input": {
+  const StyledSelectSesh = styled(InputBase)(({ theme }) => ({
       padding: "10px",
       borderRadius: 20,
-      background: "#2E4F4F",
+      background: theme.palette.primary.main,
       position: "relative",
-      color: "#CBE4DE",
+      color: theme.palette.primary.text,
       "&:focus": {
         borderRadius: 20,
       },
-    },
-  });
+  }));
 
   const keywords = [
     "disaccharides",

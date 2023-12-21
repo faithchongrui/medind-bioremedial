@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "@emotion/styled";
 import {
   Grid,
   Button,
@@ -7,7 +8,6 @@ import {
   IconButton,
   FormHelperText,
   InputBase,
-  styled,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -20,21 +20,19 @@ import { useSession } from "../context/SessionContext";
 import SimulationPage from "./SimulationPage";
 import ActivitiesPage from "./ActivitiesPage";
 
-const FillField = styled("div")({
+const FillField = styled("div")(({ theme }) => ({
   // borderRadius: 10,
   padding: "1rem",
   paddingLeft: "3rem",
-  backgroundColor: "none",
-  "&:hover": {
-    backgroundColor: "rgba(20, 110, 114, 0.1)",
-  },
-});
+}));
 
-const StyledInputBase = styled(InputBase)({
-  color: "#CBE4DE",
-  borderBottom: "3px solid #CBE4DE",
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: theme.palette.primary.text,
+  borderBottomWidth: "3px",
+  borderBottomStyle: "solid",
+  borderBottomColor: theme.palette.primary.text,
   width: "100%",
-});
+}));
 
 const InputField = ({ text, setText, label, placeholder }) => {
   return (
@@ -154,6 +152,7 @@ const CreateSessionPage = (placeholder) => {
           fontSize: 15,
           mx: 6,
           mt: 1,
+          boxShadow: "none",
         }}
       >
         Click on the dropdown boxes to select which activities you want to focus
@@ -165,7 +164,8 @@ const CreateSessionPage = (placeholder) => {
           mx: 6,
           backgroundColor: "primary.transparency",
           color: "primary.text",
-          // borderRadius: 5,
+          borderRadius: 3,
+          boxShadow: "none",
         }}
       >
         <AccordionSummary
@@ -196,7 +196,9 @@ const CreateSessionPage = (placeholder) => {
           mt: 2,
           mx: 6,
           backgroundColor: "primary.transparency",
-          color: "primary.text"
+          color: "primary.text",
+          borderRadius: 3,
+          boxShadow: "none",
         }}
       >
         <AccordionSummary

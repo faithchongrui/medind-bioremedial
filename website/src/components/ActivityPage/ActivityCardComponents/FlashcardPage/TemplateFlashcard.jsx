@@ -4,7 +4,6 @@ import "./CardPage.css";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { useNavigate, useParams } from "react-router-dom";
-import TermsDrawer from "../TermsDrawer";
 import { Grid, Toolbar, IconButton, Box } from "@mui/material";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 

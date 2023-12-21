@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { quiz } from "./data/Data.js";
 import "./QuizStyles.css";
-import TermsDrawer from "../TermsDrawer";
 import { useLocation } from 'react-router-dom'
 
 const TemplateQuiz = () => {
