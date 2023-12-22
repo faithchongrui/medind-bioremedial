@@ -5,8 +5,11 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { useLocation } from "react-router-dom";
+import CheckboxCard from "../components/SimulationPage/CheckboxCard";
 
 const SimulationPage = ({ searchQuery, setSearchQuery }) => {
+  const location = useLocation();
   const [unit, setUnit] = useState([]);
   const [sims, setSims] = useState([]);
 
@@ -81,12 +84,13 @@ const SimulationPage = ({ searchQuery, setSearchQuery }) => {
       <Box
         sx={{
           width: "100%",
-          paddingX: "5rem",
+          paddingX: "4rem",
         }}
       >
+        
         <Typography
           component="h1"
-          variant="h4"
+          variant= {location.pathname.includes("csesh") ? "h5" : "h4"}
           sx={{
             width: "100%",
             // backgroundColor: "primary.dark",
@@ -120,14 +124,34 @@ const SimulationPage = ({ searchQuery, setSearchQuery }) => {
         }}
       >
         <div>
-          <Grid container sx={{}}>
-            {dataFiltered.map((sim) => (
-              <SimulationCard
-                title={sim.title}
-                description={sim.description}
-                imageurl={sim.image}
-              />
-            ))}
+        <Grid container columns={2}>
+            {dataFiltered.map(
+              (sim) => {
+                return location.pathname.includes("csesh") ? (
+                  <CheckboxCard>
+                    <SimulationCard
+                      title={sim.title}
+                      description={sim.description}
+                      imageurl={sim.image}
+                      sx={{ m: 0,height: "80%" }}
+                    />
+                  </CheckboxCard>
+                ) : (
+                  <Grid item xs={1}>
+                  <SimulationCard
+                    title={sim.title}
+                    description={sim.description}
+                    imageurl={sim.image}
+                  />
+                  </Grid>
+                );
+              }
+              // <SimulationCard
+              //   title={sim.title}
+              //   description={sim.description}
+              //   imageurl={sim.image}
+              // />
+            )}
           </Grid>
         </div>
       </Box>

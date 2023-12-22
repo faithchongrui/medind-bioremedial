@@ -30,39 +30,45 @@ const LayoutUI = ({ children, learning, setLearning }) => {
   const location = useLocation();
   return (
     <Grid container columns={3}>
-      <Grid item xs={0.9}>
+      <Grid item xs={1.1}>
         <TermsNavDrawer />
       </Grid>
       <Grid
         item
-        xs={2.1}
+        xs={1.9}
         sx={{
           alignItems: "center",
           justifyContent: "center",
           display: "flex",
-          position: "relative",
         }}
       >
-        <Box>
-          <Backdrop
-            open={true}
-            sx={{
-              position: "absolute",
-              height: "100%",
-              color: "#fff",
-              zIndex: (theme) => theme.zIndex.drawer + 1,
-            }}
-          >
-            {location.pathname.includes("activity") === false &&
-              learning === false && <StartLearning setLearning={setLearning} />}
-          </Backdrop>
-          <Box
-            sx={{
-              p: "2rem",
-            }}
-          >
-            {children}
-          </Box>
+        <Backdrop
+          open={true}
+          sx={{
+            position: "fixed",
+            height: "100%",
+            color: "#fff",
+            zIndex: 1,
+            alignItems: "center",
+            justifyContent: "flex-end",
+            display: "flex",
+            pr: "24.5%",
+          }}
+        >
+          {location.pathname.includes("activity") === false &&
+            learning === false && <StartLearning setLearning={setLearning} />}
+        </Backdrop>
+        <Box
+          sx={{
+            p: "2rem",
+            height: "100%",
+            right: 0,
+            bottom: 0,
+            top: 0,
+            left: 0,
+          }}
+        >
+          {children}
         </Box>
       </Grid>
     </Grid>

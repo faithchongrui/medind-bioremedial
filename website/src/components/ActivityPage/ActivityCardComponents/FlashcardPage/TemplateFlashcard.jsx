@@ -111,6 +111,4 @@ const TemplateFlashcard = () => {
   );
 };
 
-// also add ability to flag flashcards
-// the toolbar could unfold up and the full list of terms unfolds down + the buttons for adding flaging editing (edit + delete)
 export default TemplateFlashcard;

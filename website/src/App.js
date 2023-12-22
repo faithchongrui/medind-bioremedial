@@ -18,6 +18,7 @@ import CreateSessionPage from "./pages/CreateSessionPage";
 import SessionsPage from "./pages/SessionsPage";
 import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/FlashcardPage/TemplateFlashcard";
 import TemplateQuiz from "./components/ActivityPage/ActivityCardComponents/QuizPage/TemplateQuiz";
+import TemplateDragDrop from "./components/ActivityPage/ActivityCardComponents/DragDropPage/TemplateDragDrop";
 import ActivityLayout from "./components/ActivityPage/ActivityLayout";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -77,7 +78,10 @@ function App() {
       warning: {
         main: "#C14058",
         light: "#C27A87",
-    },
+      },
+      important: {
+        main: "#edc73b"
+      }
   },
   }
   );
@@ -122,6 +126,7 @@ function App() {
                 <Route path="activity/:id" element={<div></div>} />
                 <Route path="flashcards/:id" element={<TemplateFlashcard />} />
                 <Route path="quiz/:id" element={<TemplateQuiz />} />
+                <Route path="drag-drop/:id" element={<TemplateDragDrop />} />
               </Route>
 
             </Routes>

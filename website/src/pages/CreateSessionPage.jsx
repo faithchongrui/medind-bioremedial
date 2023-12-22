@@ -15,12 +15,10 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
-import SimulationSelection from "../components/CreateSessionPage/SimulationSelection";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../context/SessionContext";
 import SimulationPage from "./SimulationPage";
 import ActivitiesPage from "./ActivitiesPage";
-
 
 const FillField = styled("div")(({ theme }) => ({
   // borderRadius: 10,
@@ -50,7 +48,7 @@ const InputField = ({ text, setText, label, placeholder }) => {
       />
       <FormHelperText
         id="standard-weight-helper-text"
-        sx={ {color: "primary.text" }}
+        sx={{ color: "primary.text" }}
       >
         {label}
       </FormHelperText>
@@ -175,7 +173,7 @@ const CreateSessionPage = (placeholder) => {
           aria-controls="simulation-content"
           id="simulation-header"
         >
-          <Typography>Simulations</Typography>
+          <Typography variant="h6">Simulations</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ color: "primary.text" }}>
           <Box
@@ -186,11 +184,10 @@ const CreateSessionPage = (placeholder) => {
               mb: 1,
             }}
           >
-            {/* <SimulationPage
+            <SimulationPage
               searchQuery={simulationSearchQuery}
               setSearchQuery={setSimulationSearchQuery}
-            /> */}
-            <SimulationSelection></SimulationSelection>
+            />
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -209,7 +206,7 @@ const CreateSessionPage = (placeholder) => {
           aria-controls="simulation-content"
           id="simulation-header"
         >
-          <Typography>Flashcards & Diagrams</Typography>
+          <Typography variant="h6">Flashcards & Diagrams</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ color: "primary.text" }}>
           <Box

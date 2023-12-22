@@ -14,8 +14,18 @@ import {
   Card,
 } from "@mui/material";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 
 const TermCard = ({ card }) => {
+  const [flag, setFlag] = React.useState(true);
+
+  const handleClick = () => {
+    setFlag(!flag);
+  };
+
   return (
     <Card
       component="div"
@@ -26,10 +36,10 @@ const TermCard = ({ card }) => {
         mx: 1,
         mb: 1,
         color: "primary.text",
+        boxShadow: "none",
       }}
     >
-      <Grid container></Grid>
-      <Grid container item xs={6} columns={2}>
+      <Grid container item xs={6} columns={4}>
         <Grid
           item
           xs={1}
@@ -46,7 +56,7 @@ const TermCard = ({ card }) => {
         </Grid>
         <Grid
           item
-          xs={1}
+          xs={2}
           sx={{
             padding: 1,
             backgroundColor: "primary.main",
@@ -58,10 +68,29 @@ const TermCard = ({ card }) => {
             {card.meaning}
           </Typography>
         </Grid>
+        <Grid
+          item
+          xs={1}
+          sx={{
+            padding: 1,
+            // backgroundColor: "primary.main",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <FlagRoundedIcon
+            onClick={handleClick}
+            sx={{ color: flag ? "primary.text" : "important.main", mr: 1}}
+          />
+          <EditRoundedIcon sx={{ mr: 1}} />
+          <DeleteRoundedIcon />
+        </Grid>
       </Grid>
     </Card>
   );
 };
+
+// + the buttons for adding editing (edit + delete)
 
 const ActivityButton = ({ unit, activity, link }) => {
   const navigate = useNavigate();
@@ -97,7 +126,7 @@ const TermNavDrawer = ({ card }) => {
       sx={{
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: "30%",
+          width: "35%",
           boxSizing: "border-box",
           backgroundColor: "primary.darkest",
         },
@@ -139,27 +168,38 @@ const TermNavDrawer = ({ card }) => {
       </List>
 
       <Divider />
-      <Box
+      <Grid container
         sx={{
-          backgroundColor: "",
-          m: 1,
           borderRadius: 2,
+          color: "primary.text",
+          mt: 1,
         }}
       >
+        <Grid item sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            mx: 2,
+          }}>
         <Typography
           component="h1"
           variant="h6"
-          sx={{
-            color: "primary.text",
-            display: "flex",
-            alignItems: "center",
-            mx: 2,
-            my: 1,
-          }}
+         
         >
           {" "}
           Terms{" "}
         </Typography>
+        </Grid>
+        <Grid item sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+        <IconButton >
+         <AddRoundedIcon sx={{color: "primary.text"}}/>
+        </IconButton>
+        </Grid>
+        </Grid>
         <List sx={{ color: "primary.text" }}>
           {cards.map((card) => (
             <ListItem disablePadding>
@@ -167,7 +207,6 @@ const TermNavDrawer = ({ card }) => {
             </ListItem>
           ))}
         </List>
-      </Box>
     </Drawer>
   );
 };

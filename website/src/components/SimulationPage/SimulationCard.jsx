@@ -3,6 +3,20 @@ import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { images } from "../../config/firebase";
 import { getDownloadURL, ref } from "firebase/storage";
+import { useLocation } from "react-router-dom";
+
+const LinkParent = ({ children, title }) => {
+  const location = useLocation();
+  if (location.pathname.includes("csesh")) {
+    return <>{children}</>;
+  } else {
+    return (
+      <Link to={`/simulations/${title}`} style={{ textDecoration: "none" }}>
+        {children}
+      </Link>
+    );
+  }
+};
 
 const DescriptionTypography = ({ description }) => {
   if (description) {
@@ -42,8 +56,8 @@ const SimulationCard = ({ title, description, imageurl }) => {
   }, [imageurl]);
 
   return (
-    <Grid container item xs={6} sm={4} md={6}>
-      <Link to={`/simulations/${title}`} style={{ textDecoration: "none" }}>
+    
+      <LinkParent title={title}>
         <Card
           component="div"
           sx={{
@@ -56,9 +70,10 @@ const SimulationCard = ({ title, description, imageurl }) => {
             textOverflow: "ellipsis",
             // whiteSpace: 'nowrap',
             // height: "50vh"
+            boxShadow: "none"
           }}
         >
-          <Grid container item xs={6} columns={2}>
+          <Grid container columns={2}>
             <Grid item xs={1}>
               <CardContent>
                 <Typography
@@ -67,7 +82,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
                   sx={{
                     fontSize: 20,
                     color: "primary.text",
-                    textDecorationLine: "underline",
+                    fontWeight: "bold",
                   }}
                 >
                   {title}
@@ -97,8 +112,7 @@ const SimulationCard = ({ title, description, imageurl }) => {
             </Grid>
           </Grid>
         </Card>
-      </Link>
-    </Grid>
+      </LinkParent>
   );
 };
 

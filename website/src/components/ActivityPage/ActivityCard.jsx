@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import FlashcardCard from "./ActivityCardComponents/FlashcardPage/FlashcardCard";
 import DiagramCard from "./ActivityCardComponents/DiagramCard";
@@ -9,6 +9,7 @@ import QuizCard from "./ActivityCardComponents/QuizCard";
 
 const ActivityCard = ({ unit, terms, set }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <Box
       sx={{
@@ -20,7 +21,13 @@ const ActivityCard = ({ unit, terms, set }) => {
         padding: 2,
         cursor: "pointer",
       }}
-      onClick={() => navigate(`/activity/${unit}`)}
+      onClick={() => {
+        if (location.pathname.includes("csesh")) {
+          return null;
+        } else {
+          navigate(`/activity/${unit}`);
+        }
+      }}
     >
       <Typography
         variant="h5"
