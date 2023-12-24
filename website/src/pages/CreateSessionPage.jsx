@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Grid,
@@ -34,7 +34,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
 }));
 
-const InputField = ({ text, setText, label, placeholder }) => {
+const InputField = ({ text, setText, label, placeholder, onChange }) => {
   return (
     <FillField sx={{ px: 2, mx: 4 }}>
       <StyledInputBase
@@ -42,7 +42,12 @@ const InputField = ({ text, setText, label, placeholder }) => {
         placeholder={placeholder}
         aria-describedby="standard-weight-helper-text"
         inputProps={{ "aria-label": "search" }}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          if (onChange) {
+            onChange(e.target.value);
+          }
+        }}
         value={text}
         // value={simulationSearchQuery}
       />
@@ -65,10 +70,10 @@ const CreateSessionPage = (placeholder) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const { addNewSession } = useSession();
+  const { newSession, setNewSession, addNewSession } = useSession();
 
   function handleSubmit(text, description) {
-    addNewSession(text, description);
+    addNewSession();
     navigate(-1);
   }
 
@@ -138,12 +143,18 @@ const CreateSessionPage = (placeholder) => {
         setText={setTitle}
         placeholder="Enter a title, like 'Session 3: Class Test'"
         label="Title"
+        onChange={(value) =>
+          setNewSession((prevState) => ({ ...prevState, title: value }))
+        }
       />
       <InputField
         text={description}
         setText={setDescription}
         placeholder="Enter a description"
         label="Description (Optional)"
+        onChange={(value) =>
+          setNewSession((prevState) => ({ ...prevState, description: value }))
+        }
       />
       <Typography
         sx={{

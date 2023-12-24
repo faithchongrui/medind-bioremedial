@@ -31,30 +31,64 @@ export const SessionProvider = ({ children }) => {
     diagrams: [],
     simulations: [],
     complete: {},
-    incomplete: {}
+    incomplete: {},
   });
 
+  const [newSession, setNewSession] = useState({
+    id: "",
+    title: "",
+    description: "",
+    selectedFlashcards: [],
+    diagrams: [],
+    simulations: [],
+  });
 
   useEffect(() => {
     const fetchSessionsData = async () => {
       try {
-        const sessionsSnapshot = await getDocs(
-          collection(db, "users", currentUser.uid, "sessions")
+
+        const sessionsRef = collection(
+          db,
+          "users",
+          currentUser.uid,
+          "sessions"
         );
-        const sessionData = sessionsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+
+        const sessionsSnapshot = await getDocs(
+          sessionsRef
+        );
+
+        const sessionData = await Promise.all(
+          sessionsSnapshot.docs.map(async (doc) => {
+            const selectedFlashcardsDocs = await getDocs(
+              collection(sessionsRef, doc.id, "selectedFlashcards")
+            );
+            const diagramsDocs = await getDocs(
+              collection(sessionsRef, doc.id, "selectedDiagrams")
+            );
+            const simulationsDocs = await getDocs(
+              collection(sessionsRef, doc.id, "selectedSimulations")
+            );
+
+            return {
+              id: doc.id,
+              selectedFlashcards: selectedFlashcardsDocs.docs.map((doc) => doc.data()),
+              diagrams: diagramsDocs.docs.map((doc) => doc.data()),
+              simulations: simulationsDocs.docs.map((doc) => doc.data()),
+              ...doc.data(),
+            };  
+          })
+
+        );
         setSessions(sessionData);
+
       } catch (error) {
         console.error("Error fetching sessions data: ", error);
       }
     };
 
-    console.log(currentUser.uid);
-
     fetchSessionsData();
-  }, [currentUser.uid]);
+  }, [sessions, currentUser.uid, ]);
 
   const FindActiveSessionById = (sessionId) => {
     const selectedSession = sessions.find(
@@ -92,42 +126,63 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const addNewSession = async (title, description, selectedFlashcards, diagrams, simulations) => {
+  const addNewSession = async () => {
     try {
       const sessionDocRef = await addDoc(
         collection(db, "users", currentUser.uid, "sessions"),
         {
-          title: title,
-          description: description,
+          title: newSession.title,
+          description: newSession.description,
           complete: {
             name: "complete",
-            number: 0
+            number: 0,
           },
           incomplete: {
             name: "incomplete",
-            number: 100
+            number: 100,
           },
         }
       );
-      const sessionRef = doc(db, "users", currentUser.uid, "sessions", sessionDocRef.id)
-      const selectedFlashcardsRef = collection(sessionRef, "selectedFlashcards")
-      const diagramsRef = collection(sessionRef, "selectedDiagrams")
-      const simulationsRef = collection(sessionRef, "selectedSimulations")
-      selectedFlashcards.forEach( async (flashcard) => {
+      const sessionRef = doc(
+        db,
+        "users",
+        currentUser.uid,
+        "sessions",
+        sessionDocRef.id
+      );
+      const selectedFlashcardsRef = collection(
+        sessionRef,
+        "selectedFlashcards"
+      );
+      const diagramsRef = collection(sessionRef, "selectedDiagrams");
+      const simulationsRef = collection(sessionRef, "selectedSimulations");
+      newSession.selectedFlashcards.forEach(async (flashcard) => {
         await addDoc(selectedFlashcardsRef, {
-          name: flashcard
-        })
-      })
-      diagrams.forEach( async (diagram) => {
-        await addDoc(diagramsRef, {
-          name: diagram
-        })
-      })
-      simulations.forEach( async (simulation) => {
+          name: flashcard,
+        });
+      });
+      // newSession.diagrams.forEach( async (diagram) => {
+      //   await addDoc(diagramsRef, {
+      //     name: diagram
+      //   })
+      // })
+      await addDoc(diagramsRef, {
+        name: "",
+      });
+      newSession.simulations.forEach(async (simulation) => {
         await addDoc(simulationsRef, {
-          name: simulation
-        })
-      })
+          name: simulation,
+        });
+      });
+
+      setNewSession({
+        id: "",
+        title: "",
+        description: "",
+        selectedFlashcards: [],
+        diagrams: [],
+        simulations: [],
+      });
     } catch (error) {
       console.error(error);
     }
@@ -137,11 +192,11 @@ export const SessionProvider = ({ children }) => {
     try {
       idList.forEach(async (id) => {
         await deleteDoc(doc(db, "users", currentUser.uid, "sessions", id));
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   const updateSelectedFlashcards = async (flashcards) => {
     if (activeSession) {
@@ -163,6 +218,8 @@ export const SessionProvider = ({ children }) => {
   const value = {
     sessions,
     activeSession,
+    newSession,
+    setNewSession,
     addNewSession,
     deleteNewSession,
     setActiveSessionById,

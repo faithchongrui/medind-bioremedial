@@ -6,12 +6,13 @@ import DiagramCard from "./ActivityCardComponents/DiagramCard";
 import DragDropCard from "./ActivityCardComponents/DragDropCard";
 import TypeCard from "./ActivityCardComponents/TypeCard";
 import QuizCard from "./ActivityCardComponents/QuizCard";
+import CheckboxCard from "../SimulationPage/CheckboxCard"
 
 const ActivityCard = ({ unit, terms, set }) => {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <Box
+      <Box
       sx={{
         my: 1,
         // mx: 10,
@@ -62,7 +63,7 @@ const ActivityCard = ({ unit, terms, set }) => {
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Box>  
   );
 };
 

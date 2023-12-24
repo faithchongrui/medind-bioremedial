@@ -56,7 +56,6 @@ const SimulationCard = ({ title, description, imageurl }) => {
   }, [imageurl]);
 
   return (
-    
       <LinkParent title={title}>
         <Card
           component="div"

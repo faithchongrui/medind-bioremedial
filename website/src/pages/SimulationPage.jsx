@@ -128,7 +128,7 @@ const SimulationPage = ({ searchQuery, setSearchQuery }) => {
             {dataFiltered.map(
               (sim) => {
                 return location.pathname.includes("csesh") ? (
-                  <CheckboxCard>
+                  <CheckboxCard value={sim.title} type="simulations">
                     <SimulationCard
                       title={sim.title}
                       description={sim.description}

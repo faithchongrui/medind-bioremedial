@@ -14,8 +14,22 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const CreatedSession = ({ deleting, value, cards, setCards }) => {
-  // const [selected, setSelected] = useState(true)
+const CreatedSession = ({ deleting, card, cards, setCards }) => {
+  const [selected, setSelected] = useState(false)
+
+  const handleCheck = () => {
+    setSelected(!selected)
+
+    const alreadyContains = cards.includes(card.title)
+
+    if (alreadyContains) {
+      setCards(cards.filter((value) => value !== card.title));
+    }
+    else {
+      setCards([...cards, card.id]);
+    }
+  }
+
   return (
     <div>
       <Grid
@@ -39,8 +53,9 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                 },
                 "& .MuiSvgIcon-root": { fontSize: 25 },
               }}
-              value={value}
-              onChange={() => setCards([...cards, value])}
+              checked={selected}
+              value={card.id}
+              onChange={handleCheck}
             />
           </Grid>
         )}
@@ -61,7 +76,7 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                 mt: 1,
               }}
             >
-              Title
+              {card.title}
             </Typography>
             <Typography
               sx={{
@@ -71,7 +86,7 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                 mb: 1,
               }}
             >
-              Description (optional)
+              {card.description}
             </Typography>
             <Accordion
               sx={{
@@ -97,7 +112,11 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                     }}
                   >
                     Flashcards
-                    <Box sx={{ padding: 1 }}>Biomolecule Functions</Box>
+                    {card.selectedFlashcards?.map((flashcard) => {
+                      return (
+                        <Box sx={{ padding: 1 }}>{flashcard.name}</Box>
+                      );
+                    })}
                   </Grid>
                   <Grid
                     item
@@ -109,7 +128,11 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                     }}
                   >
                     Diagrams
-                    <Box sx={{ padding: 1 }}>Eukaryotic Cell</Box>
+                    {card.diagrams.map((diagram) => {
+                      return (
+                        <Box sx={{ padding: 1 }}>{diagram.name}</Box>
+                      );
+                    })}
                   </Grid>
                   <Grid
                     item
@@ -120,7 +143,11 @@ const CreatedSession = ({ deleting, value, cards, setCards }) => {
                     }}
                   >
                     Simulations
-                    <Box sx={{ padding: 1 }}>Fluid Mosaic Model</Box>
+                    {card.simulations?.map((simulation) => {
+                      return (
+                        <Box sx={{ padding: 1 }}>{simulation.name}</Box>
+                      );
+                    })}
                   </Grid>
                 </Grid>
               </AccordionDetails>

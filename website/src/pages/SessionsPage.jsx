@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -16,18 +16,29 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import SessionsSearchBar from "../components/SessionsPage/SessionsSearchBar";
 import CreatedSession from "../components/SessionsPage/CreatedSession";
+import { useSession } from "../context/SessionContext";
 
 const SessionsPage = () => {
   const [sessionSearchQuery, setSessionSearchQuery] = useState("");
   const [deleting, setDeleting] = useState(false);
   const navigate = useNavigate();
 
-  const [cards, setCards] = useState([1, 2, 3, 4, 5]);
+  const { sessions, deleteNewSession } = useSession();
+
+  const [cards, setCards] = useState([]);
   const [cardsToDelete, setCardsToDelete] = useState([]);
+
+  useEffect(() => {
+    if (sessions) {
+      setCards([...sessions]);
+    }
+
+  }, [sessions]);
 
   function handleConfirm() {
     setCards(cards.filter((value) => !cardsToDelete.includes(value)));
     setDeleting(false);
+    deleteNewSession(cardsToDelete)
     setCardsToDelete([]);
   }
 
@@ -152,14 +163,28 @@ const SessionsPage = () => {
       </Box>
       <Box>
         <Stack spacing={2} sx={{ mx: 3, mt: 2 }}>
-          {cards.map((value) => (
-            <CreatedSession
-              deleting={deleting}
-              value={value}
-              cards={cardsToDelete}
-              setCards={setCardsToDelete}
-            />
-          ))}
+          {cards.length > 0 ? (
+            cards.map((doc) => (
+              <CreatedSession
+                key={doc.id} 
+                deleting={deleting}
+                card={doc}
+                cards={cardsToDelete}
+                setCards={setCardsToDelete}
+              />
+            ))
+          ) : (
+            <Typography
+              sx={{
+                color: "primary.text",
+                fontSize: 20,
+                mx: 2,
+                mt: 1,
+              }}
+            >
+              No sessions found
+            </Typography>
+          )}
         </Stack>
       </Box>
     </div>

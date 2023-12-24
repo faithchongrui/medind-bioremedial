@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import { Checkbox, Grid } from "@mui/material";
-import SimulationCard from "./SimulationCard"; // Assuming the path to your SimulationCard component
+import { useSession } from "../../context/SessionContext";
 
-const CheckboxCard = ({ children, onCheckboxChange }) => {
+const CheckboxCard = ({ children, value, type }) => {
   const [isChecked, setChecked] = useState(false);
+  const { newSession, setNewSession } = useSession();
 
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
-    if (onCheckboxChange) {
-      onCheckboxChange(!isChecked);
+    const alreadyContains = newSession[type].includes(value)
+
+    if (alreadyContains) {
+      setNewSession((prevSelected) => {
+        const newSelected = prevSelected[type].filter((item) => item !== value);
+        return { ...prevSelected, [type]: newSelected };
+      });
+    }
+    else {
+      setNewSession({ ...newSession, [type]: [...newSession[type], value] });
     }
   };
 
@@ -17,21 +26,33 @@ const CheckboxCard = ({ children, onCheckboxChange }) => {
   };
 
   return (
-    <Grid container sx={{
-      borderRadius: 5,
-      mb: 1,
-      backgroundColor: isChecked ? "primary.transparency" : "inherit"
-    }}>
-      <Grid item xs={1} sx={{ 
+    <Grid
+      container
+      sx={{
+        borderRadius: 5,
+        mb: 1,
+        backgroundColor: isChecked ? "primary.transparency" : "inherit",
+      }}
+    >
+      <Grid
+        item
+        xs={1}
+        sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          }}>
-        <Checkbox checked={isChecked} onChange={handleCheckboxChange} sx={{
-          color: "primary.text",
-          "&.Mui-checked": { color: "primary.text" },
-          '& .MuiSvgIcon-root': { fontSize: 40 },
-        }}/>
+        }}
+      >
+        <Checkbox
+          value={value}
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+          sx={{
+            color: "primary.text",
+            "&.Mui-checked": { color: "primary.text" },
+            "& .MuiSvgIcon-root": { fontSize: 40 },
+          }}
+        />
       </Grid>
       <Grid item xs={11} onClick={disableCardClick}>
         {React.cloneElement(children, {

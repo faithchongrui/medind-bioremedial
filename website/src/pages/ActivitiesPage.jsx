@@ -13,12 +13,16 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
+import CheckboxCard from "../components/SimulationPage/CheckboxCard";
+import { useLocation } from "react-router-dom";
 
 const ActivitiesPage = () => {
   const [unit, setUnit] = useState([]);
   const [type, setType] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [unitContent, setUnitContent] = useState([]);
+
+  const location = useLocation();
 
   const fetchUnitContent = async () => {
     try {
@@ -135,14 +139,35 @@ const ActivitiesPage = () => {
         >
           <div>
             <Grid container sx={{}}>
-              {dataFiltered.map((unitcontent, index) => (
-                <ActivityCard
-                  key={index}
-                  unit={unitcontent.unit}
-                  terms={unitcontent.terms}
-                  set={unitcontent.set}
-                />
-              ))}
+              {dataFiltered.map((unitcontent, index) => 
+              // (
+              //   <ActivityCard
+              //     key={index}
+              //     unit={unitcontent.unit}
+              //     terms={unitcontent.terms}
+              //     set={unitcontent.set}
+              //   />
+              // )
+              {
+                return location.pathname.includes("csesh") ? (
+                  <CheckboxCard value={unitcontent.unit} type="selectedFlashcards">
+                    <ActivityCard
+                      key={index}
+                      unit={unitcontent.unit}
+                      terms={unitcontent.terms}
+                      set={unitcontent.set}
+                    />
+                  </CheckboxCard>
+                ) : (
+                  <ActivityCard
+                      key={index}
+                      unit={unitcontent.unit}
+                      terms={unitcontent.terms}
+                      set={unitcontent.set}
+                    />
+                )
+              }
+              )}
             </Grid>
           </div>
         </Box>
