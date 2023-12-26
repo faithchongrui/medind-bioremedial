@@ -73,19 +73,17 @@ function App() {
         light: "#146E72",
         text: "#CBE4DE",
         transparency: "rgba(20, 110, 114, 0.1)",
-        white: "#FFFFFF"
+        white: "#FFFFFF",
       },
       warning: {
         main: "#C14058",
         light: "#C27A87",
       },
       important: {
-        main: "#edc73b"
-      }
-  },
-  }
-  );
-
+        main: "#edc73b",
+      },
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -128,7 +126,6 @@ function App() {
                 <Route path="quiz/:id" element={<TemplateQuiz />} />
                 <Route path="drag-drop/:id" element={<TemplateDragDrop />} />
               </Route>
-
             </Routes>
           </SessionProvider>
         </AuthProvider>

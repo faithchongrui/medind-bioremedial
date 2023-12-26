@@ -56,11 +56,7 @@ const CheckboxCard = ({ children, value, type }) => {
       </Grid>
       <Grid item xs={11} onClick={disableCardClick}>
         {React.cloneElement(children, {
-          // Remove the Link component
-          to: null,
-          style: { cursor: "default" }, // Optionally change cursor to default
-          // Pass other props to the SimulationCard component
-          onClick: null, // Disable the onClick function
+          checked: isChecked
         })}
       </Grid>
     </Grid>

@@ -45,8 +45,9 @@ const fetchImage = async (image) => {
   const imageURL = await getDownloadURL(pathReference);
   return await imageURL;
 };
-const SimulationCard = ({ title, description, imageurl }) => {
+const SimulationCard = ({ title, description, imageurl, checked }) => {
   const [image, setImage] = useState();
+  const location = useLocation()
 
   useEffect(() => {
     (async () => {
@@ -62,6 +63,9 @@ const SimulationCard = ({ title, description, imageurl }) => {
           sx={{
             // width: "70%",
             backgroundColor: "primary.main",
+            ...(location.pathname.includes("csesh") && checked && {
+              backgroundColor: "primary.light"
+            }),
             borderRadius: 3,
             cursor: "pointer",
             m: 1,
