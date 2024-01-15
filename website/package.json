@@ -33,6 +33,7 @@
     "puppeteer": "^21.1.0",
     "puppeteer-core": "^21.1.0",
     "react": "^18.2.0",
+    "react-devtools": "^5.0.0",
     "react-dom": "^18.2.0",
     "react-horizontal-scrolling-menu": "^4.1.0",
     "react-icons": "^4.10.1",
@@ -51,7 +52,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "react-devtools": "react-devtools"
   },
   "eslintConfig": {
     "extends": [
