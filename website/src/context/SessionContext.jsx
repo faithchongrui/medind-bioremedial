@@ -21,6 +21,8 @@ export const SessionProvider = ({ children }) => {
   // This is a provider for a dashboard which keeps track of a user's progress in a 'session'. A 'session' is a collection of selected flashcard sets in the firestore, diagrams and simulations. It also keeps track of the progress of flashcards learnt.
   const [sessions, setSessions] = useState([]);
 
+  const [shouldFetchSessions, setShouldFetchSessions] = useState(false)
+
   const { currentUser } = useAuth();
 
   const [activeSession, setActiveSession] = useState({
@@ -52,7 +54,7 @@ export const SessionProvider = ({ children }) => {
           "users",
           currentUser.uid,
           "sessions"
-        );
+        );  
 
         const sessionsSnapshot = await getDocs(
           sessionsRef
@@ -87,8 +89,10 @@ export const SessionProvider = ({ children }) => {
       }
     };
 
-    fetchSessionsData();
-  }, [sessions, currentUser.uid, ]);
+    return () => {
+      fetchSessionsData()
+    }
+  }, []);
 
   const FindActiveSessionById = (sessionId) => {
     const selectedSession = sessions.find(
