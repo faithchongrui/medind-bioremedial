@@ -122,7 +122,7 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
                     item
                     xs={1}
                     sx={{
-                      backgroundColor: "primary.transparency",
+                      backgroundColor: "primary.dark",
                       padding: 1,
                       borderRight: "10px solid #2c5254",
                     }}
