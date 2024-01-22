@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import SimulationCard from "../components/SimulationPage/SimulationCard";
-import SearchBar from "../components/SearchBar/SearchBar";
+import SearchBar from "../components/SearchBars/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";

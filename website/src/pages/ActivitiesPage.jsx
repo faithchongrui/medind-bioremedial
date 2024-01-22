@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Grid, Box, Typography } from "@mui/material";
-import SearchBar from "../components/SearchBar/SearchBar";
+import SearchBar from "../components/SearchBars/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import TypeFilter from "../components/TypeFilter/TypeFilter";
 import ActivityCard from "../components/ActivityPage/ActivityCard";
