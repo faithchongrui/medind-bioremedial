@@ -20,7 +20,9 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 
 const TermCard = ({ card }) => {
-  const [flag, setFlag] = React.useState(true);
+  const [flag, setFlag] = React.useState(true); // For Michael: This is a good start to your thinking process!
+  //  But you will have to add them to an array that contains the flagged terms eventually, and filtering out TermCard instances with a True flag just to add them
+  //  to the array will be difficult. Could you find a way to add them to the flagged cards array directly?
 
   const handleClick = () => {
     setFlag(!flag);
@@ -117,10 +119,13 @@ const ActivityButton = ({ unit, activity, link }) => {
   );
 };
 
-const TermNavDrawer = ({ card }) => {
+const TermNavDrawer = ({ cards }) => { // Feedback for Michael: cards is the array passed into TermNavDrawer, so make sure you spell it as such in the map
   const navigate = useNavigate();
   const { id } = useParams();
-  const cards = [1, 2, 3, 4];
+  // const cards = [1, 2, 3, 4];
+  const Test = () => {
+    console.log("Test")
+  }
   return (
     <Drawer
       sx={{
@@ -195,8 +200,9 @@ const TermNavDrawer = ({ card }) => {
             alignItems: "center",
             justifyContent: "center",
           }}>
+            {/* { For Michael:  Make sure that when passing in functions, you dont type the brackets as well. You are passing in the function object, not its execution} */}
         <IconButton >
-         <AddRoundedIcon sx={{color: "primary.text"}}/>
+         <AddRoundedIcon sx={{color: "primary.text"}} onClick={Test}/>
         </IconButton>
         </Grid>
         </Grid>
@@ -208,6 +214,7 @@ const TermNavDrawer = ({ card }) => {
           ))}
         </List>
     </Drawer>
+    // For Michael: notice how in order to create the list seen in the UI, we map each element of the cards array to a TermCard component
   );
 };
 
