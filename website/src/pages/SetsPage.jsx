@@ -15,31 +15,31 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import SmallerSearchBar from "../components/SearchBars/SmallerSearchBar";
-import CreatedSession from "../components/SessionsPage/CreatedSession";
-import { useSession } from "../context/SessionContext";
+import CreatedSet from "../components/SetsPage/CreatedSet";
+// import { useSet } from "../context/SessionContext";
 
-const SessionsPage = () => {
-  const [sessionSearchQuery, setSessionSearchQuery] = useState("");
-  const [deleting, setDeleting] = useState(false);
+const SetsPage = () => {
+//   const [setSearchQuery, setSetSearchQuery] = useState("");
+//   const [deleting, setDeleting] = useState(false);
   const navigate = useNavigate();
 
-  const { sessions, deleteNewSession } = useSession();
+//   const { sets, deleteNewSet } = useSet();
 
   const [cards, setCards] = useState([]);
-  const [cardsToDelete, setCardsToDelete] = useState([]);
+//   const [cardsToDelete, setCardsToDelete] = useState([]);
 
-  useEffect(() => {
-    if (sessions) {
-      setCards([...sessions]);
-    }
-  }, [sessions]);
+//   useEffect(() => {
+//     if (sessions) {
+//       setCards([...sessions]);
+//     }
+//   }, [sessions]);
 
-  function handleConfirm() {
-    setCards(cards.filter((value) => !cardsToDelete.includes(value)));
-    setDeleting(false);
-    deleteNewSession(cardsToDelete);
-    setCardsToDelete([]);
-  }
+//   function handleConfirm() {
+//     setCards(cards.filter((value) => !cardsToDelete.includes(value)));
+//     setDeleting(false);
+//     deleteNewSession(cardsToDelete);
+//     setCardsToDelete([]);
+//   }
 
   return (
     <div>
@@ -85,12 +85,12 @@ const SessionsPage = () => {
                 // paddingX: 2,
               }}
             >
-              Created Sessions
+              Created Sets
             </Typography>
           </Grid>
           <Grid item>
             <IconButton
-              onClick={() => navigate(`/csesh`)}
+              onClick={() => navigate(`/cset`)}
               sx={{
                 padding: 1,
                 mr: 2,
@@ -104,7 +104,7 @@ const SessionsPage = () => {
               <AddRoundedIcon fontSize="medium" />
             </IconButton>
             <IconButton
-              onClick={() => navigate(`/csesh`)}
+              onClick={() => navigate(`/cset`)}
               sx={{
                 padding: 1,
                 mr: 2,
@@ -120,22 +120,19 @@ const SessionsPage = () => {
             <Checkbox
               icon={<DeleteOutlineRoundedIcon fontSize="medium" />}
               checkedIcon={<DeleteOutlineRoundedIcon fontSize="medium" />}
-              checked={deleting}
-              onChange={() => setDeleting(!deleting)}
+            //   checked={deleting}
+            //   onChange={() => setDeleting(!deleting)}
               sx={{
                 padding: 1,
                 color: "warning.main",
                 "&.Mui-checked": {
                   color: "warning.main",
                   backgroundColor: "warning.light",
-                  "&:hover": {
-                    backgroundColor: "primary.dark",
-                  },
                 },
                 backgroundColor: "primary.dark",
               }}
             />
-            {deleting === true && (
+            {/* {deleting === true && (
               <Button
                 sx={{
                   borderRadius: 5,
@@ -144,36 +141,35 @@ const SessionsPage = () => {
                   color: "warning.main",
                   backgroundColor: "warning.light",
                   "&:hover": {
-                    backgroundColor: "warning.main",
-                    color: "warning.light",
+                    backgroundColor: "warning.light",
                   },
                   textTransform: "none",
                 }}
                 onClick={handleConfirm}
               >
                 Confirm
-              </Button>
-            )}
+              </Button> */}
+            {/* )} */}
           </Grid>
           <Grid item xs={7} sx={{ width: "100%" }}>
             <SmallerSearchBar
               sx={{ justifyContent: "right", alignItems: "right" }}
-              searchQuery={sessionSearchQuery}
-              setSearchQuery={setSessionSearchQuery}
+            //   searchQuery={setSearchQuery}
+            //   setSearchQuery={setSetSearchQuery}
             />
           </Grid>
         </Grid>
       </Box>
       <Box>
         <Stack spacing={2} sx={{ mx: 3, mt: 2 }}>
-          {cards.length > 0 ? (
+          {/* {cards.length > 0 ? (
             cards.map((doc) => (
-              <CreatedSession
-                key={doc.id}
-                deleting={deleting}
-                card={doc}
-                cards={cardsToDelete}
-                setCards={setCardsToDelete}
+              <CreatedSet
+                // key={doc.id} 
+                // deleting={deleting}
+                // card={doc}
+                // cards={cardsToDelete}
+                // setCards={setCardsToDelete}
               />
             ))
           ) : (
@@ -187,11 +183,12 @@ const SessionsPage = () => {
             >
               No sessions found
             </Typography>
-          )}
+          )} */}
+          <CreatedSet></CreatedSet>
         </Stack>
       </Box>
     </div>
   );
 };
 
-export default SessionsPage;
+export default SetsPage;

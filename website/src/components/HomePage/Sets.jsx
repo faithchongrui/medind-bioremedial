@@ -1,9 +1,11 @@
 import React from "react";
 import { Grid, Button, Box, Typography, IconButton } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useNavigate } from "react-router-dom";
 
 const Sets = () => {
   const arr = [1, 2, 3, 4];
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -23,34 +25,35 @@ const Sets = () => {
           width: "fit-content",
         }}
       >
-        <Typography
+        <Grid container columns={2} padding={1}>
+          <Grid item sx={{padding: 1, display: "flex", alignItems: "center",}}>
+          <Typography
           component="h1"
           variant="h6"
           sx={{
             color: "primary.text",
-            my: 2,
-            ml: 2,
-            mr: 1,
             fontWeight: 300,
-            padding: 1,
           }}
         >
           Created Sets
         </Typography>
-        <IconButton
+          </Grid>
+          <Grid item sx={{padding: 1, display: "flex", alignItems: "center",}}>
+          <IconButton
           sx={{
             color: "primary.text",
             backgroundColor: "primary.main",
-            my: 2.5,
-            // padding: 1,
             ":hover": {
               backgroundColor: "primary.darkest",
               boxShadow: "none",
             },
           }}
+          onClick={() => navigate("/set")}
         >
-          <EditRoundedIcon />
+          <EditRoundedIcon sx={{ fontSize: 20 }}/>
         </IconButton>
+          </Grid>
+        </Grid>
       </Box>
 
       {arr.map((number) => (

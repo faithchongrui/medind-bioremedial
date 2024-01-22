@@ -20,6 +20,8 @@ import TemplateFlashcard from "./components/ActivityPage/ActivityCardComponents/
 import TemplateQuiz from "./components/ActivityPage/ActivityCardComponents/QuizPage/TemplateQuiz";
 import TemplateDragDrop from "./components/ActivityPage/ActivityCardComponents/DragDropPage/TemplateDragDrop";
 import ActivityLayout from "./components/ActivityPage/ActivityLayout";
+import SetsPage from "./pages/SetsPage";
+import CreateSetPage from "./pages/CreateSetPage";
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { SessionProvider } from "./context/SessionContext";
@@ -78,6 +80,7 @@ function App() {
       warning: {
         main: "#C14058",
         light: "#C27A87",
+        dark: "#A2293F"
       },
       important: {
         main: "#edc73b",
@@ -120,6 +123,8 @@ function App() {
               />
               <Route path="/csesh" element={<CreateSessionPage />} />
               <Route path="/sesh" element={<SessionsPage />} />
+              <Route path="/cset" element={<CreateSetPage />} />
+              <Route path="/set" element={<SetsPage />} />
               <Route element={<ActivityLayout />}>
                 <Route path="activity/:id" element={<div></div>} />
                 <Route path="flashcards/:id" element={<TemplateFlashcard />} />

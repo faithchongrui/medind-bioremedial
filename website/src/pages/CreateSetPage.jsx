@@ -16,9 +16,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "../components/SearchBars/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { useNavigate } from "react-router-dom";
-import { useSession } from "../context/SessionContext";
-import SimulationPage from "./SimulationPage";
-import ActivitiesPage from "./ActivitiesPage";
+// import { useSession } from "../context/SessionContext";
+// import SimulationPage from "./SimulationPage";
+// import ActivitiesPage from "./ActivitiesPage";
 
 const FillField = styled("div")(({ theme }) => ({
   // borderRadius: 10,
@@ -61,21 +61,21 @@ const InputField = ({ text, setText, label, placeholder, onChange }) => {
   );
 };
 
-const CreateSessionPage = (placeholder) => {
+const CreateSetPage = (placeholder) => {
   const navigate = useNavigate();
 
-  const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
-  const [activitySearchQuery, setActivitySearchQuery] = useState("");
+  // const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
+  // const [activitySearchQuery, setActivitySearchQuery] = useState("");
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const { newSession, setNewSession, addNewSession } = useSession();
+  // const { newSession, setNewSession, addNewSession } = useSession();
 
-  function handleSubmit(text, description) {
-    addNewSession();
-    navigate(-1);
-  }
+  // function handleSubmit(text, description) {
+  //   addNewSession();
+  //   navigate(-1);
+  // }
 
   return (
     <div>
@@ -99,7 +99,7 @@ const CreateSessionPage = (placeholder) => {
               fontSize: 25,
             }}
           >
-            Add a New Session
+            Add a New Set
           </Typography>
         </Grid>
         <Grid
@@ -112,7 +112,7 @@ const CreateSessionPage = (placeholder) => {
         >
           <Grid item>
             <Button
-              onClick={() => handleSubmit(title, description)}
+              // onClick={() => handleSubmit(title, description)}
               sx={{
                 textTransform: "none",
                 backgroundColor: "primary.dark",
@@ -141,20 +141,20 @@ const CreateSessionPage = (placeholder) => {
       <InputField
         text={title}
         setText={setTitle}
-        placeholder="Enter a title, like 'Session 3: Class Test'"
+        placeholder="Enter a title, like 'Difficult Words'"
         label="Title"
-        onChange={(value) =>
-          setNewSession((prevState) => ({ ...prevState, title: value }))
-        }
+        // onChange={(value) =>
+        //   // setNewSession((prevState) => ({ ...prevState, title: value }))
+        // }
       />
       <InputField
         text={description}
         setText={setDescription}
         placeholder="Enter a description"
         label="Description (Optional)"
-        onChange={(value) =>
-          setNewSession((prevState) => ({ ...prevState, description: value }))
-        }
+        // onChange={(value) =>
+        //   // setNewSession((prevState) => ({ ...prevState, description: value }))
+        // }
       />
       <Typography
         sx={{
@@ -166,8 +166,7 @@ const CreateSessionPage = (placeholder) => {
           boxShadow: "none",
         }}
       >
-        Click on the dropdown boxes to select which activities you want to focus
-        on.
+        Click on the dropdown boxes to customise your terms.
       </Typography>
       <Accordion
         sx={{
@@ -195,14 +194,14 @@ const CreateSessionPage = (placeholder) => {
               mb: 1,
             }}
           >
-            <SimulationPage
+            {/* <SimulationPage
               searchQuery={simulationSearchQuery}
               setSearchQuery={setSimulationSearchQuery}
-            />
+            /> */}
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion
+      {/* <Accordion
         sx={{
           mt: 2,
           mx: 6,
@@ -228,18 +227,18 @@ const CreateSessionPage = (placeholder) => {
               mb: 1,
             }}
           >
-            {/* <SearchBar
+            <SearchBar
               searchQuery={activitySearchQuery}
               setSearchQuery={setActivitySearchQuery}
-            /> */}
+            />
             <ActivitiesPage />
-            {/* <UnitFilter width={"50%"} /> */}
+            <UnitFilter width={"50%"} />
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
       <Box></Box>
     </div>
   );
 };
 
-export default CreateSessionPage;
+export default CreateSetPage;

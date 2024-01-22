@@ -3,7 +3,7 @@ import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
-const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
+const SmallerSearchBar = ({ searchQuery, setSearchQuery }) => {
   const Search = styled("div")({
     position: "relative",
     borderRadius: 30,
@@ -50,4 +50,4 @@ const SessionsSearchBar = ({ searchQuery, setSearchQuery }) => {
   );
 };
 
-export default SessionsSearchBar;
+export default SmallerSearchBar;
