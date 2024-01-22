@@ -2,7 +2,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import TermsNavDrawer from "./components/ActivityPage/TermsNavDrawer";
 import { Routes, Route, useLocation, useHistory } from "react-router-dom";
 import Start from "./pages/StartPage";
 import HomePage from "./pages/HomePage";
