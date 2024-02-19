@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Outlet, useLocation } from "react-router-dom";
 import { Grid, Button, Backdrop, IconButton, Box } from "@mui/material";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import TermsNavDrawer from "./TermsNavDrawer";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const StartLearning = ({ setLearning }) => {
   return (
@@ -26,12 +28,53 @@ const StartLearning = ({ setLearning }) => {
     </Button>
   );
 };
+
+const fetchTermsQuery = async (unit) => {
+  try {
+    const collectionRef = collection(db, "activities");
+    const termsQuery = query(collectionRef, where("unit", "==", unit));
+    return termsQuery;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+
 const LayoutUI = ({ children, learning, setLearning }) => {
+
+  const { id } = useParams()
+
+  const [terms, setTerms] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      const queryTerms = await fetchTermsQuery(id);
+      const querySnapshot = await getDocs(queryTerms);
+      querySnapshot.forEach(async (doc) => {
+        const termsRef = collection(db, "activities", doc.id, "keywords");
+        // This is a firebase collection reference for the program to retrieve the terms from
+        const termsSnapshot = await getDocs(termsRef);
+        termsSnapshot.forEach((doc) => {
+          const data = {
+            ...doc.data(),
+            id: doc.id,
+          };
+          setTerms((terms) => [...terms, data]); 
+          // the spread operator unpacks the current array (terms) 
+          // into this new array
+          // the terms React State is then redefined as this new array.
+        });
+      });
+    })();
+  }, [id]); // For Michael: How to retrieve the terms from the firebase
+
   const location = useLocation();
+
   return (
     <Grid container columns={3}>
       <Grid item xs={1.1}>
-        <TermsNavDrawer />
+        <TermsNavDrawer cards={terms}/> 
+        {/*  For Michael: passing in the terms as an argument to the TermsNavDrawer  */}
       </Grid>
       <Grid
         item
