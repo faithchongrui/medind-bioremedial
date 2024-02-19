@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { PieChart, Pie, Cell } from "recharts";
 import {
@@ -24,6 +24,10 @@ const Session = () => {
   const handleChange = (event) => {
     setSession(event.target.value);
   };
+
+  useEffect(() => {
+
+  })
 
   const StyledSelectSesh = styled(InputBase)(({ theme }) => ({
       padding: 5,
