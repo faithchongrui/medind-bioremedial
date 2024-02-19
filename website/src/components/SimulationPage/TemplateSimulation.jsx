@@ -55,12 +55,6 @@ const TemplateSimulation = ({ sims }) => {
     },
   });
 
-  const [expand, setExpand] = useState(false);
-
-  const toggleAccordion = () => {
-    setExpand((prev) => !prev);
-  };
-
   if (!simulation) {
     return <div> Simulation not found </div>;
   }
@@ -97,7 +91,6 @@ const TemplateSimulation = ({ sims }) => {
       </Box>
       <Box>
         <Accordion
-          expanded={expand}
           sx={{
             width: "40%",
             position: "fixed",
@@ -122,7 +115,7 @@ const TemplateSimulation = ({ sims }) => {
             <StyledToolButtons>
               <PlayArrowRoundedIcon />
             </StyledToolButtons>
-            <StyledToolButtons onClick={toggleAccordion}>
+            <StyledToolButtons>
               <ZoomOutMapRoundedIcon />
             </StyledToolButtons>
           </AccordionSummary>
@@ -146,9 +139,7 @@ const TemplateSimulation = ({ sims }) => {
               component="body"
               variant="body1"
               sx={{
-                paddingX: 1,
                 fontSize: 15,
-                mt: 1,
                 color: "primary.text",
                 backgroundColor: "inherit",
               }}

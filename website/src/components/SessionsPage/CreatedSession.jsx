@@ -71,7 +71,7 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
               sx={{
                 color: "primary.text",
                 fontSize: 20,
-                mx: 2,
+                mx: 1,
                 mt: 1,
               }}
             >
@@ -81,7 +81,7 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
               sx={{
                 color: "primary.text",
                 fontSize: 15,
-                mx: 2,
+                mx: 1,
                 mb: 1,
               }}
             >
@@ -97,7 +97,7 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
               <AccordionDetails
                 sx={{
                   backgroundColor: "primary.transparency",
-                  paddingTop: 2,
+                  paddingTop: 1,
                 }}
               >
                 <Grid container columns={3}>

@@ -26,32 +26,36 @@ const Sets = () => {
         }}
       >
         <Grid container columns={2} padding={1}>
-          <Grid item sx={{padding: 1, display: "flex", alignItems: "center",}}>
-          <Typography
-          component="h1"
-          variant="h6"
-          sx={{
-            color: "primary.text",
-            fontWeight: 300,
-          }}
-        >
-          Created Sets
-        </Typography>
+          <Grid item sx={{ padding: 1, display: "flex", alignItems: "center" }}>
+            <Typography
+              component="h1"
+              variant="h6"
+              sx={{
+                color: "primary.text",
+                fontWeight: 300,
+              }}
+            >
+              Created Sets
+            </Typography>
           </Grid>
-          <Grid item sx={{padding: 1, display: "flex", alignItems: "center",}}>
-          <IconButton
-          sx={{
-            color: "primary.text",
-            backgroundColor: "primary.main",
-            ":hover": {
-              backgroundColor: "primary.darkest",
-              boxShadow: "none",
-            },
-          }}
-          onClick={() => navigate("/set")}
-        >
-          <EditRoundedIcon sx={{ fontSize: 20 }}/>
-        </IconButton>
+          <Grid item sx={{ padding: 1, display: "flex", alignItems: "center" }}>
+            <Button
+              sx={{
+                color: "primary.text",
+                backgroundColor: "primary.light",
+                padding: 1,
+                borderRadius: 7,
+                textTransform: "none",
+                ":hover": {
+                  backgroundColor: "primary.darkest",
+                  boxShadow: "none",
+                },
+              }}
+              onClick={() => navigate("/set")}
+            >
+              <EditRoundedIcon sx={{ paddingRight: 1 }} />
+              Edit & Add
+            </Button>
           </Grid>
         </Grid>
       </Box>
@@ -85,3 +89,7 @@ const Sets = () => {
 };
 
 export default Sets;
+
+// sets shown should just be the most recent from the main sets page
+// can directly take the component
+// clicking on it will take you to the custom activity page

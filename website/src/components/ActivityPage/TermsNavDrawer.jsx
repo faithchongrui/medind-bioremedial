@@ -16,7 +16,7 @@ import {
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 
 const TermCard = ({ card }) => {
@@ -48,7 +48,6 @@ const TermCard = ({ card }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            padding: 1,
             backgroundColor: "primary.light",
           }}
         >
@@ -60,7 +59,6 @@ const TermCard = ({ card }) => {
           item
           xs={2}
           sx={{
-            padding: 1,
             backgroundColor: "primary.main",
             display: "flex",
             alignItems: "center",
@@ -82,10 +80,10 @@ const TermCard = ({ card }) => {
         >
           <FlagRoundedIcon
             onClick={handleClick}
-            sx={{ color: flag ? "primary.text" : "important.main", mr: 1}}
+            sx={{ color: flag ? "primary.text" : "important.main", mr: 1 }}
           />
-          <EditRoundedIcon sx={{ mr: 1}} />
-          <DeleteRoundedIcon />
+          <EditRoundedIcon sx={{ mr: 1 }} />
+          <DeleteRoundedIcon sx={{ mr: 1, color: "warning.main" }} />
         </Grid>
       </Grid>
     </Card>
@@ -102,7 +100,8 @@ const ActivityButton = ({ unit, activity, link }) => {
       sx={{
         backgroundColor: "primary.main",
         textTransform: "none",
-        m: 1,
+        mx: 1,
+        mb: 1,
         width: "100%",
         color: "primary.text",
         fontSize: 15,
@@ -119,13 +118,14 @@ const ActivityButton = ({ unit, activity, link }) => {
   );
 };
 
-const TermNavDrawer = ({ cards }) => { // Feedback for Michael: cards is the array passed into TermNavDrawer, so make sure you spell it as such in the map
+const TermNavDrawer = ({ cards }) => {
+  // Feedback for Michael: cards is the array passed into TermNavDrawer, so make sure you spell it as such in the map
   const navigate = useNavigate();
   const { id } = useParams();
   // const cards = [1, 2, 3, 4];
   const Test = () => {
-    console.log("Test")
-  }
+    console.log("Test");
+  };
   return (
     <Drawer
       sx={{
@@ -173,46 +173,49 @@ const TermNavDrawer = ({ cards }) => { // Feedback for Michael: cards is the arr
       </List>
 
       <Divider />
-      <Grid container
+      <Grid
+        container
         sx={{
           borderRadius: 2,
           color: "primary.text",
           mt: 1,
         }}
       >
-        <Grid item sx={{
+        <Grid
+          item
+          sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             mx: 2,
-          }}>
-        <Typography
-          component="h1"
-          variant="h6"
-         
+          }}
         >
-          {" "}
-          Terms{" "}
-        </Typography>
+          <Typography component="h1" variant="h6">
+            {" "}
+            Terms{" "}
+          </Typography>
         </Grid>
-        <Grid item sx={{
+        <Grid
+          item
+          sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-          }}>
-            {/* { For Michael:  Make sure that when passing in functions, you dont type the brackets as well. You are passing in the function object, not its execution} */}
-        <IconButton >
-         <AddRoundedIcon sx={{color: "primary.text"}} onClick={Test}/>
-        </IconButton>
+          }}
+        >
+          {/* { For Michael:  Make sure that when passing in functions, you dont type the brackets as well. You are passing in the function object, not its execution} */}
+          <IconButton>
+            <AddRoundedIcon sx={{ color: "primary.text" }} onClick={Test} />
+          </IconButton>
         </Grid>
-        </Grid>
-        <List sx={{ color: "primary.text" }}>
-          {cards.map((card) => (
-            <ListItem disablePadding>
-              <TermCard card={card} />
-            </ListItem>
-          ))}
-        </List>
+      </Grid>
+      <List sx={{ color: "primary.text" }}>
+        {cards.map((card) => (
+          <ListItem disablePadding>
+            <TermCard card={card} />
+          </ListItem>
+        ))}
+      </List>
     </Drawer>
     // For Michael: notice how in order to create the list seen in the UI, we map each element of the cards array to a TermCard component
   );
