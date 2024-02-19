@@ -15,20 +15,19 @@ import {
 import { Link } from "react-router-dom";
 
 const CreatedSession = ({ deleting, card, cards, setCards }) => {
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const handleCheck = () => {
-    setSelected(!selected)
+    setSelected(!selected);
 
-    const alreadyContains = cards.includes(card.title)
+    const alreadyContains = cards.includes(card.title);
 
     if (alreadyContains) {
       setCards(cards.filter((value) => value !== card.title));
-    }
-    else {
+    } else {
       setCards([...cards, card.id]);
     }
-  }
+  };
 
   return (
     <div>
@@ -113,25 +112,21 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
                   >
                     Flashcards
                     {card.selectedFlashcards?.map((flashcard) => {
-                      return (
-                        <Box sx={{ padding: 1 }}>{flashcard.name}</Box>
-                      );
+                      return <Box sx={{ padding: 1 }}>{flashcard.name}</Box>;
                     })}
                   </Grid>
                   <Grid
                     item
                     xs={1}
                     sx={{
-                      backgroundColor: "primary.dark",
+                      backgroundColor: "primary.transparency",
                       padding: 1,
                       borderRight: "10px solid #2c5254",
                     }}
                   >
                     Diagrams
                     {card.diagrams.map((diagram) => {
-                      return (
-                        <Box sx={{ padding: 1 }}>{diagram.name}</Box>
-                      );
+                      return <Box sx={{ padding: 1 }}>{diagram.name}</Box>;
                     })}
                   </Grid>
                   <Grid
@@ -144,9 +139,7 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
                   >
                     Simulations
                     {card.simulations?.map((simulation) => {
-                      return (
-                        <Box sx={{ padding: 1 }}>{simulation.name}</Box>
-                      );
+                      return <Box sx={{ padding: 1 }}>{simulation.name}</Box>;
                     })}
                   </Grid>
                 </Grid>
