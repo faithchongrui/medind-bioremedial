@@ -237,7 +237,6 @@ const CreateSessionPage = (placeholder) => {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Box></Box>
     </div>
   );
 };

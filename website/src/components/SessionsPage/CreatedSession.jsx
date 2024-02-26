@@ -13,6 +13,9 @@ import {
   Checkbox,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
 
 const CreatedSession = ({ deleting, card, cards, setCards }) => {
   const [selected, setSelected] = useState(false);
@@ -29,6 +32,13 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
     }
   };
 
+  const [flag, setFlag] = React.useState(true);
+  const handleClick = () => {
+    setFlag(!flag);
+  };
+  const editfunction = (cardtitle) => {
+    cardtitle = "aaaaa";
+  };
   return (
     <div>
       <Grid
@@ -87,6 +97,18 @@ const CreatedSession = ({ deleting, card, cards, setCards }) => {
             >
               {card.description}
             </Typography>
+            <Grid item>
+              <FlagRoundedIcon
+                onClick={handleClick}
+                sx={{ color: flag ? "primary.text" : "important.main", mr: 1 }}
+              />
+              <EditRoundedIcon
+                sx={{ mr: 1, color: "primary.text" }}
+                onClick={editfunction(card.title)}
+              />
+              <DeleteRoundedIcon sx={{ mr: 1, color: "warning.main" }} />
+            </Grid>
+            
             <Accordion
               sx={{
                 backgroundColor: "primary.main",

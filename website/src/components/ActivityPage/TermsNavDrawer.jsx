@@ -51,7 +51,7 @@ const TermCard = ({ card }) => {
             backgroundColor: "primary.light",
           }}
         >
-          <Typography sx={{ padding: 1, maxHeight: "fit-content" }}>
+          <Typography sx={{ padding: 1, maxHeight: "fit-content", wordBreak: "break-word", fontSize: 14}}>
             {card.word}
           </Typography>
         </Grid>
@@ -64,7 +64,7 @@ const TermCard = ({ card }) => {
             alignItems: "center",
           }}
         >
-          <Typography sx={{ padding: 1, maxHeight: "fit-content" }}>
+          <Typography sx={{ padding: 1, maxHeight: "fit-content", fontSize: 14 }}>
             {card.meaning}
           </Typography>
         </Grid>

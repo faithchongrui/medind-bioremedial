@@ -24,6 +24,7 @@ const CreatedSet = () => {
   const handleClick = () => {
     setFlag(!flag);
   };
+  const editfunc = () => {};
   return (
     <Box sx={{ backgroundColor: "primary.dark", borderRadius: 3 }}>
       <Grid
@@ -66,7 +67,11 @@ const CreatedSet = () => {
             onClick={handleClick}
             sx={{ color: flag ? "primary.text" : "important.main", mr: 1 }}
           />
-          <EditRoundedIcon sx={{ mr: 1, color: "primary.text" }} />
+          <EditRoundedIcon
+            sx={{ mr: 1, color: "primary.text" }}
+            on
+            Click={editfunc}
+          />
           <DeleteRoundedIcon sx={{ mr: 1, color: "warning.main" }} />
         </Grid>
       </Grid>
@@ -82,7 +87,7 @@ const CreatedSet = () => {
             sx={{
               padding: 2,
               my: 2,
-              ml: 2,
+              ml: 1,
               backgroundColor: "primary.light",
               color: "primary.text",
               boxShadow: "none",

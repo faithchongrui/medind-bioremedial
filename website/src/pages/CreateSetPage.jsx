@@ -11,11 +11,15 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Card,
+  Checkbox,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SearchBar from "../components/SearchBars/SearchBar";
 import UnitFilter from "../components/UnitFilter/UnitFilter";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "../components/SearchBars/SearchBar";
+import FlagRoundedIcon from "@mui/icons-material/FlagRounded";
+
 // import { useSession } from "../context/SessionContext";
 // import SimulationPage from "./SimulationPage";
 // import ActivitiesPage from "./ActivitiesPage";
@@ -62,6 +66,7 @@ const InputField = ({ text, setText, label, placeholder, onChange }) => {
 };
 
 const CreateSetPage = (placeholder) => {
+  const arr = [1, 2, 3, 4, 6];
   const navigate = useNavigate();
 
   // const [simulationSearchQuery, setSimulationSearchQuery] = useState("");
@@ -69,6 +74,7 @@ const CreateSetPage = (placeholder) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  // const [isChecked, setChecked] = useState(false);
 
   // const { newSession, setNewSession, addNewSession } = useSession();
 
@@ -166,77 +172,98 @@ const CreateSetPage = (placeholder) => {
           boxShadow: "none",
         }}
       >
-        Click on the dropdown boxes to customise your terms.
+        Search for the terms that you want to add.
       </Typography>
-      <Accordion
+      <Box
         sx={{
           mt: 2,
           mx: 6,
+          p: 1,
           backgroundColor: "primary.transparency",
           color: "primary.text",
           borderRadius: 3,
           boxShadow: "none",
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "primary.text" }} />}
-          aria-controls="simulation-content"
-          id="simulation-header"
+        <SearchBar />
+        <Grid
+          container
+          // wrap="nowrap"
+          sx={{ overflow: "auto", p: 2 }}
+          spacing={3}
         >
-          <Typography variant="h6">Simulations</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ color: "primary.text" }}>
-          <Box
-            sx={{
-              background: "primary.transparency",
-              borderRadius: 5,
-              padding: 2,
-              mb: 1,
-            }}
-          >
-            {/* <SimulationPage
-              searchQuery={simulationSearchQuery}
-              setSearchQuery={setSimulationSearchQuery}
-            /> */}
-          </Box>
-        </AccordionDetails>
-      </Accordion>
-      {/* <Accordion
-        sx={{
-          mt: 2,
-          mx: 6,
-          backgroundColor: "primary.transparency",
-          color: "primary.text",
-          borderRadius: 3,
-          boxShadow: "none",
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "primary.text" }} />}
-          aria-controls="simulation-content"
-          id="simulation-header"
-        >
-          <Typography variant="h6">Flashcards & Diagrams</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ color: "primary.text" }}>
-          <Box
-            sx={{
-              background: "primary.transparency",
-              borderRadius: 5,
-              padding: 2,
-              mb: 1,
-            }}
-          >
-            <SearchBar
-              searchQuery={activitySearchQuery}
-              setSearchQuery={setActivitySearchQuery}
-            />
-            <ActivitiesPage />
-            <UnitFilter width={"50%"} />
-          </Box>
-        </AccordionDetails>
-      </Accordion> */}
-      <Box></Box>
+          {arr.map((number) => (
+            <Card
+              component="div"
+              sx={{
+                width: "100%",
+                backgroundColor: "primary.dark",
+                borderRadius: 3,
+                mx: 1,
+                mb: 1,
+                color: "primary.text",
+                boxShadow: "none",
+              }}
+            >
+              <Grid container item xs={12}>
+                <Grid item xs={0.5}>
+                <Checkbox sx={{color: "primary.text", "&.Mui-checked": { color: "primary.text" },}}></Checkbox>
+                </Grid>
+                <Grid
+                  item
+                  xs={4}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "primary.light",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      padding: 1,
+                      maxHeight: "fit-content",
+                      wordBreak: "break-word",
+                      fontSize: 14,
+                    }}
+                  >
+                    ssdsds
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={7}
+                  sx={{
+                    backgroundColor: "primary.main",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{ padding: 1, maxHeight: "fit-content", fontSize: 14 }}
+                  >
+                    dsdss
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={0.5}
+                  sx={{
+                    padding: 1,
+                    // backgroundColor: "primary.main",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <FlagRoundedIcon
+                    // onClick={handleClick}
+                    sx={{ color: "important.main" }}
+                  />
+                </Grid>
+              </Grid>
+            </Card>
+          ))}
+        </Grid>
+      </Box>
     </div>
   );
 };
